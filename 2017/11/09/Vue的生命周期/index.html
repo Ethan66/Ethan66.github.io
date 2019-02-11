@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模板、挂载Dom、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。   1、create 和 mounted 相关 1、new Vue() 创建vue实例  2、beforecreated el 和 data 并未初始化 ，可以在这加个loading事件  3、">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue的生命周期">
+<meta property="og:url" content="http://yoursite.com/2017/11/09/Vue的生命周期/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:description" content="Vue实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模板、挂载Dom、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。   1、create 和 mounted 相关 1、new Vue() 创建vue实例  2、beforecreated el 和 data 并未初始化 ，可以在这加个loading事件  3、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oz1faf1l3.bkt.clouddn.com/vue_lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png">
+<meta property="og:image" content="http://oz1faf1l3.bkt.clouddn.com/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F1.png">
+<meta property="og:updated_time" content="2019-01-22T14:19:34.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue的生命周期">
+<meta name="twitter:description" content="Vue实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模板、挂载Dom、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。   1、create 和 mounted 相关 1、new Vue() 创建vue实例  2、beforecreated el 和 data 并未初始化 ，可以在这加个loading事件  3、">
+<meta name="twitter:image" content="http://oz1faf1l3.bkt.clouddn.com/vue_lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/09/Vue的生命周期/">
+
+
+
+
+
+  <title>Vue的生命周期 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/Vue的生命周期/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue的生命周期</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T15:02:09+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Vue实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模板、挂载Dom、渲染→更新→渲染、卸载等一系列过程，我们称这是Vue的生命周期。通俗说就是Vue实例从创建到销毁的过程，就是生命周期。</p>
+</blockquote>
+<p><img src="http://oz1faf1l3.bkt.clouddn.com/vue_lifecycle-%E6%A0%87%E6%B3%A8%E7%89%88%E6%9C%AC.png" alt="vue生命周期"></p>
+<h3 id="1、create-和-mounted-相关"><a href="#1、create-和-mounted-相关" class="headerlink" title="1、create 和 mounted 相关"></a>1、create 和 mounted 相关</h3><p><img src="http://oz1faf1l3.bkt.clouddn.com/vue-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F1.png" alt=""></p>
+<h5 id="1、new-Vue"><a href="#1、new-Vue" class="headerlink" title="1、new Vue()"></a>1、new Vue()</h5><blockquote>
+<p>创建vue实例</p>
+</blockquote>
+<h5 id="2、beforecreated"><a href="#2、beforecreated" class="headerlink" title="2、beforecreated"></a>2、beforecreated</h5><blockquote>
+<p>el 和 data 并未初始化 ，可以在这加个loading事件</p>
+</blockquote>
+<h5 id="3、Observe-Date，Init-Events"><a href="#3、Observe-Date，Init-Events" class="headerlink" title="3、Observe Date，Init Events"></a>3、Observe Date，Init Events</h5><blockquote>
+<p>Observe Date为开始监控Data对象数据变化，Init Events为Vue内部初始化事件</p>
+</blockquote>
+<h5 id="4、created"><a href="#4、created" class="headerlink" title="4、created"></a>4、created</h5><blockquote>
+<p>el未初始化，data已经初始化，可以在这里再初始化data，实现函数自运行</p>
+</blockquote>
+<h5 id="5、Compile-template-into-render-function"><a href="#5、Compile-template-into-render-function" class="headerlink" title="5、Compile template into render function"></a>5、Compile template into render function</h5><blockquote>
+<p>编译模板，把data里面的数据和模板生成html，但并没有渲染到页面</p>
+</blockquote>
+<h5 id="6、beforeMount"><a href="#6、beforeMount" class="headerlink" title="6、beforeMount"></a>6、beforeMount</h5><blockquote>
+<p>完成el的初始化，此时还没生成页面，比如<div></div>这种状态，未显示</p>
+</blockquote>
+<h5 id="7、Create-vm-el-and-replace-“el”-width-it"><a href="#7、Create-vm-el-and-replace-“el”-width-it" class="headerlink" title="7、Create vm.$el and replace “el” width it"></a>7、Create vm.$el and replace “el” width it</h5><blockquote>
+<p>用上面生成的html替换el属性指向的dom对象</p>
+</blockquote>
+<h5 id="8、mounted"><a href="#8、mounted" class="headerlink" title="8、mounted"></a>8、mounted</h5><blockquote>
+<p>完成挂载，也就是模板中的html渲染到了页面中，此时一般可以做一些ajax操作，mounted只会执行一次</p>
+</blockquote>
+<h3 id="2、update-相关"><a href="#2、update-相关" class="headerlink" title="2、update 相关"></a>2、update 相关</h3><h5 id="1、beforeUpdate"><a href="#1、beforeUpdate" class="headerlink" title="1、beforeUpdate"></a>1、beforeUpdate</h5><blockquote>
+<p>数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</p>
+</blockquote>
+<h5 id="2、updated"><a href="#2、updated" class="headerlink" title="2、updated"></a>2、updated</h5><blockquote>
+<p>当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。</p>
+</blockquote>
+<h5 id="3、beforeDestroy"><a href="#3、beforeDestroy" class="headerlink" title="3、beforeDestroy"></a>3、beforeDestroy</h5><blockquote>
+<p>实例销毁之前调用。在这一步，实例仍然完全可用。</p>
+</blockquote>
+<h5 id="4、destroyed"><a href="#4、destroyed" class="headerlink" title="4、destroyed"></a>4、destroyed</h5><blockquote>
+<p>Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用。</p>
+</blockquote>
+<h3 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h3><blockquote>
+<p>beforecreate : 可以在这加个loading事件<br>created ：在这结束loading，还做一些初始化，实现函数自执行<br>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情<br>beforeUpdate：可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程<br>beforeDestory： 你确认删除XX吗？ destoryed ：当前组件已被删除，清空相关内容</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/01/js设计模式/" rel="next" title="js设计模式">
+                <i class="fa fa-chevron-left"></i> js设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/09/Vue-router知识点/" rel="prev" title="Vue-router知识点">
+                Vue-router知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、create-和-mounted-相关"><span class="nav-number">1.</span> <span class="nav-text">1、create 和 mounted 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、new-Vue"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、new Vue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、beforecreated"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、beforecreated</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、Observe-Date，Init-Events"><span class="nav-number">1.0.3.</span> <span class="nav-text">3、Observe Date，Init Events</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、created"><span class="nav-number">1.0.4.</span> <span class="nav-text">4、created</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、Compile-template-into-render-function"><span class="nav-number">1.0.5.</span> <span class="nav-text">5、Compile template into render function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、beforeMount"><span class="nav-number">1.0.6.</span> <span class="nav-text">6、beforeMount</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、Create-vm-el-and-replace-“el”-width-it"><span class="nav-number">1.0.7.</span> <span class="nav-text">7、Create vm.$el and replace “el” width it</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、mounted"><span class="nav-number">1.0.8.</span> <span class="nav-text">8、mounted</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#2、update-相关"><span class="nav-number">2.</span> <span class="nav-text">2、update 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、beforeUpdate"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、beforeUpdate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、updated"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、updated</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、beforeDestroy"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、beforeDestroy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、destroyed"><span class="nav-number">2.0.4.</span> <span class="nav-text">4、destroyed</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、总结"><span class="nav-number">3.</span> <span class="nav-text">3、总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
