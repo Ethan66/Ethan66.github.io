@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:description" content="0、安装全局包123npm install -g vue-clinpm install -g nrmnpm install -g yarn 1、查看全局安装1npm list -g --depth 0 2、查看npm安装的全局node包12npm config get prefix//C:\Users\Administrator\AppData\Roaming\npm（测过：windows所有全局">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-22T14:19:24.385Z">
+<meta property="og:updated_time" content="2019-02-24T14:45:34.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git实用性操作">
 <meta name="twitter:description" content="0、安装全局包123npm install -g vue-clinpm install -g nrmnpm install -g yarn 1、查看全局安装1npm list -g --depth 0 2、查看npm安装的全局node包12npm config get prefix//C:\Users\Administrator\AppData\Roaming\npm（测过：windows所有全局">
@@ -357,6 +357,8 @@
 <h3 id="2、查看npm安装的全局node包"><a href="#2、查看npm安装的全局node包" class="headerlink" title="2、查看npm安装的全局node包"></a>2、查看npm安装的全局node包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config get prefix</span><br><span class="line">//C:\Users\Administrator\AppData\Roaming\npm（测过：windows所有全局安装的node包都在这个路径下）</span><br></pre></td></tr></table></figure>
 <h3 id="3、查看账号密码"><a href="#3、查看账号密码" class="headerlink" title="3、查看账号密码"></a>3、查看账号密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br><span class="line">$ git config --global user.name &quot;xxx&quot;</span><br><span class="line">$ git config --global user.email &quot;xxx@gmail.com&quot;</span><br></pre></td></tr></table></figure>
 <h3 id="4、切换镜像源"><a href="#4、切换镜像源" class="headerlink" title="4、切换镜像源"></a>4、切换镜像源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nrm ls // 查看所有镜像源</span><br><span class="line">nrm --help // 帮助</span><br><span class="line">nrm use taobao // 切换到淘宝镜像源</span><br><span class="line">nrm use npm // 切换到npm镜像源，比如要发npm包</span><br></pre></td></tr></table></figure>
+<h3 id="5、查看本地项目的远程库地址"><a href="#5、查看本地项目的远程库地址" class="headerlink" title="5、查看本地项目的远程库地址"></a>5、查看本地项目的远程库地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h3 id="6、npm-install-chrome失败"><a href="#6、npm-install-chrome失败" class="headerlink" title="6、npm install chrome失败"></a>6、npm install chrome失败</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install chromedriver --chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -477,7 +479,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -548,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、安装全局包"><span class="nav-number">1.</span> <span class="nav-text">0、安装全局包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、查看全局安装"><span class="nav-number">2.</span> <span class="nav-text">1、查看全局安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、查看npm安装的全局node包"><span class="nav-number">3.</span> <span class="nav-text">2、查看npm安装的全局node包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、查看账号密码"><span class="nav-number">4.</span> <span class="nav-text">3、查看账号密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、切换镜像源"><span class="nav-number">5.</span> <span class="nav-text">4、切换镜像源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0、安装全局包"><span class="nav-number">1.</span> <span class="nav-text">0、安装全局包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、查看全局安装"><span class="nav-number">2.</span> <span class="nav-text">1、查看全局安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、查看npm安装的全局node包"><span class="nav-number">3.</span> <span class="nav-text">2、查看npm安装的全局node包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、查看账号密码"><span class="nav-number">4.</span> <span class="nav-text">3、查看账号密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、切换镜像源"><span class="nav-number">5.</span> <span class="nav-text">4、切换镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、查看本地项目的远程库地址"><span class="nav-number">6.</span> <span class="nav-text">5、查看本地项目的远程库地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、npm-install-chrome失败"><span class="nav-number">7.</span> <span class="nav-text">6、npm install chrome失败</span></a></li></ol></div>
             
 
           </div>
