@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="this,">
+  <meta name="keywords" content="知识点,">
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="1、全局下this1console.log(this);  //window 2、内部函数this123456function fn()&amp;#123;  funciton fn1()&amp;#123;    console.log(this);  &amp;#125;&amp;#125;fn();   //window,在当前作用域下找不到this，直接往父作用域找，直到找到为止 3、setTimeout(),setIn">
-<meta name="keywords" content="this">
+<meta name="keywords" content="知识点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Js中的this">
 <meta property="og:url" content="http://yoursite.com/2017/10/31/Js中的this/index.html">
 <meta property="og:site_name" content="肥而不腻的蜗牛">
-<meta property="og:description" content="1、全局下this1console.log(this);  //window 2、内部函数this123456function fn()&amp;#123;  funciton fn1()&amp;#123;    console.log(this);  &amp;#125;&amp;#125;fn();   //window,在当前作用域下找不到this，直接往父作用域找，直到找到为止 3、setTimeout(),setIn">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-25T13:32:26.464Z">
+<meta property="og:image" content="https://drscdn.500px.org/photo/297100589/q%3D80_m%3D2000/v2?webp=true&sig=560bc7505b10a5ef2433176ee5fce0ddc695e56b0813aba714e72dceae8145bf">
+<meta property="og:updated_time" content="2019-03-09T05:54:16.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js中的this">
-<meta name="twitter:description" content="1、全局下this1console.log(this);  //window 2、内部函数this123456function fn()&amp;#123;  funciton fn1()&amp;#123;    console.log(this);  &amp;#125;&amp;#125;fn();   //window,在当前作用域下找不到this，直接往父作用域找，直到找到为止 3、setTimeout(),setIn">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/297100589/q%3D80_m%3D2000/v2?webp=true&sig=560bc7505b10a5ef2433176ee5fce0ddc695e56b0813aba714e72dceae8145bf">
 
 
 
@@ -315,8 +314,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
                   </a>
                 </span>
 
@@ -352,7 +351,8 @@
       
 
       
-        <h4 id="1、全局下this"><a href="#1、全局下this" class="headerlink" title="1、全局下this"></a>1、全局下this</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(this);  //window</span><br></pre></td></tr></table></figure>
+        <p><img src="https://drscdn.500px.org/photo/297100589/q%3D80_m%3D2000/v2?webp=true&amp;sig=560bc7505b10a5ef2433176ee5fce0ddc695e56b0813aba714e72dceae8145bf" alt=""><br><a id="more"></a></p>
+<h4 id="1、全局下this"><a href="#1、全局下this" class="headerlink" title="1、全局下this"></a>1、全局下this</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(this);  //window</span><br></pre></td></tr></table></figure>
 <h4 id="2、内部函数this"><a href="#2、内部函数this" class="headerlink" title="2、内部函数this"></a>2、内部函数this</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">  funciton fn1()&#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn();   //window,在当前作用域下找不到this，直接往父作用域找，直到找到为止</span><br></pre></td></tr></table></figure>
 <h4 id="3、setTimeout-setInterval-的this特殊性"><a href="#3、setTimeout-setInterval-的this特殊性" class="headerlink" title="3、setTimeout(),setInterval()的this特殊性"></a>3、setTimeout(),setInterval()的this特殊性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&apos;click&apos;, function(e)&#123;</span><br><span class="line">    console.log(this);                    //document</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        console.log(this);            //window</span><br><span class="line">    &#125;, 200);</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
 <h4 id="4-转换this方法"><a href="#4-转换this方法" class="headerlink" title="4. 转换this方法"></a>4. 转换this方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">//Function.prototype.bind();替换this,但是不会执行函数</span><br><span class="line">var obj1 = &#123;</span><br><span class="line">    name: &apos;Byron&apos;,</span><br><span class="line">    fn : function()&#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj3=&#123;a: 3&#125;;</span><br><span class="line">var fn3=obj1.fn.bind(obj3);</span><br><span class="line">fn3();  //obj3,this被替换了obj3</span><br><span class="line"></span><br><span class="line">document.addEventListener(&apos;click&apos;, function(e)&#123;</span><br><span class="line">    console.log(this);                    //document</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        console.log(this);            //document</span><br><span class="line">    &#125;.bind(this), 200);</span><br><span class="line">&#125;, false);</span><br><span class="line"></span><br><span class="line">//call(arg1,arg2,arg3...);第一个参数为替换this，第二个开始是传给函数的参数，并执行函数</span><br><span class="line">//apply(arg1,[arg2,arg3...]);第一个参数为替换this，第二个开始是数组，数组里的值传给函数的参数，并执行函数</span><br><span class="line">var value=100;</span><br><span class="line">function fn(a,b)&#123;</span><br><span class="line">  console.log(this.value+a+b);</span><br><span class="line">&#125;</span><br><span class="line">var obj=&#123;</span><br><span class="line">  value:200</span><br><span class="line">&#125;</span><br><span class="line">fn(3,5);   //108</span><br><span class="line">fn.call(obj,3,5);   //208</span><br><span class="line">fn.apply(obj,[3,6]);  //209</span><br><span class="line"></span><br><span class="line">var arr=[1,3,9,7,4];</span><br><span class="line">//Math.max(1,3,9,7,4);</span><br><span class="line">console.log(Math.max.apply(null,arr));   //利用apply函数把数组里的值取出并传递给Math.max(),使得函数可以执行</span><br><span class="line"></span><br><span class="line">function joinStr()&#123;</span><br><span class="line">  //arguments.join(&quot;-&quot;);不能这么用，因为arguments为对象，没有join方法</span><br><span class="line">  var str=Array.prototype.join.call(arguments, &quot;-&quot;);</span><br><span class="line">  var temp=Array.prototype.join.bind(arguments);</span><br><span class="line">  var str2=temp(&quot;-&quot;);</span><br><span class="line">  console.log(str);</span><br><span class="line">  console.log(typeof str);</span><br><span class="line"> console.log(str2);</span><br><span class="line">  console.log(typeof str2);</span><br><span class="line">&#125;</span><br><span class="line">joinStr(1,2,&quot;a&quot;);</span><br></pre></td></tr></table></figure>
@@ -374,7 +374,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/this/" rel="tag"># this</a>
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
           
         </div>
       
@@ -397,8 +397,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/原型链和继承/" rel="prev" title="原型链和继承">
-                原型链和继承 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/31/原型链和继承/" rel="prev" title="js原型链和继承">
+                js原型链和继承 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -478,7 +478,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -489,7 +489,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -500,7 +500,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
