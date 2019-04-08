@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="yarn,">
+  <meta name="keywords" content="git,">
 
 
 
@@ -79,14 +79,14 @@
 
 
 
-<meta name="keywords" content="yarn">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yarn基础">
 <meta property="og:url" content="http://yoursite.com/2018/10/05/yarn基础/index.html">
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/297064691/q%3D80_m%3D2000/v2?webp=true&sig=cb807c7f1acdcab189aeec5b3bbebaa9bc73346ea204ac70b3665d90d2960801">
-<meta property="og:updated_time" content="2019-03-09T05:54:18.545Z">
+<meta property="og:updated_time" content="2019-04-03T08:52:47.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yarn基础">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/297064691/q%3D80_m%3D2000/v2?webp=true&sig=cb807c7f1acdcab189aeec5b3bbebaa9bc73346ea204ac70b3665d90d2960801">
@@ -352,24 +352,15 @@
 
       
         <p><img src="https://drscdn.500px.org/photo/297064691/q%3D80_m%3D2000/v2?webp=true&amp;sig=cb807c7f1acdcab189aeec5b3bbebaa9bc73346ea204ac70b3665d90d2960801" alt=""><br><a id="more"></a></p>
-<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<h5 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h5><blockquote>
 <p>yarn是facebook发布的新一代包管理工具，旨在解决以往使用npm作为包管理会遇到的一些问题。从其官方介绍可以看到其重点强调的3个点：快、可靠、安全。</p>
 <p>yarn拥有以下6个特性：<br>1、离线模式: 一次安装，永久使用，无需下载。<br>2、依赖确定性：安装依赖锁定，保证一致性。<br>3、更好的网络性能：下载包，优化网络请求，最大限度提高网络利用率</p>
 </blockquote>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">安装方式1: npm i -g yarn</span><br><span class="line"></span><br><span class="line">安装方式2: window下载msi，linux 和 mac 上使用 shell 指令来安装（依赖Node）</span><br></pre></td></tr></table></figure>
-<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>0、使用淘宝镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
-<p>1、安装包</p>
-<blockquote>
-<p>npm install === yarn /yarn install—— install 安装是默认行为。</p>
-<p>npm install xxx –save === yarn add xxx</p>
-<p>npm uninstall xxx –save === yarn remove xxx</p>
-</blockquote>
-<p>2、下载包</p>
-<blockquote>
-<p>npm install xxx–save-dev === yarn add xxx –dev</p>
-<p>npm update –save === yarn upgrade</p>
-</blockquote>
-<p>3、其他<br><a href="http://www.jianshu.com/p/006ed368fa1d" target="_blank" rel="noopener">http://www.jianshu.com/p/006ed368fa1d</a></p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">安装方式1: npm i -g yarn</span><br><span class="line"></span><br><span class="line">安装方式2: window下载msi，linux 和 mac 上使用 shell 指令来安装（依赖Node）</span><br></pre></td></tr></table></figure>
+<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><p>使用淘宝镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p>安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install === yarn /yarn install—— install 安装是默认行为。</span><br><span class="line"></span><br><span class="line">npm install xxx --save === yarn add xxx</span><br><span class="line"></span><br><span class="line">npm install xxx--save-dev === yarn add xxx --dev</span><br></pre></td></tr></table></figure></p>
+<p>卸载更新包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall xxx --save === yarn remove xxx</span><br><span class="line"></span><br><span class="line">npm update xxx === yarn upgrade xxx</span><br><span class="line"></span><br><span class="line">npm update xxx@4.7.0 === yarn upgrade xxx@4.7.0</span><br></pre></td></tr></table></figure></p>
+<p>其他<br><a href="http://www.jianshu.com/p/006ed368fa1d" target="_blank" rel="noopener">http://www.jianshu.com/p/006ed368fa1d</a></p>
 
       
     </div>
@@ -387,7 +378,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/yarn/" rel="tag"># yarn</a>
+            <a href="/tags/git/" rel="tag"># git</a>
           
         </div>
       
@@ -491,7 +482,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -502,7 +493,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -513,7 +504,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -562,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方法"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li></ol></div>
             
 
           </div>

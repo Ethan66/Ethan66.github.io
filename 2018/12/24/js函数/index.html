@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/262501361/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=a4e86d631bebc5ade36eadfc4f531a014b79f776275f7417c380d81004bcf2ca">
-<meta property="og:updated_time" content="2019-03-09T05:54:14.339Z">
+<meta property="og:updated_time" content="2019-04-03T08:52:41.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js函数">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/262501361/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=a4e86d631bebc5ade36eadfc4f531a014b79f776275f7417c380d81004bcf2ca">
@@ -352,6 +352,7 @@
 
       
         <p><img src="https://drscdn.500px.org/photo/262501361/q%3D80_m%3D2000_k%3D1/v2?webp=true&amp;sig=a4e86d631bebc5ade36eadfc4f531a014b79f776275f7417c380d81004bcf2ca" alt=""><br><a id="more"></a></p>
+<h5 id="Function-prototype-toString"><a href="#Function-prototype-toString" class="headerlink" title="Function.prototype.toString()"></a>Function.prototype.toString()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let fn = function()&#123;&#125;</span><br><span class="line">fn.toString() // &apos;function()&#123;&#125;&apos;</span><br></pre></td></tr></table></figure>
 <h5 id="函数与解构赋值结合使用"><a href="#函数与解构赋值结合使用" class="headerlink" title="函数与解构赋值结合使用"></a>函数与解构赋值结合使用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function foo(&#123;x, y = 5&#125;) &#123;</span><br><span class="line">  console.log(x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(&#123;&#125;) // undefined 5</span><br><span class="line">foo(&#123;x: 1&#125;) // 1 5</span><br><span class="line">foo(&#123;x: 1, y: 2&#125;) // 1 2</span><br><span class="line">foo() // TypeError: Cannot read property &apos;x&apos; of undefined</span><br><span class="line">// 上面代码只使用了对象的解构赋值默认值，没有使用函数参数的默认值。只有当函数foo的参数是一个对象时，变量x和y才会通过解构赋值生成。如果函数foo调用时没提供参数，变量x和y就不会生成，从而报错。通过提供函数参数的默认值，就可以避免这种情况。</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function foo(&#123;x, y = 5&#125; = &#123;&#125;) &#123;</span><br><span class="line">  console.log(x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo() // undefined 5</span><br></pre></td></tr></table></figure>
 <h5 id="函数参数默认值的位置"><a href="#函数参数默认值的位置" class="headerlink" title="函数参数默认值的位置"></a>函数参数默认值的位置</h5><p>函数参数默认值应该放最后，这样就可以看出到底省略了哪些参数，不放最后就没意义了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function f(x = 1, y) &#123;</span><br><span class="line">  return [x, y];</span><br><span class="line">&#125;</span><br><span class="line">f() // [1, undefined]</span><br><span class="line">f(2) // [2, undefined])</span><br><span class="line">f(, 1) // 报错</span><br></pre></td></tr></table></figure></p>
@@ -484,7 +485,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -495,7 +496,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -506,7 +507,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -555,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数与解构赋值结合使用"><span class="nav-number">1.</span> <span class="nav-text">函数与解构赋值结合使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数参数默认值的位置"><span class="nav-number">2.</span> <span class="nav-text">函数参数默认值的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数的length属性"><span class="nav-number">3.</span> <span class="nav-text">函数的length属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数参数的作用域"><span class="nav-number">4.</span> <span class="nav-text">函数参数的作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rest参数"><span class="nav-number">5.</span> <span class="nav-text">rest参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#name属性"><span class="nav-number">6.</span> <span class="nav-text">name属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#箭头函数"><span class="nav-number">7.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#箭头函数注意"><span class="nav-number">8.</span> <span class="nav-text">箭头函数注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不适合场合"><span class="nav-number">9.</span> <span class="nav-text">不适合场合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Function-prototype-toString"><span class="nav-number">1.</span> <span class="nav-text">Function.prototype.toString()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数与解构赋值结合使用"><span class="nav-number">2.</span> <span class="nav-text">函数与解构赋值结合使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数参数默认值的位置"><span class="nav-number">3.</span> <span class="nav-text">函数参数默认值的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数的length属性"><span class="nav-number">4.</span> <span class="nav-text">函数的length属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数参数的作用域"><span class="nav-number">5.</span> <span class="nav-text">函数参数的作用域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rest参数"><span class="nav-number">6.</span> <span class="nav-text">rest参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#name属性"><span class="nav-number">7.</span> <span class="nav-text">name属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#箭头函数"><span class="nav-number">8.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#箭头函数注意"><span class="nav-number">9.</span> <span class="nav-text">箭头函数注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不适合场合"><span class="nav-number">10.</span> <span class="nav-text">不适合场合</span></a></li></ol></div>
             
 
           </div>

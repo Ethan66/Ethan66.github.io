@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之DOM操作">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/js之DOM操作/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/298732607/q%3D80_m%3D2000/v2?webp=true&sig=6ead84481c57db3d6028123e72ae6ac9edc27a4de554179bcfe09057fe54dcf9">
+<meta property="og:updated_time" content="2019-04-03T08:52:43.087Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之DOM操作">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/298732607/q%3D80_m%3D2000/v2?webp=true&sig=6ead84481c57db3d6028123e72ae6ac9edc27a4de554179bcfe09057fe54dcf9">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/19/js之DOM操作/">
+
+
+
+
+
+  <title>js之DOM操作 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/js之DOM操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之DOM操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T11:13:46+08:00">
+                2019-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/298732607/q%3D80_m%3D2000/v2?webp=true&amp;sig=6ead84481c57db3d6028123e72ae6ac9edc27a4de554179bcfe09057fe54dcf9" alt=""><br><a id="more"></a></p>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><h5 id="增删查元素"><a href="#增删查元素" class="headerlink" title="增删查元素"></a>增删查元素</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 获取元素</span><br><span class="line">document.querySelector(&quot;#id&quot;)</span><br><span class="line">document.querySelector(&apos;.class1&apos;) // 假如有2个class1取第一个</span><br><span class="line">document.querySelectorAll(&quot;.class&quot;)[0]</span><br><span class="line">document.querySelector(&quot;.class input[type=text]&quot;)</span><br><span class="line"></span><br><span class="line">// 增加元素</span><br><span class="line">let $el = document.createElement(&quot;div&quot;)</span><br><span class="line">$el.innerHTML = &quot;nihao&quot;</span><br><span class="line">document.querySelector(&quot;body&quot;).appendChild($el)</span><br><span class="line"></span><br><span class="line">// 删除元素</span><br><span class="line">let $div = document.querySelector(&quot;.className&quot;)</span><br><span class="line">document.querySelector(&quot;body&quot;).removeChild($div)</span><br></pre></td></tr></table></figure>
+<h5 id="增删改查class"><a href="#增删改查class" class="headerlink" title="增删改查class"></a>增删改查class</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let el = document.querySelector(&apos;#id&apos;)</span><br><span class="line">// 获取所有class</span><br><span class="line">el.className // 返回的是字符串</span><br><span class="line">el.classList  //返回的是数组</span><br><span class="line">// 添加class</span><br><span class="line">el.classList.add(&apos;class2&apos;, &apos;class1&apos;, &apos;class3&apos;)</span><br><span class="line">// 删除class</span><br><span class="line">el.classList.remove(&apos;class3&apos;)</span><br><span class="line">//判断是否存在某个class</span><br><span class="line">el.classList.contains(&quot;className&quot;)</span><br><span class="line">// 获取单个class</span><br><span class="line">el.classList.item(0) //class2</span><br><span class="line">el.classList.item(1) // class1</span><br><span class="line">// 替换class</span><br><span class="line">el.classList.replace(&apos;class2&apos;, &apos;class6&apos;) // true, 最后为&apos;class6 class1 class3&apos;</span><br><span class="line">// 替换class</span><br><span class="line">el.classList.toggle(&apos;class1&apos;) // false, 因为有class1，所以删除，最后为‘class6 class3’</span><br><span class="line">el.classList.toggle(&apos;classs4&apos;) // true, 因为没有class4,所以添加，最后为&apos;class6 class3 class4&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="删改查style"><a href="#删改查style" class="headerlink" title="删改查style"></a>删改查style</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let el = document.querySelector(&apos;#id&apos;)</span><br><span class="line">// 获取style</span><br><span class="line">el.getAttribute(&apos;style&apos;) // 获取绑定在style属性上的全部值</span><br><span class="line">el.style.color // 获取绑定在style属性上的值，不能取style属性，不然会获取很多内容</span><br><span class="line">// 修改style</span><br><span class="line">el.style.fontSize = &apos;18px&apos;</span><br><span class="line">el.style.cssText = &apos;color: red; font-size: 20px;&apos;</span><br><span class="line">el.setAttribute(&apos;style&apos;, &apos;color: red; font-size: 16px;&apos;)</span><br><span class="line">// 删除style</span><br><span class="line">el.removeAttribute(&apos;style&apos;)</span><br></pre></td></tr></table></figure>
+<h5 id="增删改查属性"><a href="#增删改查属性" class="headerlink" title="增删改查属性"></a>增删改查属性</h5><p>let el = document.querySelector(‘#id’)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//设置属性</span><br><span class="line">el.setAttribute(&quot;style&quot;, &quot;background: #fff;&quot;)</span><br><span class="line">//获取属性</span><br><span class="line">el.getAttribute(&quot;style&quot;)</span><br><span class="line">//删除属性</span><br><span class="line">el.removeAttribute(&quot;style&quot;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><h5 id="style和window-getComputedStyle的异同"><a href="#style和window-getComputedStyle的异同" class="headerlink" title="style和window.getComputedStyle的异同"></a>style和window.getComputedStyle的异同</h5><blockquote>
+<p>同：getComputedStyle 和 element.style 的相同点就是二者返回的都是 CSSStyleDeclaration 对象，取相应属性值得时候都是采用的 CSS 驼峰式写法，均需要注意 float 属性。<br>异：element.style 读取的只是元素的内联样式，即写在元素的 style 属性上的样式；而 getComputedStyle 读取的样式是最终样式，包括了内联样式、嵌入样式和外部样式。<br>getComputedStyle兼容性：IE支持9，其他均支持</p>
+</blockquote>
+<h5 id="记忆方法"><a href="#记忆方法" class="headerlink" title="记忆方法"></a>记忆方法</h5><blockquote>
+<p>clientWidth/clientHeight获取content+padding<br>clientTop/clientLeft获取border<br>offsetWidht/offsetHeight获取content+padding+border<br>offsetTop/offsetLeft不准确的理解为获取margin</p>
+</blockquote>
+<h5 id="获取元素的各种宽高度"><a href="#获取元素的各种宽高度" class="headerlink" title="获取元素的各种宽高度"></a>获取元素的各种宽高度</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let el = document.querySelector(&apos;.cls1&apos;)</span><br><span class="line">// 元素的所有宽高（content、padding、border）</span><br><span class="line">el.offsetWidth</span><br><span class="line">el.offsetHeight</span><br><span class="line"></span><br><span class="line">// 元素的宽高（content和padding）</span><br><span class="line">el.clientWidth</span><br><span class="line">el.clientHeight</span><br><span class="line"></span><br><span class="line">// 元素的border值</span><br><span class="line">el.clientTop // 元素的上边框宽度</span><br><span class="line">el.clientLeft // 元素的左边框宽度</span><br><span class="line"></span><br><span class="line">// 元素的margin值</span><br><span class="line">getComputedStyle(el).marginTop // 注意：展示的是数值带px</span><br><span class="line">getComputedStyle(el).margin // 注意：展示的是数值带px，比如：&apos;5px 6px 7px 8px&apos;</span><br></pre></td></tr></table></figure>
+<h5 id="元素的偏移量"><a href="#元素的偏移量" class="headerlink" title="元素的偏移量"></a>元素的偏移量</h5><p>offsetTop/offsetLeft：获取元素距离当前最近非position: static;父元素的上偏移/左偏移，假如父元素都是position: static;则指向body元素。假如元素有设定left,top,则按照此值来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">el.offsetTop</span><br><span class="line">el.offsetLeft</span><br></pre></td></tr></table></figure></p>
+<h5 id="元素的滚动"><a href="#元素的滚动" class="headerlink" title="元素的滚动"></a>元素的滚动</h5><p>scrollWidth/scrollHeight：获取元素的文档宽高，包含溢出部分，假如内容没有溢出，那就展示本身元素的宽高（padding+content）<br>scrollTop/scrollLeft: 获取元素滚动的举例</p>
+<h5 id="可视区域的宽高"><a href="#可视区域的宽高" class="headerlink" title="可视区域的宽高"></a>可视区域的宽高</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.documentElement.clientWidth</span><br><span class="line">document.documentElement.clientHeight</span><br></pre></td></tr></table></figure>
+<h5 id="浏览器的宽高"><a href="#浏览器的宽高" class="headerlink" title="浏览器的宽高"></a>浏览器的宽高</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">window.innerWidth //除去菜单栏的窗口宽度</span><br><span class="line">window.innerHeight//除去菜单栏的窗口高度</span><br><span class="line">window.outerWidth//包括菜单栏的窗口宽度</span><br><span class="line">window.outerHeight//包括菜单栏的窗口宽度</span><br><span class="line">window.screenTop//距离屏幕的高度</span><br><span class="line">window.screenLeft//距离屏幕的宽度</span><br></pre></td></tr></table></figure>
+<h5 id="电脑屏幕的宽高"><a href="#电脑屏幕的宽高" class="headerlink" title="电脑屏幕的宽高"></a>电脑屏幕的宽高</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.screen.height//电脑屏幕的高度</span><br><span class="line">window.screen.width//电脑屏幕的宽度</span><br><span class="line">window.screen.availHeight//电脑屏幕的可利用高度</span><br><span class="line">window.screen.availWidth//电脑屏幕的可利用宽度</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/js之正则表达式练习/" rel="next" title="js之正则表达式练习">
+                <i class="fa fa-chevron-left"></i> js之正则表达式练习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/19/js之综合/" rel="prev" title="js之综合">
+                js之综合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM"><span class="nav-number">1.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#增删查元素"><span class="nav-number">1.0.1.</span> <span class="nav-text">增删查元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增删改查class"><span class="nav-number">1.0.2.</span> <span class="nav-text">增删改查class</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删改查style"><span class="nav-number">1.0.3.</span> <span class="nav-text">删改查style</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增删改查属性"><span class="nav-number">1.0.4.</span> <span class="nav-text">增删改查属性</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#样式"><span class="nav-number">2.</span> <span class="nav-text">样式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#style和window-getComputedStyle的异同"><span class="nav-number">2.0.1.</span> <span class="nav-text">style和window.getComputedStyle的异同</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#记忆方法"><span class="nav-number">2.0.2.</span> <span class="nav-text">记忆方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取元素的各种宽高度"><span class="nav-number">2.0.3.</span> <span class="nav-text">获取元素的各种宽高度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元素的偏移量"><span class="nav-number">2.0.4.</span> <span class="nav-text">元素的偏移量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#元素的滚动"><span class="nav-number">2.0.5.</span> <span class="nav-text">元素的滚动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可视区域的宽高"><span class="nav-number">2.0.6.</span> <span class="nav-text">可视区域的宽高</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#浏览器的宽高"><span class="nav-number">2.0.7.</span> <span class="nav-text">浏览器的宽高</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#电脑屏幕的宽高"><span class="nav-number">2.0.8.</span> <span class="nav-text">电脑屏幕的宽高</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
