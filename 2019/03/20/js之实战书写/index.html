@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/298787095/q%3D80_m%3D1500/v2?webp=true&sig=eb98e34ab11d51df4c29246b2cd93b0ccf5d79b2af4449cae7c27e03537294e7">
-<meta property="og:updated_time" content="2019-04-03T08:52:44.362Z">
+<meta property="og:updated_time" content="2019-05-02T09:38:01.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js之实战书写">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/298787095/q%3D80_m%3D1500/v2?webp=true&sig=eb98e34ab11d51df4c29246b2cd93b0ccf5d79b2af4449cae7c27e03537294e7">
@@ -353,6 +353,8 @@
       
         <p><img src="https://drscdn.500px.org/photo/298787095/q%3D80_m%3D1500/v2?webp=true&amp;sig=eb98e34ab11d51df4c29246b2cd93b0ccf5d79b2af4449cae7c27e03537294e7" alt=""><br><a id="more"></a></p>
 <h5 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let key in obj)&#123;</span><br><span class="line">  if(obj.hasOwnProperty(key))&#123;</span><br><span class="line">    console.log(key+&apos; is &apos;+obj[key]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;    //a is 1,b is 2</span><br></pre></td></tr></table></figure>
+<h5 id="JSON-stringify-遇到undefined，函数，symbol值会忽略的问题"><a href="#JSON-stringify-遇到undefined，函数，symbol值会忽略的问题" class="headerlink" title="JSON.stringify()遇到undefined，函数，symbol值会忽略的问题"></a>JSON.stringify()遇到undefined，函数，symbol值会忽略的问题</h5><p>不好的地方：拷贝了之后会抛弃对象的constructor，所以深拷贝后构造函数都会变成Object<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; x: undefined, y: function()&#123;&#125;, z: Symbol(&apos;&apos;) &#125;</span><br><span class="line">JSON.stringify(obj) // &quot;&#123;&#125;&quot; 全部都忽略</span><br><span class="line"></span><br><span class="line">// 解决方案</span><br><span class="line">let str = JSON.stringify(obj, function(key, val)&#123;</span><br><span class="line">  if (typeof val === &apos;undefined&apos;) return &apos;&apos;</span><br><span class="line">  if (typeof val === &apos;function&apos;) return val + &apos;&apos;</span><br><span class="line">  return val</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">let obj1 = JSON.parse(str, function(k,val)&#123;</span><br><span class="line">  if(val.indexOf &amp;&amp; val.indexOf(&apos;function&apos;) &gt; -1)&#123;</span><br><span class="line">     return eval(&quot;(function()&#123;return &quot; + val + &quot; &#125;)()&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">  return val</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -544,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#for…in"><span class="nav-number">1.</span> <span class="nav-text">for…in</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#for…in"><span class="nav-number">1.</span> <span class="nav-text">for…in</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON-stringify-遇到undefined，函数，symbol值会忽略的问题"><span class="nav-number">2.</span> <span class="nav-text">JSON.stringify()遇到undefined，函数，symbol值会忽略的问题</span></a></li></ol></div>
             
 
           </div>
