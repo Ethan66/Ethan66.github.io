@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="电脑环境配置,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="注意事项1亲测过的版本：ubuntu16-18版本，以后版本不确定。使用的电脑是legacy，假如是UEFI可能需要试验一下。 准备工作1234EasyBCD软件：用于之后开机时的双系统切换（假如安装后只能进入Ubuntu系统，此软件没用）；UltraISO软件：下载安装软碟通，用于制作安装ubuntu的U盘启动盘；U盘：没有内容的U盘，用于装Ubuntu的系统U盘。Ubuntu18.04的iso">
+<meta name="keywords" content="电脑环境配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win10安装ubuntu系统">
+<meta property="og:url" content="http://yoursite.com/2019/05/18/win10安装ubuntu系统/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:description" content="注意事项1亲测过的版本：ubuntu16-18版本，以后版本不确定。使用的电脑是legacy，假如是UEFI可能需要试验一下。 准备工作1234EasyBCD软件：用于之后开机时的双系统切换（假如安装后只能进入Ubuntu系统，此软件没用）；UltraISO软件：下载安装软碟通，用于制作安装ubuntu的U盘启动盘；U盘：没有内容的U盘，用于装Ubuntu的系统U盘。Ubuntu18.04的iso">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-18T15:43:55.349Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="win10安装ubuntu系统">
+<meta name="twitter:description" content="注意事项1亲测过的版本：ubuntu16-18版本，以后版本不确定。使用的电脑是legacy，假如是UEFI可能需要试验一下。 准备工作1234EasyBCD软件：用于之后开机时的双系统切换（假如安装后只能进入Ubuntu系统，此软件没用）；UltraISO软件：下载安装软碟通，用于制作安装ubuntu的U盘启动盘；U盘：没有内容的U盘，用于装Ubuntu的系统U盘。Ubuntu18.04的iso">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/18/win10安装ubuntu系统/">
+
+
+
+
+
+  <title>win10安装ubuntu系统 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/win10安装ubuntu系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">win10安装ubuntu系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T23:45:33+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件教程/" itemprop="url" rel="index">
+                    <span itemprop="name">软件教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">亲测过的版本：ubuntu16-18版本，以后版本不确定。使用的电脑是legacy，假如是UEFI可能需要试验一下。</span><br></pre></td></tr></table></figure>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EasyBCD软件：用于之后开机时的双系统切换（假如安装后只能进入Ubuntu系统，此软件没用）；</span><br><span class="line">UltraISO软件：下载安装软碟通，用于制作安装ubuntu的U盘启动盘；</span><br><span class="line">U盘：没有内容的U盘，用于装Ubuntu的系统U盘。</span><br><span class="line">Ubuntu18.04的iso镜像文件。</span><br></pre></td></tr></table></figure>
+<h3 id="window操作"><a href="#window操作" class="headerlink" title="window操作"></a>window操作</h3><h5 id="安装EasyBCD软件"><a href="#安装EasyBCD软件" class="headerlink" title="安装EasyBCD软件"></a>安装EasyBCD软件</h5><h5 id="给window分区"><a href="#给window分区" class="headerlink" title="给window分区"></a>给window分区</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">分一个至少80G的硬盘，不要分配盘符。</span><br></pre></td></tr></table></figure>
+<h5 id="确认win10的启动方式是UEFI还是Legacy"><a href="#确认win10的启动方式是UEFI还是Legacy" class="headerlink" title="确认win10的启动方式是UEFI还是Legacy"></a>确认win10的启动方式是UEFI还是Legacy</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我的电脑 - 管理 - 磁盘管理 - 右键“磁盘0”，在弹出的菜单中如果有“转换成MBR磁盘”，则是UEFI启动的，如果是转换成GPT则为Legacy。</span><br></pre></td></tr></table></figure>
+<h5 id="制作系统U盘"><a href="#制作系统U盘" class="headerlink" title="制作系统U盘"></a>制作系统U盘</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、插入U盘</span><br><span class="line">2、打开UltraISO软件</span><br><span class="line">3、文件 - 打开 - Ubuntu18.04的iso镜像文件</span><br><span class="line">4、ios文件加载完，启动 - 写入硬盘映像 - 硬盘驱动器 - 选择U盘 - 写入 - 完成。</span><br><span class="line">5、其他注意事项： 若电脑是UEFI启动模式，而不是传统的Legacy启动，制作的启动U盘也要选择UEFI启动模式，否则无法启动。</span><br><span class="line">还要注意磁盘的分区表是GPT还是MBR，MBR是旧的分区表形式，GPT是新的分区表形式，至于二者的具体区别这里不多说，想了解的自行百度，若是GPT分区表，制作U盘时就要选择GPT，否则无法启动</span><br></pre></td></tr></table></figure>
+<h5 id="设置U盘启动"><a href="#设置U盘启动" class="headerlink" title="设置U盘启动"></a>设置U盘启动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不要拔U盘 - 重启 - 进入boot（不同机型按键不同，笔记本多f2, 台式机多是del）</span><br><span class="line">Boot Mode是UEFI和Legacy的Secure Boot都先设置为Disable。</span><br><span class="line">将USB HDD置顶：大概在boot里将UBS HDD排到最前面。</span><br></pre></td></tr></table></figure>
+<h3 id="安装Ubuntu"><a href="#安装Ubuntu" class="headerlink" title="安装Ubuntu"></a>安装Ubuntu</h3><blockquote>
+<p>问题：有可能在插入U盘开机安装Ubuntu第一步就出现Failed to load ldlinux.c32，Boot failed: please change disks and press a key<br>答：使用Universal-USB-Installer-1.9.6.1重新制作U盘系统，教程参考网上。<br>问：若重新制作后光标一直闪烁<br>答：制作系统U盘的第4步，点击启动 - 写入硬盘映像 - 硬盘驱动器 - 选择U盘 - 写入方式：RAW - 写入 - 完成。</p>
+</blockquote>
+<h5 id="选择安装"><a href="#选择安装" class="headerlink" title="选择安装"></a>选择安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、重启 - 进入U盘安装界面 - 选择install Ubuntu</span><br><span class="line">2、选择语言 - 不用连接无线</span><br><span class="line">3、为图形或无线硬件...不勾选</span><br></pre></td></tr></table></figure>
+<h5 id="安装类型"><a href="#安装类型" class="headerlink" title="安装类型"></a>安装类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不要选择安装Ubuntu与window共存，选择其他选项。</span><br><span class="line">除非你确认整台电脑只需要Ubuntu系统，清除整个磁盘并安装Ubuntu，但是电脑里的东西就没了。</span><br><span class="line">系统会弹出提示询问是否强制以UFEI模式进行ubuntu安装，不要点“强制”。点击“后退”即可进入下一步。</span><br></pre></td></tr></table></figure>
+<h5 id="Ubuntu空间划分"><a href="#Ubuntu空间划分" class="headerlink" title="Ubuntu空间划分"></a>Ubuntu空间划分</h5><blockquote>
+<p>ubuntu18.04只需挂载了两个分区: /表示的是放系统文件；/home是放用户文件。其他可不挂载。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">空间解释：/boot:存放linux内核，用来引导系统的，如果是Legacy启动就要设置引导，UEFI就不用设置这个（UEFI要设置EFI文件)。</span><br><span class="line">swap：用作虚拟内存，这个一般和自己的物理内存一般大。</span><br><span class="line">/：主要用来存放Linux系统文件。</span><br><span class="line">/home: 存放用户文件。</span><br><span class="line">分配</span><br><span class="line">1、选择空闲磁盘 - 点击+ - 开始分配</span><br><span class="line">2、注：创建分区的时候默认选项：新分区类型：逻辑分区。新分区位置：空间起始位置。用于：Ext4日志文件系统。</span><br><span class="line">3、swap: 大小：和内存一致。用于:交换空间。默认（可不设）。</span><br><span class="line">4、/boot：大小：500。挂载点：/boot（不设置，不需要分区，不然只能进入一个系统）。</span><br><span class="line">5、/: 大小：最小30G。挂载点：/。</span><br><span class="line">6、/home: 大小：剩余大小。挂载点：/home。</span><br><span class="line">7、安装启动引导器的设备：选择Windows boot Manager或window系统的名字。</span><br><span class="line">8、点击安装有可能会提示：No EFI System Partition was found...，说明没有设置efi分区，点返回。</span><br><span class="line">9、/efi: 大小：500，用于：efi</span><br></pre></td></tr></table></figure>
+<h5 id="有可能会提示GRUB安装失败（未亲测）"><a href="#有可能会提示GRUB安装失败（未亲测）" class="headerlink" title="有可能会提示GRUB安装失败（未亲测）"></a>有可能会提示GRUB安装失败（未亲测）</h5><p>重启会出现3种情况：<br>1、直接进入window，插入U盘，重新进入U盘系统。选择试用Try ubuntu without install<br>打开终端(Open Terminal)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># sudo su</span><br><span class="line"># sudo add-apt-repository ppa:yannubuntu/boot-repair</span><br><span class="line"># sudo apt-get update</span><br><span class="line"># sudo apt-get install boot-repair</span><br></pre></td></tr></table></figure></p>
+<p>静候几分钟，等其结束后关机，拔掉Ｕ盘，开机</p>
+<p>2、直接进入 ubuntu（亲测）<br>插入U盘，打开电脑，然后选择try ubuntu without install。试用不安装。<br>进入ubuntu系统后，连接好网络，打开终端，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:yannubuntu/boot-repair &amp;&amp; sudo apt-get update</span><br></pre></td></tr></table></figure></p>
+<p>完成后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y boot-repair &amp;&amp; boot-repair</span><br></pre></td></tr></table></figure></p>
+<p>完成后出现弹窗，选择recommended repair，重启电脑</p>
+<p>3、选择 ubunru， 开机黑屏，只有光标在闪<br>这个问题，是因为，我给boot 单独分区，所以需要 指向  /dev/sda  （该地址，也是Windows10 的系统 C盘）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//查看分区方法也很多 ： 图形化(用眼看) or 命令</span><br><span class="line"> </span><br><span class="line">sudo -i  //获取超级权限</span><br><span class="line">sudo fdisk -l   // 查看自己的硬盘分区，根据大小判定自己的/boot 在哪</span><br><span class="line"> </span><br><span class="line">//如果大小不能判定，就通过查看 grub文件夹所在的来判断</span><br><span class="line"> </span><br><span class="line">//因为我的 boot 是放在 机械盘下，所以是 sdb9，需要指向 sda.</span><br><span class="line"> </span><br><span class="line"> mount /dev/sdb9  /mnt</span><br><span class="line"> sduo grub-install -boot--directory=/mnt /dev/sda</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">//如果 boot 在根目下面没有单独分区则 这里 是 sda9 不是 sdb9 </span><br><span class="line"> </span><br><span class="line">mount /dev/sda9  /mnt</span><br><span class="line">sduo grub-install -boot--directory=/mnt/boot /dev/sda</span><br></pre></td></tr></table></figure></p>
+<h3 id="EasyBCD操作"><a href="#EasyBCD操作" class="headerlink" title="EasyBCD操作"></a>EasyBCD操作</h3><p>上面Ubuntu系统安装成功后需要重启，此时重启会发现开机时没有Ubuntu选项，系统自动进入win系统，这是就需要配置开机引导了。</p>
+<h5 id="选择添加新条目"><a href="#选择添加新条目" class="headerlink" title="选择添加新条目"></a>选择添加新条目</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、Linux/BSD：定义名称，驱动器：之前/boot分区。点击添加条目。</span><br></pre></td></tr></table></figure>
+<h5 id="进入查看设置查看是否存在"><a href="#进入查看设置查看是否存在" class="headerlink" title="进入查看设置查看是否存在"></a>进入查看设置查看是否存在</h5><h5 id="点击编辑引导菜单"><a href="#点击编辑引导菜单" class="headerlink" title="点击编辑引导菜单"></a>点击编辑引导菜单</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此时可以看到当前有两栏，win10和Ubuntu系统，win10后面会有√，同时在下面选择等待10秒或者不跳过启动项。重启就可以看到有win10和Ubuntu的启动选择了。</span><br></pre></td></tr></table></figure>
+<h3 id="卸载Ubuntu系统"><a href="#卸载Ubuntu系统" class="headerlink" title="卸载Ubuntu系统"></a>卸载Ubuntu系统</h3><h5 id="点击编辑引导菜单-1"><a href="#点击编辑引导菜单-1" class="headerlink" title="点击编辑引导菜单"></a>点击编辑引导菜单</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打开EasyBCD，点击编辑引导菜单，右键选中Ubuntu系统并删除。</span><br></pre></td></tr></table></figure>
+<h5 id="打开BCD部署"><a href="#打开BCD部署" class="headerlink" title="打开BCD部署"></a>打开BCD部署</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在分区中选中win的C盘，确保MBR配置选项和图片一致，点击编写MBR，编写成功之后重启系统，此时就会发现直接进入Win10系统了。</span><br></pre></td></tr></table></figure>
+<h5 id="打开磁盘管理"><a href="#打开磁盘管理" class="headerlink" title="打开磁盘管理"></a>打开磁盘管理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右键选中Ubuntu系统所在分区，选择删除卷，使其恢复空闲状态（绿色），后续可以重新装Ubuntu系统。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/电脑环境配置/" rel="tag"># 电脑环境配置</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/18/hello-world(1)/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">1.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window操作"><span class="nav-number">3.</span> <span class="nav-text">window操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装EasyBCD软件"><span class="nav-number">3.0.1.</span> <span class="nav-text">安装EasyBCD软件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#给window分区"><span class="nav-number">3.0.2.</span> <span class="nav-text">给window分区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#确认win10的启动方式是UEFI还是Legacy"><span class="nav-number">3.0.3.</span> <span class="nav-text">确认win10的启动方式是UEFI还是Legacy</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#制作系统U盘"><span class="nav-number">3.0.4.</span> <span class="nav-text">制作系统U盘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置U盘启动"><span class="nav-number">3.0.5.</span> <span class="nav-text">设置U盘启动</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Ubuntu"><span class="nav-number">4.</span> <span class="nav-text">安装Ubuntu</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择安装"><span class="nav-number">4.0.1.</span> <span class="nav-text">选择安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装类型"><span class="nav-number">4.0.2.</span> <span class="nav-text">安装类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ubuntu空间划分"><span class="nav-number">4.0.3.</span> <span class="nav-text">Ubuntu空间划分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有可能会提示GRUB安装失败（未亲测）"><span class="nav-number">4.0.4.</span> <span class="nav-text">有可能会提示GRUB安装失败（未亲测）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EasyBCD操作"><span class="nav-number">5.</span> <span class="nav-text">EasyBCD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择添加新条目"><span class="nav-number">5.0.1.</span> <span class="nav-text">选择添加新条目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进入查看设置查看是否存在"><span class="nav-number">5.0.2.</span> <span class="nav-text">进入查看设置查看是否存在</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#点击编辑引导菜单"><span class="nav-number">5.0.3.</span> <span class="nav-text">点击编辑引导菜单</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载Ubuntu系统"><span class="nav-number">6.</span> <span class="nav-text">卸载Ubuntu系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#点击编辑引导菜单-1"><span class="nav-number">6.0.1.</span> <span class="nav-text">点击编辑引导菜单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开BCD部署"><span class="nav-number">6.0.2.</span> <span class="nav-text">打开BCD部署</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开磁盘管理"><span class="nav-number">6.0.3.</span> <span class="nav-text">打开磁盘管理</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

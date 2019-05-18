@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="练习题集,">
+  <meta name="keywords" content="css,">
 
 
 
@@ -79,17 +79,17 @@
 
 
 
-<meta name="keywords" content="练习题集">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js之this练习">
-<meta property="og:url" content="http://yoursite.com/2019/03/20/js之this练习/index.html">
+<meta property="og:title" content="css默认样式修改">
+<meta property="og:url" content="http://yoursite.com/2018/10/05/css默认样式修改(4)/index.html">
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://drscdn.500px.org/photo/299185027/q%3D80_m%3D1500/v2?webp=true&sig=cd7f9a836ccb2f2bee9328e0e88119709a543d289023ca31e37645a8ab5b7032">
-<meta property="og:updated_time" content="2019-05-18T15:41:27.668Z">
+<meta property="og:image" content="https://drscdn.500px.org/photo/297117911/q%3D80_m%3D1500/v2?webp=true&sig=d01942c7bb4f7f7b81463e5e063ce6bcc0044d3a4576bf2e3e1eac2508352900">
+<meta property="og:updated_time" content="2019-05-18T15:41:32.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js之this练习">
-<meta name="twitter:image" content="https://drscdn.500px.org/photo/299185027/q%3D80_m%3D1500/v2?webp=true&sig=cd7f9a836ccb2f2bee9328e0e88119709a543d289023ca31e37645a8ab5b7032">
+<meta name="twitter:title" content="css默认样式修改">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/297117911/q%3D80_m%3D1500/v2?webp=true&sig=d01942c7bb4f7f7b81463e5e063ce6bcc0044d3a4576bf2e3e1eac2508352900">
 
 
 
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/20/js之this练习/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/05/css默认样式修改(4)/">
 
 
 
 
 
-  <title>js之this练习 | 肥而不腻的蜗牛</title>
+  <title>css默认样式修改 | 肥而不腻的蜗牛</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/js之this练习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/css默认样式修改(4)/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ethan-庄">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js之this练习</h1>
+          <h1 class="post-title" itemprop="name headline">css默认样式修改</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T14:12:38+08:00">
-                2019-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-05T10:16:21+08:00">
+                2018-10-05
               </time>
             
 
@@ -301,6 +301,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/实用/" itemprop="url" rel="index">
+                    <span itemprop="name">实用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,12 +351,9 @@
       
 
       
-        <p><img src="https://drscdn.500px.org/photo/299185027/q%3D80_m%3D1500/v2?webp=true&amp;sig=cd7f9a836ccb2f2bee9328e0e88119709a543d289023ca31e37645a8ab5b7032" alt=""><br><a id="more"></a></p>
-<h3 id="1、this"><a href="#1、this" class="headerlink" title="1、this"></a>1、this</h3><h5 id="1、js面试题目"><a href="#1、js面试题目" class="headerlink" title="1、js面试题目"></a>1、js面试题目</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  foo: function()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var bar = obj.foo</span><br><span class="line">obj.foo() // 打印出的 this 是 obj</span><br><span class="line">bar() // 打印出的 this 是 window</span><br></pre></td></tr></table></figure>
-<h5 id="2、解题原理"><a href="#2、解题原理" class="headerlink" title="2、解题原理"></a>2、解题原理</h5><p>首先需要从函数的调用开始讲起。JS（ES5）里面有三种函数调用形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、func(p1, p2) //语法糖</span><br><span class="line">2、obj.child.method(p1, p2)   //语法糖</span><br><span class="line">3、func.call(context, p1, p2) // 先不讲 apply</span><br></pre></td></tr></table></figure></p>
-<p>3才是正常调用形式，用3表示1,2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func(p1, p2) 等价于</span><br><span class="line">func.call(undefined, p1, p2)</span><br><span class="line"></span><br><span class="line">obj.child.method(p1, p2) 等价于</span><br><span class="line">obj.child.method.call(obj.child, p1, p2)</span><br></pre></td></tr></table></figure></p>
-<p>至此我们的函数调用只有一种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func.call(context, p1, p2)  //context就是this</span><br></pre></td></tr></table></figure></p>
-<h5 id="3、开始解题"><a href="#3、开始解题" class="headerlink" title="3、开始解题"></a>3、开始解题</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  foo: function()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.foo() </span><br><span class="line">等价于</span><br><span class="line">function func()&#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func.call(obj)</span><br></pre></td></tr></table></figure>
+        <p><img src="https://drscdn.500px.org/photo/297117911/q%3D80_m%3D1500/v2?webp=true&amp;sig=d01942c7bb4f7f7b81463e5e063ce6bcc0044d3a4576bf2e3e1eac2508352900" alt=""><br><a id="more"></a></p>
+<h5 id="1、css滚动条默认样式修改"><a href="#1、css滚动条默认样式修改" class="headerlink" title="1、css滚动条默认样式修改"></a>1、css滚动条默认样式修改</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.innerbox::-webkit-scrollbar &#123;/*滚动条整体样式*/</span><br><span class="line">     width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/</span><br><span class="line">     height: 4px;</span><br><span class="line"> &#125;</span><br><span class="line"> .innerbox::-webkit-scrollbar-thumb &#123;/*滚动条里面小方块*/</span><br><span class="line">     border-radius: 5px;</span><br><span class="line">     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);</span><br><span class="line">     background: rgba(0,0,0,0.2);</span><br><span class="line"> &#125;</span><br><span class="line"> .innerbox::-webkit-scrollbar-track &#123;/*滚动条里面轨道*/</span><br><span class="line">     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);</span><br><span class="line">     border-radius: 0;</span><br><span class="line">     background: rgba(0,0,0,0.1);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2、CSS输入框placeholder颜色修改"><a href="#2、CSS输入框placeholder颜色修改" class="headerlink" title="2、CSS输入框placeholder颜色修改"></a>2、CSS输入框placeholder颜色修改</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">input::-webkit-input-placeholder&#123; color:red; &#125; /* WebKit browsers */</span><br><span class="line">input:-moz-placeholder&#123; color:red; &#125;/* Mozilla Firefox 4 to 18 */</span><br><span class="line">input::-moz-placeholder&#123; color:red; &#125;/* Mozilla Firefox 19+ */</span><br><span class="line">input:-ms-input-placeholder&#123; color:red;&#125; /* Internet Explorer 10+ */</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -351,7 +370,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/练习题集/" rel="tag"># 练习题集</a>
+            <a href="/tags/css/" rel="tag"># css</a>
           
         </div>
       
@@ -364,8 +383,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/20/js之方法原理/" rel="next" title="js之方法原理">
-                <i class="fa fa-chevron-left"></i> js之方法原理
+              <a href="/2018/10/04/typescript文档知识点/" rel="next" title="typescript文档知识点">
+                <i class="fa fa-chevron-left"></i> typescript文档知识点
               </a>
             
           </div>
@@ -374,8 +393,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/20/js之算法练习/" rel="prev" title="js之算法练习">
-                js之算法练习 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/05/不用less和sass怎么定义样式变量/" rel="prev" title="不用less和sass怎么定义样式变量">
+                不用less和sass怎么定义样式变量 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、this"><span class="nav-number">1.</span> <span class="nav-text">1、this</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、js面试题目"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、js面试题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、解题原理"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、解题原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、开始解题"><span class="nav-number">1.0.3.</span> <span class="nav-text">3、开始解题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、css滚动条默认样式修改"><span class="nav-number">1.</span> <span class="nav-text">1、css滚动条默认样式修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、CSS输入框placeholder颜色修改"><span class="nav-number">2.</span> <span class="nav-text">2、CSS输入框placeholder颜色修改</span></a></li></ol></div>
             
 
           </div>
