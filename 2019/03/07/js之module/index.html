@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/297096081/q%3D80_m%3D2000/v2?webp=true&sig=a2412f827aba35ea8cf018edd497345d6ff18278d93a915a381a1c4f71db5c65">
-<meta property="og:updated_time" content="2019-05-18T15:41:27.847Z">
+<meta property="og:updated_time" content="2019-10-04T06:21:30.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js之module">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/297096081/q%3D80_m%3D2000/v2?webp=true&sig=a2412f827aba35ea8cf018edd497345d6ff18278d93a915a381a1c4f71db5c65">
@@ -355,7 +355,7 @@
 <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><blockquote>
 <p>es6之前，js没有模块体系，制定的模块加载方案，主要是CommonJs和AMD，前者用于服务器，后者用于浏览器。<br>ES6模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。<br>模块功能主要有2个命令构成：export和import</p>
 </blockquote>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// CommonJs模块</span><br><span class="line">let &#123; stat, exists, readFile &#125; = require(&apos;fs&apos;);</span><br><span class="line">// 等同于</span><br><span class="line">let _fs = require(&apos;fs&apos;);</span><br><span class="line">let stat = _fs.stat;</span><br><span class="line">let exists = _fs.exists;</span><br><span class="line">let readfile = _fs.readfile;</span><br><span class="line">// CommonJs整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取 3 个方法。</span><br><span class="line"></span><br><span class="line">// ES6 模块不是对象，而是通过export命令显式指定输出的代码，再通过import命令输入。</span><br><span class="line">import &#123; stat, exists, readFile &#125; from &apos;fs&apos;;</span><br><span class="line">// 上面代码的实质是从fs模块加载 3 个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载，效率要比 CommonJS 模块的加载方式高。</span><br></pre></td></tr></table></figure>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// CommonJs模块</span><br><span class="line">let &#123; stat, exists, readFile &#125; = require(&apos;fs&apos;);</span><br><span class="line">// 等同于</span><br><span class="line">let _fs = require(&apos;fs&apos;);</span><br><span class="line">let stat = _fs.stat;</span><br><span class="line">let exists = _fs.exists;</span><br><span class="line">let readfile = _fs.readfile;</span><br><span class="line">// CommonJs整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取 3 个方法。</span><br><span class="line">// 支持动态导入，也就是 require($&#123;path&#125;/xx.js)，Es6模块不支持</span><br><span class="line">// CommonJs是同步导入, Es6是异步导入</span><br><span class="line">// CommonJs是值拷贝，想要更新，必须重新导入,Es6是导入和导出的值指向同一个内存地址</span><br><span class="line"></span><br><span class="line">// ES6 模块不是对象，而是通过export命令显式指定输出的代码，再通过import命令输入。</span><br><span class="line">import &#123; stat, exists, readFile &#125; from &apos;fs&apos;;</span><br><span class="line">// 上面代码的实质是从fs模块加载 3 个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载，效率要比 CommonJS 模块的加载方式高。</span><br></pre></td></tr></table></figure>
 <h4 id="export-命令"><a href="#export-命令" class="headerlink" title="export 命令"></a>export 命令</h4><blockquote>
 <p>一个模块就是一个独立的文件。该文件内部的所有变量，外部无法获取。如果外部要读取模块内部的某个变量，就必须使用export关键字输出该变量。<br>export命令可以出现在模块的任何位置，只要不是块作用域</p>
 </blockquote>
@@ -406,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/07/js之Iterator和for-of循环/" rel="next" title="js之Iterator和for...of循环">
-                <i class="fa fa-chevron-left"></i> js之Iterator和for...of循环
+              <a href="/2019/02/20/wx小程序知识点/" rel="next" title="wx小程序知识点">
+                <i class="fa fa-chevron-left"></i> wx小程序知识点
               </a>
             
           </div>
@@ -497,7 +497,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -519,7 +519,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

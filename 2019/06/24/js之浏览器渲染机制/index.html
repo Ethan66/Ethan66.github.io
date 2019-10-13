@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之浏览器渲染机制">
+<meta property="og:url" content="http://yoursite.com/2019/06/24/js之浏览器渲染机制/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/308841447/q%3D80_m%3D1500/v2?webp=true&sig=be48f0b6927afc21162a27931ef178a3e9f49ebdf281294a8d991a282b7cad7a">
+<meta property="og:updated_time" content="2019-10-04T06:21:28.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之浏览器渲染机制">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/308841447/q%3D80_m%3D1500/v2?webp=true&sig=be48f0b6927afc21162a27931ef178a3e9f49ebdf281294a8d991a282b7cad7a">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/24/js之浏览器渲染机制/">
+
+
+
+
+
+  <title>js之浏览器渲染机制 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/24/js之浏览器渲染机制/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之浏览器渲染机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-24T11:22:04+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/308841447/q%3D80_m%3D1500/v2?webp=true&amp;sig=be48f0b6927afc21162a27931ef178a3e9f49ebdf281294a8d991a282b7cad7a" alt=""><br><a id="more"></a></p>
+<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><blockquote>
+<p>进程：程序的一次执行,它占有一片独有的内存空间,可以通过windows任务管理器查看进程。同一个时间里，同一个计算机系统中允许两个或两个以上的进程处于并行状态，这是多进程。比如电脑同时运行微信，QQ，以及各种浏览器。浏览器运行是有些是单进程，如firefox和老版IE，有些是多进程，如chrome和新版IE。<br>线程：在一个进程内部，要同时干多件事，就需要同时运行多个“子任务”，我们把进程内的这些“子任务”称为线程。浏览器运行是多线程。JavaScript是单线程。</p>
+</blockquote>
+<h3 id="浏览器渲染引擎"><a href="#浏览器渲染引擎" class="headerlink" title="浏览器渲染引擎"></a>浏览器渲染引擎</h3><blockquote>
+<p>浏览器（多进程）包含了Browser进程（浏览器的主进程）、第三方插件进程和GPU进程（浏览器渲染进程）。浏览器渲染进程：通过取得页面内容、整理信息（应用CSS）、计算和组合最终输出可视化的图像结果。</p>
+</blockquote>
+<h5 id="主要渲染引擎"><a href="#主要渲染引擎" class="headerlink" title="主要渲染引擎"></a>主要渲染引擎</h5><blockquote>
+<p>1、Chrome, Safari等: webkit。2、firefox: Gecko。3、IE: Trident。4、360,搜狗等国内浏览器: Trident + webkit</p>
+</blockquote>
+<h5 id="浏览器渲染进程"><a href="#浏览器渲染进程" class="headerlink" title="浏览器渲染进程"></a>浏览器渲染进程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1、GUI 渲染线程：</span><br><span class="line">主要负责页面的渲染，解析HTML、CSS，构建DOM树，布局和绘制等。</span><br><span class="line">当界面需要重绘或者由于某种操作引发回流时，将执行该线程。</span><br><span class="line">该线程与JS引擎线程互斥，当执行JS引擎线程时，GUI渲染会被挂起，当任务队列空闲时，主线程才会去执行GUI渲染。</span><br><span class="line"></span><br><span class="line">2、JS引擎线程：</span><br><span class="line">该线程当然是主要负责处理 JavaScript脚本，执行代码。</span><br><span class="line">也是主要负责执行准备好待执行的事件，即定时器计数结束，或者异步请求成功并正确返回时，将依次进入任务队列，等待 JS引擎线程的执行。</span><br><span class="line">当然，该线程与 GUI渲染线程互斥，当 JS引擎线程执行 JavaScript脚本时间过长，将导致页面渲染的阻塞。</span><br><span class="line"></span><br><span class="line">3、定时触发器线程：</span><br><span class="line">负责执行异步定时器一类的函数的线程，如： setTimeout，setInterval。</span><br><span class="line">主线程依次执行代码时，遇到定时器，会将定时器交给该线程处理，当计数完毕后，事件触发线程会将计数完毕后的事件加入到任务队列的尾部，等待JS引擎线程执行。</span><br><span class="line"></span><br><span class="line">4、事件触发线程：</span><br><span class="line">主要负责将准备好的事件交给 JS引擎线程执行。</span><br><span class="line">比如 setTimeout定时器计数结束， ajax等异步请求成功并触发回调函数，或者用户触发点击事件时，该线程会将整装待发的事件依次加入到任务队列的队尾，等待 JS引擎线程的执行。</span><br><span class="line"></span><br><span class="line">5、异步http请求线程：</span><br><span class="line">负责执行异步请求一类的函数的线程，如： Promise，axios，ajax等。</span><br><span class="line">主线程依次执行代码时，遇到异步请求，会将函数交给该线程处理，当监听到状态码变更，如果有回调函数，事件触发线程会将回调函数加入到任务队列的尾部，等待JS引擎线程执行。</span><br></pre></td></tr></table></figure>
+<h3 id="DOCTYPE"><a href="#DOCTYPE" class="headerlink" title="DOCTYPE"></a>DOCTYPE</h3><h5 id="DTD概念"><a href="#DTD概念" class="headerlink" title="DTD概念"></a>DTD概念</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DOCTYPE作用：用来声明DTD。</span><br><span class="line"></span><br><span class="line">DTD全称：文档类型定义（Document Type Definition）</span><br><span class="line"></span><br><span class="line">DTD作用：是一系列的语法规则，用来定义XML或者(X)HTML文件类型。浏览器会使用DTD来判断文本类型，决定使用何种协议来解析。DTD就是告诉浏览器，我是什么文档类型，你要用什么协议来解析我</span><br></pre></td></tr></table></figure>
+<h5 id="常见的DOCTYPE声明"><a href="#常见的DOCTYPE声明" class="headerlink" title="常见的DOCTYPE声明"></a>常见的DOCTYPE声明</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、HTML 4.01 Strict：（严格的）</span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;</span><br><span class="line">该DTD包含所有的HTML元素和属性，但不包括展示性的和弃用的元素（比如 font、u下划线等，这些是被废弃了的）。</span><br><span class="line">2、HTML 4.01 Transitional：（传统的）</span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">该DTD包含所有的HTML元素和属性，但包括展示性的和弃用的元素（比如 font、u下划线等）。</span><br><span class="line">3、HTML 5：</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="浏览器渲染机制"><a href="#浏览器渲染机制" class="headerlink" title="浏览器渲染机制"></a>浏览器渲染机制</h3><blockquote>
+<p>浏览器含有一个渲染引擎，用来渲染窗口所展示的内容。默认情况下，渲染引擎可以显示html、xml文档及图片，它也可以借助插件（一种浏览器扩展）显示其他类型数据，例如使用PDF阅读器插件，用于显示PDF格式。</p>
+</blockquote>
+<h5 id="渲染引擎的基本流程："><a href="#渲染引擎的基本流程：" class="headerlink" title="渲染引擎的基本流程："></a>渲染引擎的基本流程：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 前期</span><br><span class="line">1、域名解析：浏览器通过向DNS服务器发送域名，得到对应的IP地址</span><br><span class="line">2、向这个 IP 的机器发送 HTTP 请求，请求分三个部分：TCP 三次握手、http 请求响应信息、关闭 TCP 连接。</span><br><span class="line">3、服务器收到、处理并返回 HTTP 请求</span><br><span class="line">4、浏览器得到返回内容（此时的内容为html字符串内容，只有 HTML 格式浏览器才能正确解析）</span><br><span class="line">5、当数据传送完毕，需要断开 tcp 连接，此时发起 tcp 四次挥手。</span><br><span class="line"></span><br><span class="line">// 拿到相应内容后</span><br><span class="line">解析html -&gt; 构建dom树和css树 -&gt; 构建render树 -&gt; 布局render树 -&gt; 绘制render树</span><br><span class="line">解析html：浏览器从磁盘或网络读取HTML的原始字节，并根据文件的指定编码（例如 UTF-8）将它们转换成字符串（也就是我们写的html代码）。</span><br><span class="line">DOM Tree：浏览器将HTML解析成树形的数据结构。</span><br><span class="line">CSS Rule Tree：浏览器将CSS解析成树形的数据结构。（CSS匹配HTML元素是一个相当复杂和有性能问题的事情。所以，DOM树要小，CSS尽量用id和class，千万不要过渡层叠下去。）</span><br><span class="line">Render Tree: DOM和CSSOM合并后生成Render Tree。（渲染树只会包括需要显示的节点和这些节点的样式信息，如果某个节点是 display: none 的，那么就不会在渲染树中显示。渲染过程中，如果遇到&lt;script&gt;就停止渲染，执行 JS 代码。因为浏览器有GUI渲染线程与JS引擎线程，这两个线程是互斥的关系。在构建DOM时，HTML解析器若遇到了JavaScript，那么它会暂停构建DOM，等JavaScript引擎运行完毕，浏览器再从中断的地方恢复DOM构建。JavaScript还可以更改样式，也就是它可以更改CSSOM。在执行JavaScript时，必须要能拿到完整的CSSOM。所以就导致了一个现象，在这种情况下，浏览器会先下载和构建CSSOM，然后再执行JavaScript，最后在继续构建DOM。）</span><br><span class="line">layout: 有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置。</span><br><span class="line">painting: 按照算出来的规则，通过显卡，把内容画到屏幕上。</span><br></pre></td></tr></table></figure>
+<h5 id="TCP-三次握手的过程"><a href="#TCP-三次握手的过程" class="headerlink" title="TCP 三次握手的过程"></a>TCP 三次握手的过程</h5><p>“三次握手”的目的是“为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">客户端向服务端发送连接请求报文段。该报文段中包含自身的数据通讯初始序号。请求发送后，客户端便进入 SYN-SENT 状态。</span><br><span class="line"></span><br><span class="line">服务端收到连接请求报文段后，如果同意连接，则会发送一个应答，该应答中也会包含自身的数据通讯初始序号，发送完成后便进入 SYN-RECEIVED 状态</span><br><span class="line"></span><br><span class="line">当客户端收到连接同意的应答后，还要向服务端发送一个确认报文。客户端发完这个报文段后便进入 ESTABLISHED 状态，服务端收到这个应答后也进入 ESTABLISHED 状态，此时连接建立成功。</span><br></pre></td></tr></table></figure></p>
+<h5 id="TCP-四次挥手"><a href="#TCP-四次挥手" class="headerlink" title="TCP 四次挥手"></a>TCP 四次挥手</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、若客户端 A 认为数据发送完成，则它需要向服务端 B 发送连接释放请求。</span><br><span class="line">2、B 收到连接释放请求后，会告诉应用层要释放 TCP 链接。然后会发送 ACK 包，并进入 CLOSE_WAIT 状态，此时表明 A 到 B 的连接已经释放，不再接收 A 发的数据了。但是因为 TCP 连接是双向的，所以 B 仍旧可以发送数据给 A。</span><br><span class="line">3、B 如果此时还有没发完的数据会继续发送，完毕后会向 A 发送连接释放请求，然后 B 便进入 LAST-ACK 状态。</span><br><span class="line">4、A 收到释放请求后，向 B 发送确认应答，此时 A 进入 TIME-WAIT 状态。该状态会持续 2MSL（最大段生存期，指报文段在网络中生存的时间，超时会被抛弃） 时间，若该时间段内没有 B 的重发请求的话，就进入 CLOSED 状态。当 B 收到确认应答后，也便进入 CLOSED 状态。</span><br></pre></td></tr></table></figure>
+<h5 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h5><blockquote>
+<p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务。异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，通知某个异步任务可以执行了，该任务才会进入主线程执行。<br>总结：只要主线程空了，就会去读取”任务队列”，这就是JavaScript的运行机制。【重要】</p>
+</blockquote>
+<h5 id="浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程"><a href="#浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程" class="headerlink" title="浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程"></a>浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程</h5><blockquote>
+<p>1、同步任务在JS引擎线程（主线程）上执行，形成执行栈（Execution Context Stack）<br>2、主线程之外，事件触发线程管理着一个任务队列（Task Queue）。只要异步任务有了运行结果，就在任务队列之中放置一个事件。<br>3、执行栈中的同步任务执行完毕，系统就会读取任务队列，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br>4、主线程不断重复上面的第三步。<br>主线程从”任务队列”中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为Event Loop（事件循环）。只要主线程空了，就会去读取”任务队列”，这就是JavaScript的运行机制。</p>
+</blockquote>
+<h5 id="哪些语句会放入异步任务队列及放入时机"><a href="#哪些语句会放入异步任务队列及放入时机" class="headerlink" title="哪些语句会放入异步任务队列及放入时机"></a>哪些语句会放入异步任务队列及放入时机</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、setTimeout和setlnterval</span><br><span class="line">2、DOM事件</span><br><span class="line">3、ES6中的Promise</span><br><span class="line">4、Ajax异步请求</span><br></pre></td></tr></table></figure>
+<h5 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h5><blockquote>
+<p>宏任务：script （主代码块）、setTimeout 、setInterval 、setImmediate、I/O 、UI rendering<br>微任务：process.nextTick（Nodejs） 、promise 、Object.observe 、MutationObserver<br>区别：宏任务是每次执行栈执行的代码（包括每次从事件队列中获取一个事件回调并放到执行栈中执行）<br>浏览器为了能够使得JS引擎线程与GUI渲染线程有序切换，会在当前宏任务结束之后，下一个宏任务执行开始之前，对页面进行重新渲染（宏任务 &gt; 渲染  &gt; 宏任务 &gt; …）<br>微任务是在当前宏任务执行结束之后立即执行的任务（在当前 宏任务执行之后，UI渲染之前执行的任务）。微任务的响应速度相比setTimeout（下一个宏任务）会更快，因为无需等待UI渲染。<br>当前宏任务执行后，会将在它执行期间产生的所有微任务都执行一遍。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;script start&apos;)</span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">  console.log(&apos;setTimeout&apos;)</span><br><span class="line">&#125;, 0)</span><br><span class="line">new Promise(resolve =&gt; &#123;</span><br><span class="line">  console.log(&apos;Promise&apos;)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;)</span><br><span class="line">  .then(function() &#123;</span><br><span class="line">    console.log(&apos;promise1&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(function() &#123;</span><br><span class="line">    console.log(&apos;promise2&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">console.log(&apos;script end&apos;)</span><br><span class="line">// script start =&gt; Promise =&gt; script end =&gt; promise1 =&gt; promise2 =&gt; setTimeout</span><br><span class="line">// 很多人有个误区，认为微任务快于宏任务，其实是错误的。因为宏任务中包括了 script ，浏览器会先执行一个宏任务，接下来有异步代码的话就先执行微任务。</span><br><span class="line">// 1、执行同步代码script，这属于宏任务。2、执行栈为空，查询是否有微任务需要执行。3、执行所有微任务。</span><br><span class="line">// 4、必要的话渲染 UI。5、然后开始下一轮 Event loop，执行宏任务中的异步代码</span><br></pre></td></tr></table></figure>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><blockquote>
+<p>执行一个宏任务（首次执行的主代码块或者任务队列中的回调函数）<br>执行过程中如果遇到微任务，就将它添加到微任务的任务队列中<br>宏任务执行完毕后，立即执行当前微任务队列中的所有任务（依次执行）<br>JS引擎线程挂起，GUI线程执行渲染<br>GUI线程渲染完毕后挂起，JS引擎线程执行任务队列中的下一个宏任务</p>
+</blockquote>
+<h5 id="reflow-回流-和repaint-重绘"><a href="#reflow-回流-和repaint-重绘" class="headerlink" title="reflow(回流)和repaint(重绘)"></a>reflow(回流)和repaint(重绘)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">reflow（回流）：当页面中DOM元素发生了样式变化影响了布局，需要倒回去重新渲染，这个回退的过程叫 reflow。reflow 会从 &lt;html&gt; 这个 root frame 开始递归往下，依次计算所有的结点几何尺寸和位置。reflow 几乎是无法避免的。</span><br><span class="line"></span><br><span class="line">触发reflow：</span><br><span class="line">1、增加、删除、修改DOM节点时，会导致 Reflow 或 Repaint。2、移动DOM的位置，或是加个动画的时候。3、修改CSS样式</span><br><span class="line"></span><br><span class="line">repaint（重绘）：改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。</span><br><span class="line"></span><br><span class="line">注意：(1)display:none 的节点不会被加入Render Tree，而visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为display:none是更优的。</span><br><span class="line">(2)display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint，因为没有发现位置变化。</span><br><span class="line">(3)有些情况下，比如修改了元素的样式，浏览器并不会立刻reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow，这又叫异步 reflow 或增量异步 reflow。但是在有些情况下，比如resize 窗口，改变了页面默认的字体等。对于这些操作，浏览器会马上进行 reflow。</span><br></pre></td></tr></table></figure>
+<h5 id="怎么避免reflow，怎么减少repaint"><a href="#怎么避免reflow，怎么减少repaint" class="headerlink" title="怎么避免reflow，怎么减少repaint"></a>怎么避免reflow，怎么减少repaint</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.直接改变className,如果动态改变样式，则使用cssText，避免多次修改样式。</span><br><span class="line">2.让操作的元素进行“离线处理”，处理完后一次更新：先把DOM给display:none; 使用DocumentFragment进行缓存操作，引发一次回流和重绘。</span><br><span class="line">3.尽可能在DOM树的最末端改变class（可限制回流的范围）。</span><br><span class="line">4.避免设置多层内联样式（将样式合并在一个外部类，仅产生一次回流）。</span><br><span class="line">5.动画效果应用到position属性为absolute或fixed的元素上（动画效果应用到position属性为absolute或fixed的元素上，它们不影响其他元素的布局，所它他们只会导致重新绘制，而不是一个完整回流。这样消耗会更低。）</span><br><span class="line">6、使用 visibility 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局）</span><br><span class="line">7、不要使用 table 布局，可能很小的一个小改动会造成整个 table 的重新布局</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/21/前端错误监控/" rel="next" title="前端错误监控">
+                <i class="fa fa-chevron-left"></i> 前端错误监控
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/24/js之安全问题：Cookie、CSRF和XSS/" rel="prev" title="js之安全问题：Cookie、CSRF和XSS">
+                js之安全问题：Cookie、CSRF和XSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器渲染引擎"><span class="nav-number">2.</span> <span class="nav-text">浏览器渲染引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主要渲染引擎"><span class="nav-number">2.0.1.</span> <span class="nav-text">主要渲染引擎</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#浏览器渲染进程"><span class="nav-number">2.0.2.</span> <span class="nav-text">浏览器渲染进程</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#DOCTYPE"><span class="nav-number">3.</span> <span class="nav-text">DOCTYPE</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DTD概念"><span class="nav-number">3.0.1.</span> <span class="nav-text">DTD概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常见的DOCTYPE声明"><span class="nav-number">3.0.2.</span> <span class="nav-text">常见的DOCTYPE声明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器渲染机制"><span class="nav-number">4.</span> <span class="nav-text">浏览器渲染机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#渲染引擎的基本流程："><span class="nav-number">4.0.1.</span> <span class="nav-text">渲染引擎的基本流程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP-三次握手的过程"><span class="nav-number">4.0.2.</span> <span class="nav-text">TCP 三次握手的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP-四次挥手"><span class="nav-number">4.0.3.</span> <span class="nav-text">TCP 四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#任务队列"><span class="nav-number">4.0.4.</span> <span class="nav-text">任务队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程"><span class="nav-number">4.0.5.</span> <span class="nav-text">浏览器页面初次渲染完毕后，JS引擎线程结合事件触发线程的工作流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#哪些语句会放入异步任务队列及放入时机"><span class="nav-number">4.0.6.</span> <span class="nav-text">哪些语句会放入异步任务队列及放入时机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#宏任务和微任务"><span class="nav-number">4.0.7.</span> <span class="nav-text">宏任务和微任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结"><span class="nav-number">4.0.8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reflow-回流-和repaint-重绘"><span class="nav-number">4.0.9.</span> <span class="nav-text">reflow(回流)和repaint(重绘)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#怎么避免reflow，怎么减少repaint"><span class="nav-number">4.0.10.</span> <span class="nav-text">怎么避免reflow，怎么减少repaint</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

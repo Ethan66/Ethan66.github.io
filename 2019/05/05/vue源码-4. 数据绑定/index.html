@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/304484215/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=d8703f9e85f642bef954bdfe1f4f43a772ab1061520ae726bae1f56ee6a44bfe">
-<meta property="og:updated_time" content="2019-05-18T15:41:22.673Z">
+<meta property="og:updated_time" content="2019-10-04T06:21:24.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue源码-4.数据绑定">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/304484215/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=d8703f9e85f642bef954bdfe1f4f43a772ab1061520ae726bae1f56ee6a44bfe">
@@ -352,6 +352,9 @@
 
       
         <p><img src="https://drscdn.500px.org/photo/304484215/q%3D80_m%3D2000_k%3D1/v2?webp=true&amp;sig=d8703f9e85f642bef954bdfe1f4f43a772ab1061520ae726bae1f56ee6a44bfe" alt=""><br><a id="more"></a></p>
+<h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><blockquote>
+<p>遍历vm._data里的属性，将属性重新defineProperty。vm.xx = xxx 触发了set方法，set方法里改变了vm._data的值，触发了vm._data.xx的set方法，从而更新模板</p>
+</blockquote>
 <h4 id="什么是vue的数据绑定"><a href="#什么是vue的数据绑定" class="headerlink" title="什么是vue的数据绑定"></a>什么是vue的数据绑定</h4><p>一旦更新了data中的某个属性数据，所有界面上直接或间接使用了此属性的节点都会更新。</p>
 <h4 id="怎么实现数据绑定"><a href="#怎么实现数据绑定" class="headerlink" title="怎么实现数据绑定"></a>怎么实现数据绑定</h4><p>通过数据劫持来实现数据绑定的效果。用defineProperty()来监视data中所有属性数据的变化，一旦变化就去更新界面。<br>vm.xxx = xxx 改变vm的xxx属性，触发set函数，改变_data里xxx属性的值，触发set函数，实行更新界面。</p>
 
@@ -475,7 +478,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -497,7 +500,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -546,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是vue的数据绑定"><span class="nav-number">1.</span> <span class="nav-text">什么是vue的数据绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#怎么实现数据绑定"><span class="nav-number">2.</span> <span class="nav-text">怎么实现数据绑定</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是vue的数据绑定"><span class="nav-number">2.</span> <span class="nav-text">什么是vue的数据绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#怎么实现数据绑定"><span class="nav-number">3.</span> <span class="nav-text">怎么实现数据绑定</span></a></li></ol></div>
             
 
           </div>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之运行机制">
+<meta property="og:url" content="http://yoursite.com/2019/06/27/js之运行机制/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/308930455/q%3D80_m%3D1500/v2?webp=true&sig=93b43cb77eb307b5d828902b7a217d38e9a6f72bcb7d6e388f679aeb52cb228b">
+<meta property="og:updated_time" content="2019-10-04T06:21:28.824Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之运行机制">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/308930455/q%3D80_m%3D1500/v2?webp=true&sig=93b43cb77eb307b5d828902b7a217d38e9a6f72bcb7d6e388f679aeb52cb228b">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/27/js之运行机制/">
+
+
+
+
+
+  <title>js之运行机制 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/js之运行机制/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之运行机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T15:28:08+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/308930455/q%3D80_m%3D1500/v2?webp=true&amp;sig=93b43cb77eb307b5d828902b7a217d38e9a6f72bcb7d6e388f679aeb52cb228b" alt=""><br><a id="more"></a></p>
+<h3 id="js的异步和单线程"><a href="#js的异步和单线程" class="headerlink" title="js的异步和单线程"></a>js的异步和单线程</h3><h5 id="js的单线程"><a href="#js的单线程" class="headerlink" title="js的单线程"></a>js的单线程</h5><blockquote>
+<p>JavaScript语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？</p>
+</blockquote>
+<h5 id="js异步"><a href="#js异步" class="headerlink" title="js异步"></a>js异步</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">console.log(1);</span><br><span class="line">setTimeout(function () &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;, 1000);</span><br><span class="line">console.log(3);  // 1,3,2</span><br><span class="line"></span><br><span class="line">console.log(1);</span><br><span class="line">setTimeout(function () &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;, 0); // 将1000改为0</span><br><span class="line">console.log(3);  // 1,3,2</span><br><span class="line"></span><br><span class="line">console.log(&apos;A&apos;);</span><br><span class="line">setTimeout(function () &#123;</span><br><span class="line">    console.log(&apos;B&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">while (1) &#123;</span><br><span class="line">&#125; // A</span><br><span class="line"></span><br><span class="line">// 总结：js 是单线程（同一时间只能做一件事），而且有一个任务队列：全部的同步任务执行完毕后，再来执行异步任务。第一行代码和最后一行代码是同步任务；但是，setTimeout是异步任务。</span><br><span class="line">执行的顺序：1、先执行同步任务。2、遇到异步任务setTimeout，要挂起。3、全部的同步任务执行完毕后，再来执行异步任务。</span><br></pre></td></tr></table></figure>
+<h5 id="js的同步"><a href="#js的同步" class="headerlink" title="js的同步"></a>js的同步</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;A&apos;);</span><br><span class="line">alert(&apos;haha&apos;);</span><br><span class="line">console.log(&apos;B&apos;); // 只有点击确定了，才会打印B</span><br></pre></td></tr></table></figure>
+<h5 id="同步和异步的对比"><a href="#同步和异步的对比" class="headerlink" title="同步和异步的对比"></a>同步和异步的对比</h5><blockquote>
+<p>因为setTimeout是异步任务，所以程序并不会卡在那里，而是继续向下执行（即使settimeout设置了倒计时一万秒）；但是alert函数是同步任务，程序会卡在那里，如果它没有执行，后面的也不会执行（卡在那里，自然也就造成了阻塞）。</p>
+</blockquote>
+<h5 id="setTimeout和setInterval的两个方法"><a href="#setTimeout和setInterval的两个方法" class="headerlink" title="setTimeout和setInterval的两个方法"></a>setTimeout和setInterval的两个方法</h5><blockquote>
+<p>对于第二个参数有以下需要注意的地方：1、当第二个参数缺省时，默认为 0；2、当指定的值小于 4 毫秒，则增加到 4ms(4ms 是 HTML5 标准指定的，对于 2010 年及之前的浏览器则是 10ms);也就是说至少需要4毫秒，该setTimeout()拿到任务队列中。</p>
+</blockquote>
+<h3 id="H5-Web-Workers-多线程"><a href="#H5-Web-Workers-多线程" class="headerlink" title="H5 Web Workers(多线程)"></a>H5 Web Workers(多线程)</h3><blockquote>
+<p>JavaScript是单线程。当一个页面加载一个复杂运算的 js 文件时，用户界面可能会短暂地“冻结”，不能再做其他操作。Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。</p>
+</blockquote>
+<h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; placeholder=&quot;数值&quot; id=&quot;number&quot;&gt;</span><br><span class="line">&lt;button id=&quot;btn&quot;&gt;计算&lt;/button&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  // 1 1 2 3 5 8    f(n) = f(n-1) + f(n-2)</span><br><span class="line">  function fibonacci(n) &#123;</span><br><span class="line">    return n&lt;=2 ? 1 : fibonacci(n-1) + fibonacci(n-2)  //递归调用</span><br><span class="line">  &#125;</span><br><span class="line">  var input = document.getElementById(&apos;number&apos;)</span><br><span class="line">  document.getElementById(&apos;btn&apos;).onclick = function () &#123;</span><br><span class="line">    var number = input.value</span><br><span class="line">    var result = fibonacci(number)</span><br><span class="line">    alert(result)</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="Web-Workers的基本使用"><a href="#Web-Workers的基本使用" class="headerlink" title="Web Workers的基本使用"></a>Web Workers的基本使用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 新建一个 Worker 线程</span><br><span class="line">var worker = new Worker(&apos;work.js&apos;);</span><br><span class="line">// 主线程调用worker.postMessage()方法，向 Worker 发消息。</span><br><span class="line">// 接着，主线程通过worker.onmessage指定监听函数，接收子线程发回来的消息。</span><br><span class="line"></span><br><span class="line"> var input = document.getElementById(&apos;number&apos;)</span><br><span class="line">  document.getElementById(&apos;btn&apos;).onclick = function () &#123;</span><br><span class="line">    var number = input.value</span><br><span class="line">    //创建一个Worker对象</span><br><span class="line">    var worker = new Worker(&apos;worker.js&apos;)</span><br><span class="line">    // 绑定接收消息的监听</span><br><span class="line">    worker.onmessage = function (event) &#123;</span><br><span class="line">      console.log(&apos;主线程接收分线程返回的数据: &apos;+event.data)</span><br><span class="line">      alert(event.data)</span><br><span class="line">    &#125;</span><br><span class="line">    // 向分线程发送消息</span><br><span class="line">    worker.postMessage(number)</span><br><span class="line">    console.log(&apos;主线程向分线程发送数据: &apos;+number)</span><br><span class="line">  &#125;</span><br><span class="line">    console.log(this) // window</span><br><span class="line"></span><br><span class="line">// Worker 线程内部需要有一个监听函数，监听message事件。</span><br><span class="line">// 通过 postMessage(data) 方法来向主线程发送数据。</span><br><span class="line">//worker.js文件</span><br><span class="line">function fibonacci(n) &#123;</span><br><span class="line">  return n&lt;=2 ? 1 : fibonacci(n-1) + fibonacci(n-2)  //递归调用</span><br><span class="line">&#125;</span><br><span class="line">console.log(this)//[object DedicatedWorkerGlobalScope]</span><br><span class="line">this.onmessage = function (event) &#123;</span><br><span class="line">  var number = event.data</span><br><span class="line">  console.log(&apos;分线程接收到主线程发送的数据: &apos;+number)</span><br><span class="line">  //计算</span><br><span class="line">  var result = fibonacci(number)</span><br><span class="line">  postMessage(result)</span><br><span class="line">  console.log(&apos;分线程向主线程返回数据: &apos;+result)</span><br><span class="line">  // alert(result)  alert是window的方法, 在分线程不能调用</span><br><span class="line">  // 分线程中的全局对象不再是window, 所以在分线程中不可能更新界面</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/27/js之综合/" rel="next" title="js之综合">
+                <i class="fa fa-chevron-left"></i> js之综合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/27/js之页面性能优化/" rel="prev" title="js之页面性能优化">
+                js之页面性能优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#js的异步和单线程"><span class="nav-number">1.</span> <span class="nav-text">js的异步和单线程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#js的单线程"><span class="nav-number">1.0.1.</span> <span class="nav-text">js的单线程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js异步"><span class="nav-number">1.0.2.</span> <span class="nav-text">js异步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js的同步"><span class="nav-number">1.0.3.</span> <span class="nav-text">js的同步</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同步和异步的对比"><span class="nav-number">1.0.4.</span> <span class="nav-text">同步和异步的对比</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#setTimeout和setInterval的两个方法"><span class="nav-number">1.0.5.</span> <span class="nav-text">setTimeout和setInterval的两个方法</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#H5-Web-Workers-多线程"><span class="nav-number">2.</span> <span class="nav-text">H5 Web Workers(多线程)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#举例"><span class="nav-number">2.0.1.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Web-Workers的基本使用"><span class="nav-number">2.0.2.</span> <span class="nav-text">Web Workers的基本使用</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
