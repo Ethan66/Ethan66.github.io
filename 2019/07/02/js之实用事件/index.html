@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/298867489/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=672c71ab2f0f78b0e907246ceae8898c4d8ca59b7f6038ad235801c342cafbc7">
-<meta property="og:updated_time" content="2019-10-04T06:21:29.165Z">
+<meta property="og:updated_time" content="2020-02-02T03:05:31.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js之实用事件">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/298867489/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=672c71ab2f0f78b0e907246ceae8898c4d8ca59b7f6038ad235801c342cafbc7">
@@ -374,7 +374,15 @@
 <h5 id="函数防抖"><a href="#函数防抖" class="headerlink" title="函数防抖"></a>函数防抖</h5><blockquote>
 <p>一个需要频繁触发的函数，在规定时间内，只让最后一次生效，前面的不生效。其原理就第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码。当第二次调用该函数时，它会清除前一次的定时器并设置另一个。如果前一个定时器已经执行过了，这个操作就没有任何意义。然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器，然后延迟一定时间再执行。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id=&apos;btn&apos;&gt;按钮&lt;/button&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">function debounce(fn, delay) &#123;</span><br><span class="line">    // 记录上一次的延时器</span><br><span class="line">   var timer = null;</span><br><span class="line">    return function() &#123;</span><br><span class="line">    // 清除上一次延时器</span><br><span class="line">    clearTimeout(timer)</span><br><span class="line">    timer = setTimeout(function() &#123;</span><br><span class="line">            fn.apply(this)</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">document.getElementById(&apos;btn&apos;).onclick = debounce(function() &#123;</span><br><span class="line">    console.log(&apos;点击事件被触发&apos; + Date.now())</span><br><span class="line">&#125;, 1000)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id=&apos;btn&apos;&gt;按钮&lt;/button&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">function debounce(fn, delay, immediate = true) &#123;</span><br><span class="line">    // 记录上一次的延时器</span><br><span class="line">   var timer = null;</span><br><span class="line">    return function() &#123;</span><br><span class="line">      if (immediate) &#123;</span><br><span class="line">        fn.apply(this, [...arguments])</span><br><span class="line">        immediate = false</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        // 清除上一次延时器</span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">        timer = setTimeout(function() &#123;</span><br><span class="line">          fn.apply(this, [...arguments])</span><br><span class="line">        &#125;, delay)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">document.getElementById(&apos;btn&apos;).onclick = debounce(function() &#123;</span><br><span class="line">    console.log(&apos;点击事件被触发&apos; + Date.now())</span><br><span class="line">&#125;, 1000)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="数组降维"><a href="#数组降维" class="headerlink" title="数组降维"></a>数组降维</h5><blockquote>
+<p>思路： 递归</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let arr = [[1,[2,3, [4,5]]]]</span><br><span class="line"></span><br><span class="line">function fn (arr, callback) &#123;</span><br><span class="line">  let result = []</span><br><span class="line">  (function fn1 (arr) &#123;</span><br><span class="line">    arr.forEach(item =&gt; &#123;</span><br><span class="line">      if (Array.isArray(item)) &#123;</span><br><span class="line">        fn1(item)</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        result.push(callback(item))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)(arr)</span><br><span class="line">  return result</span><br><span class="line">&#125;</span><br><span class="line">let res = fn(arr, function (item) &#123;return item + 1&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="对象父子级分解"><a href="#对象父子级分解" class="headerlink" title="对象父子级分解"></a>对象父子级分解</h5><blockquote>
+<p>将对象的父子级进行分解成数组</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; id: 1, name: &apos;一级1&apos;, children: [&#123; id: 2, name: &apos;一级1-1&apos; &#125;, &#123; id: 3, name: &apos;一级1-2&apos;, children: [&#123; id: 4, name: &apos;一级1-1-1&apos; &#125;, &#123; id: 5, name: &apos;一级1-1-2&apos; &#125;] &#125;] &#125;</span><br><span class="line"></span><br><span class="line">function fn (obj, callback) &#123;</span><br><span class="line">  let result = [];</span><br><span class="line">  (function fn1 (obj) &#123;</span><br><span class="line">    result.push(obj)</span><br><span class="line">    if (obj.children) &#123;</span><br><span class="line">      obj.children.forEach(item =&gt; &#123;</span><br><span class="line">        fn1(item)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)(obj)</span><br><span class="line">  return result</span><br><span class="line">&#125;</span><br><span class="line">let res = fn(obj)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -495,7 +503,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -566,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监听滚动的结束事件"><span class="nav-number">1.</span> <span class="nav-text">监听滚动的结束事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断移动设备类型"><span class="nav-number">2.</span> <span class="nav-text">判断移动设备类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取当前页面的URL-对其带的参数进行处理"><span class="nav-number">3.</span> <span class="nav-text">获取当前页面的URL 对其带的参数进行处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#颜色16进制转rgb"><span class="nav-number">4.</span> <span class="nav-text">颜色16进制转rgb</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">5.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#预加载"><span class="nav-number">6.</span> <span class="nav-text">预加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数节流"><span class="nav-number">7.</span> <span class="nav-text">函数节流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数防抖"><span class="nav-number">8.</span> <span class="nav-text">函数防抖</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监听滚动的结束事件"><span class="nav-number">1.</span> <span class="nav-text">监听滚动的结束事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断移动设备类型"><span class="nav-number">2.</span> <span class="nav-text">判断移动设备类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取当前页面的URL-对其带的参数进行处理"><span class="nav-number">3.</span> <span class="nav-text">获取当前页面的URL 对其带的参数进行处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#颜色16进制转rgb"><span class="nav-number">4.</span> <span class="nav-text">颜色16进制转rgb</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">5.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#预加载"><span class="nav-number">6.</span> <span class="nav-text">预加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数节流"><span class="nav-number">7.</span> <span class="nav-text">函数节流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数防抖"><span class="nav-number">8.</span> <span class="nav-text">函数防抖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组降维"><span class="nav-number">9.</span> <span class="nav-text">数组降维</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象父子级分解"><span class="nav-number">10.</span> <span class="nav-text">对象父子级分解</span></a></li></ol></div>
             
 
           </div>
@@ -586,7 +594,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

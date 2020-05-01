@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/308889393/q%3D80_m%3D1500/v2?webp=true&sig=48952e772b3844825d60ffd0aa79a676f7de2efefda9c57e7985709aeb59ea82">
-<meta property="og:updated_time" content="2019-10-04T06:21:29.687Z">
+<meta property="og:updated_time" content="2020-02-02T03:05:32.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js之安全问题：Cookie、CSRF和XSS">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/308889393/q%3D80_m%3D1500/v2?webp=true&sig=48952e772b3844825d60ffd0aa79a676f7de2efefda9c57e7985709aeb59ea82">
@@ -353,7 +353,7 @@
       
         <p><img src="https://drscdn.500px.org/photo/308889393/q%3D80_m%3D1500/v2?webp=true&amp;sig=48952e772b3844825d60ffd0aa79a676f7de2efefda9c57e7985709aeb59ea82" alt=""><br><a id="more"></a></p>
 <h3 id="Cookie安全性问题"><a href="#Cookie安全性问题" class="headerlink" title="Cookie安全性问题"></a>Cookie安全性问题</h3><h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><blockquote>
-<p>主要存储登录信息，用户在某网站登录过一次，下次访问不用登录就可以进入网站。<br>每次都会携带在 header 中，对于请求性能影响。<br>cookie大小限制是4k，是每个name=value的value的值大概是4k</p>
+<p>http是无状态的协议。客户端与服务端建立连接传输数据，数据传输完毕就断开连接，下次请求再创建新的链接，所以请求的时候服务器根本不知道是不是同一个用户进行请求。cookie就是为了解决http无状态问题，服务器发送登录凭据Cookie给客户端，用户再次访问的时候就会发送服务器，服务器再进行比对，确认无误就会免密码操作。<br>每次都会携带在 header 中，对于请求性能影响。<br>cookie大小限制是4k，是每个name=value的value的值大概是4k</p>
 </blockquote>
 <h5 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &apos;username=Ethan&apos;</span><br><span class="line">document.cookie = &apos;age=18&apos;</span><br></pre></td></tr></table></figure>
 <h5 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h5><blockquote>
@@ -495,7 +495,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +517,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -586,7 +586,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

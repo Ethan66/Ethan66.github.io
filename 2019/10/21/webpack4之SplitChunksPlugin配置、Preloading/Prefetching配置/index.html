@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack4,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="webpack4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离">
+<meta property="og:url" content="http://yoursite.com/2019/10/21/webpack4之SplitChunksPlugin配置、Preloading/Prefetching配置/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/1004532594/q%3D80_m%3D2000/v2?sig=49ce1a183a79c158548d5ecac24171b86f73bfb0b43cfefee8005dee330c09d0">
+<meta property="og:updated_time" content="2020-02-02T03:05:37.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/1004532594/q%3D80_m%3D2000/v2?sig=49ce1a183a79c158548d5ecac24171b86f73bfb0b43cfefee8005dee330c09d0">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/21/webpack4之SplitChunksPlugin配置、Preloading/Prefetching配置/">
+
+
+
+
+
+  <title>webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/21/webpack4之SplitChunksPlugin配置、Preloading/Prefetching配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-21T14:04:08+08:00">
+                2019-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/1004532594/q%3D80_m%3D2000/v2?sig=49ce1a183a79c158548d5ecac24171b86f73bfb0b43cfefee8005dee330c09d0" alt=""><br><a id="more"></a></p>
+<h3 id="SplitChunksPlugin"><a href="#SplitChunksPlugin" class="headerlink" title="SplitChunksPlugin"></a>SplitChunksPlugin</h3><h5 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h5><blockquote>
+<p>三方引入的依赖包，其实基本不会被改动，其实不需要和业务代码一起打包到一个js文件中。所以业务代码和依赖包可以进行分开，每次打包的时候，用户只需要更新业务代码，依赖包可以从缓存中读取。</p>
+</blockquote>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">import _ from &apos;lodash&apos;</span><br><span class="line">console.log(_.join([&apos;a&apos;, &apos;b&apos;], &apos;##&apos;))</span><br><span class="line"></span><br><span class="line">// webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mode: &apos;production&apos;,</span><br><span class="line">  devtool: &apos;cheap-module-eval-source-map&apos;,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    index1: &apos;./index.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [new HtmlWebpackPlugin(&#123;</span><br><span class="line">    template: &apos;./index.html&apos;</span><br><span class="line">  &#125;), new CleanWebpackPlugin()</span><br><span class="line">],</span><br><span class="line">optimization: &#123;</span><br><span class="line"> splitChunks: &#123; // 告诉webpack，我要进行代码分割</span><br><span class="line">    chunks: &quot;all&quot;, // 同步异步加载都需要进行分割，一般只需要写这一个配置就行了，下面的都可以不用写</span><br><span class="line">    minSize: 30000, // 对依赖包大于30K的才进行分割</span><br><span class="line">    minChunks: 1, // 对依赖包引入了几次了才进行代码分割</span><br><span class="line">    maxAsyncRequests: 5, // 最大对前5个依赖包进行代码分割</span><br><span class="line">    maxInitialRequests: 3, // 对入口文件引入的依赖包进行代码分割</span><br><span class="line">    automaticNameDelimiter: &apos;~&apos;, // 连接符</span><br><span class="line">    name: true,</span><br><span class="line">    cacheGroups: &#123; // 缓存组的意思</span><br><span class="line">      vendors: &#123;</span><br><span class="line">        test: /[\\/]node_modules[\\/]/,</span><br><span class="line">        priority: -10 // 优先级，都符合vendors和default的时候看哪个优先级高</span><br><span class="line">      &#125;,</span><br><span class="line">    default: &#123;</span><br><span class="line">      priority: -20, // 优先级</span><br><span class="line">      reuseExistingChunk: true</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;sef&apos;)</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="针对异步加载依赖包，不配置webpack也会进行代码分割"><a href="#针对异步加载依赖包，不配置webpack也会进行代码分割" class="headerlink" title="针对异步加载依赖包，不配置webpack也会进行代码分割"></a>针对异步加载依赖包，不配置webpack也会进行代码分割</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">function getComponent () &#123;</span><br><span class="line">  return import(&apos;lodash&apos;).then(_ =&gt; &#123;</span><br><span class="line">    console.log(_.join([&apos;a&apos;, &apos;b&apos;], &apos;##&apos;))</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">getComponent()</span><br><span class="line"></span><br><span class="line">// webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mode: &apos;production&apos;,</span><br><span class="line">  devtool: &apos;cheap-module-eval-source-map&apos;,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    index1: &apos;./index.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [new HtmlWebpackPlugin(&#123;</span><br><span class="line">    template: &apos;./index.html&apos;</span><br><span class="line">  &#125;), new CleanWebpackPlugin()</span><br><span class="line">],</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;sef&apos;)</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Prefetching"><a href="#Prefetching" class="headerlink" title="Prefetching"></a>Prefetching</h3><h5 id="目的-1"><a href="#目的-1" class="headerlink" title="目的"></a>目的</h5><blockquote>
+<p>第三方依赖包进行代码分离，虽然第二次可以从缓存中获取。但对第一次加载却加载多个js文件，影响效率。<br>所以splitChunks的chunks默认是async，webpack建议我们按需加载。<br>Preloading/Prefetching: 在网络带宽空闲的时候将按其他资源加载好。</p>
+</blockquote>
+<h5 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 同步加载</span><br><span class="line">// index.js</span><br><span class="line">document.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">  let div = document.createElement(&apos;div&apos;)</span><br><span class="line">  div.innerText = &apos;Ethan&apos;</span><br><span class="line">  document.querySelector(&apos;.app&apos;).append(div)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 按需加载</span><br><span class="line">// index.js</span><br><span class="line">document.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line"> import(&apos;./index1.js&apos;).then((&#123; default: fn &#125;) =&gt; &#123;</span><br><span class="line">   fn()   </span><br><span class="line"> &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">// index1.js</span><br><span class="line">function fn () &#123;</span><br><span class="line">  let div = document.createElement(&apos;div&apos;)</span><br><span class="line">  div.innerText = &apos;Ethan&apos;</span><br><span class="line">  document.querySelector(&apos;.app&apos;).append(div)</span><br><span class="line">&#125;</span><br><span class="line">export default fn</span><br></pre></td></tr></table></figure>
+<h5 id="查看代码的使用率"><a href="#查看代码的使用率" class="headerlink" title="查看代码的使用率"></a>查看代码的使用率</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">浏览器：ctrl+shift+p ---&gt; show Coverage ---&gt; 左上方圆圈点击为红色 ---&gt; 刷新页面 ---&gt; 查看使用率</span><br></pre></td></tr></table></figure>
+<h5 id="Prefetching配置"><a href="#Prefetching配置" class="headerlink" title="Prefetching配置"></a>Prefetching配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">document.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line"> import(/*webpackPrefetch: true*/&apos;./index1.js&apos;).then((&#123; default: fn &#125;) =&gt; &#123;</span><br><span class="line">   fn()   </span><br><span class="line"> &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="css分离"><a href="#css分离" class="headerlink" title="css分离"></a>css分离</h3><h5 id="目的-2"><a href="#目的-2" class="headerlink" title="目的"></a>目的</h5><blockquote>
+<p>将css样式从html文件中分离</p>
+</blockquote>
+<h5 id="MiniCssExtractPlugin配置"><a href="#MiniCssExtractPlugin配置" class="headerlink" title="MiniCssExtractPlugin配置"></a>MiniCssExtractPlugin配置</h5><blockquote>
+<p>不支持热更新，所以只要配置生产环境。同时将webpack.common.js的css规则移到development配置下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev mini-css-extract-plugin</span><br><span class="line">npm i -D optimize-css-assets-webpack-plugin</span><br><span class="line">npm i -D terser-webpack-plugin</span><br><span class="line"></span><br><span class="line">// webpack.prod.js</span><br><span class="line">const MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;)</span><br><span class="line">const TerserJSPlugin = require(&apos;terser-webpack-plugin&apos;)</span><br><span class="line">const OptimizeCSSAssetsPlugin = require(&apos;optimize-css-assets-webpack-plugin&apos;)</span><br><span class="line">const commonConfig = require(&apos;./webpack.common.js&apos;)</span><br><span class="line">const merge = require(&apos;webpack-merge&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">const prodConfig = &#123;</span><br><span class="line">  mode: &apos;production&apos;,</span><br><span class="line">  devtool: &apos;cheap-module-eval-source-map&apos;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new MiniCssExtractPlugin()</span><br><span class="line">  ],</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: [new TerserJSPlugin(&#123;&#125;), new OptimizeCSSAssetsPlugin(&#123;&#125;)],</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">      test: /\.scss$/,</span><br><span class="line">      use: [</span><br><span class="line">        MiniCssExtractPlugin.loader,</span><br><span class="line">        &#123;</span><br><span class="line">          loader: &apos;css-loader&apos;,</span><br><span class="line">          options: &#123;</span><br><span class="line">            importLoaders: 2</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &apos;postcss-loader&apos;,</span><br><span class="line">        &apos;sass-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      test: /\.css$/,</span><br><span class="line">      use: [</span><br><span class="line">        MiniCssExtractPlugin.loader, &apos;css-loader&apos;, &apos;postcss-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">   output: &#123;</span><br><span class="line">    filename: &apos;[name].[contenthash].js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].[contenthash].chunk.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = merge(commonConfig, prodConfig)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &apos;./style.css&apos;</span><br><span class="line"></span><br><span class="line">// style.css</span><br><span class="line">body&#123;</span><br><span class="line">  background: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack4/" rel="tag"># webpack4</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/17/webpack4之development和production打包配置/" rel="next" title="webpack4之development和production打包配置">
+                <i class="fa fa-chevron-left"></i> webpack4之development和production打包配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/22/webpack4之打包分析/" rel="prev" title="webpack4之打包分析">
+                webpack4之打包分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SplitChunksPlugin"><span class="nav-number">1.</span> <span class="nav-text">SplitChunksPlugin</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#目的"><span class="nav-number">1.0.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置"><span class="nav-number">1.0.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#针对异步加载依赖包，不配置webpack也会进行代码分割"><span class="nav-number">1.0.3.</span> <span class="nav-text">针对异步加载依赖包，不配置webpack也会进行代码分割</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#Prefetching"><span class="nav-number">2.</span> <span class="nav-text">Prefetching</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#目的-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#演示代码"><span class="nav-number">2.0.2.</span> <span class="nav-text">演示代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看代码的使用率"><span class="nav-number">2.0.3.</span> <span class="nav-text">查看代码的使用率</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Prefetching配置"><span class="nav-number">2.0.4.</span> <span class="nav-text">Prefetching配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css分离"><span class="nav-number">3.</span> <span class="nav-text">css分离</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#目的-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MiniCssExtractPlugin配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">MiniCssExtractPlugin配置</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端有哪些异常 JS 语法错误、代码异常 AJAX 请求异常 静态资源加载异常 Promise 异常 Iframe 异常 崩溃和卡顿  try-catch: 处理预见错误 1、try-catch只能捕获到同步的运行时错误。2、try-catch是监听可预见逻辑错误。  12345678910111213141516171819202122// 同步错误: try-catch遇到同步错误会执行到ca">
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之前端异常日志">
+<meta property="og:url" content="http://yoursite.com/2019/11/28/js之前端异常日志/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:description" content="前端有哪些异常 JS 语法错误、代码异常 AJAX 请求异常 静态资源加载异常 Promise 异常 Iframe 异常 崩溃和卡顿  try-catch: 处理预见错误 1、try-catch只能捕获到同步的运行时错误。2、try-catch是监听可预见逻辑错误。  12345678910111213141516171819202122// 同步错误: try-catch遇到同步错误会执行到ca">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-02T03:05:31.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之前端异常日志">
+<meta name="twitter:description" content="前端有哪些异常 JS 语法错误、代码异常 AJAX 请求异常 静态资源加载异常 Promise 异常 Iframe 异常 崩溃和卡顿  try-catch: 处理预见错误 1、try-catch只能捕获到同步的运行时错误。2、try-catch是监听可预见逻辑错误。  12345678910111213141516171819202122// 同步错误: try-catch遇到同步错误会执行到ca">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/js之前端异常日志/">
+
+
+
+
+
+  <title>js之前端异常日志 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/js之前端异常日志/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之前端异常日志</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T16:55:56+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/实用/" itemprop="url" rel="index">
+                    <span itemprop="name">实用</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="前端有哪些异常"><a href="#前端有哪些异常" class="headerlink" title="前端有哪些异常"></a>前端有哪些异常</h5><ul>
+<li>JS 语法错误、代码异常</li>
+<li>AJAX 请求异常</li>
+<li>静态资源加载异常</li>
+<li>Promise 异常</li>
+<li>Iframe 异常</li>
+<li>崩溃和卡顿</li>
+</ul>
+<h5 id="try-catch-处理预见错误"><a href="#try-catch-处理预见错误" class="headerlink" title="try-catch: 处理预见错误"></a>try-catch: 处理预见错误</h5><blockquote>
+<p>1、try-catch只能捕获到同步的运行时错误。2、try-catch是监听可预见逻辑错误。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 同步错误: try-catch遇到同步错误会执行到catch</span><br><span class="line">try&#123;</span><br><span class="line">  let name = &apos;Ethan&apos;</span><br><span class="line">  console.log(a11)</span><br><span class="line">&#125; catch (e) &#123; console.log(&apos;能捕获异常：&apos;, e) &#125; // 能捕获异常： ReferenceError: nam is not defined</span><br><span class="line"></span><br><span class="line">// 语法错误：try-catch遇到js语法出错无法执行catch</span><br><span class="line">try &#123;</span><br><span class="line">  let name = &apos;jartto</span><br><span class="line">  console.log(nam);</span><br><span class="line">&#125; catch(e) &#123;</span><br><span class="line">  console.log(&apos;不捕获到异常：&apos;,e); // Uncaught SyntaxError: Invalid or unexpected token</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 异步错误：try-catch遇到js异步出错无法执行catch</span><br><span class="line">try &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    undefined.map(v =&gt; v);</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125; catch(e) &#123;</span><br><span class="line">  console.log(&apos;捕获到异常：&apos;,e) // Uncaught TypeError: Cannot read property &apos;map&apos; of undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="window-onerror：监听同步异步和iframe错误"><a href="#window-onerror：监听同步异步和iframe错误" class="headerlink" title="window.onerror：监听同步异步和iframe错误"></a>window.onerror：监听同步异步和iframe错误</h5><blockquote>
+<p>1、onerror可以捕获同步异步错误。2、onerror最好写在所有JS脚本的前面，否则有可能捕获不到错误。<br>3、当 JS 运行时错误发生时，window 会触发一个 ErrorEvent 接口的 error 事件，并执行 window.onerror()。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">window.onerror = function(message, source, lineno, colno, error) &#123;</span><br><span class="line">// message：错误信息。source：发生错误的脚本URL。</span><br><span class="line">// lineno：发生错误的行号。colno：发生错误的列号。</span><br><span class="line">// error：Error对象。</span><br><span class="line">console.log(&apos;捕获到异常：&apos;,&#123;message, source, lineno, colno, error&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 同步错误：window.onerror会被执行</span><br><span class="line">a11</span><br><span class="line"></span><br><span class="line">// 异步错误：window.onerror会被执行</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    Jartto;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 语法错误: window.onerror没有被执行</span><br><span class="line">let name = &apos;Ethan</span><br><span class="line"></span><br><span class="line">// 网络请求：window.onerror没有被执行</span><br><span class="line">&lt;img src=&quot;./jartto.png&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="window-addEventListener-‘error’-：监听资源-js-img-link-加载错误"><a href="#window-addEventListener-‘error’-：监听资源-js-img-link-加载错误" class="headerlink" title="window.addEventListener(‘error’)：监听资源(js/img/link)加载错误"></a>window.addEventListener(‘error’)：监听资源(js/img/link)加载错误</h5><blockquote>
+<p>window.addEventListener(‘error’)和window.onerror是同一种监听方式。当一项资源（如图片或脚本）加载失败，加载资源的元素会触发一个 Event 接口的 error 事件，并执行该元素上的onerror() 处理函数。这些 error 事件不会向上冒泡到 window ，所以必须在捕获阶段将其捕捉到才行，window.error默认为冒泡阶段，所以不能捕获。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./jartto.png&quot;&gt;</span><br><span class="line"></span><br><span class="line">window.addEventListener(&apos;error&apos;, (error) =&gt; &#123;</span><br><span class="line">  if (error) &#123;</span><br><span class="line">    let target = error.target || error.srcElement // 不同浏览器下返回的 error 对象不同</span><br><span class="line">    let isElementTarget = target instanceof HTMLScriptElement || target instanceof HTMLImageElement || target instanceof HTMLLinkElement</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(&apos;捕获到异常：&apos;, error);</span><br><span class="line">&#125;, true)</span><br></pre></td></tr></table></figure>
+<h5 id="Script-error另一种解决思路-仅参考"><a href="#Script-error另一种解决思路-仅参考" class="headerlink" title="Script error另一种解决思路(仅参考)"></a>Script error另一种解决思路(仅参考)</h5><blockquote>
+<p>改写了 EventTarget 的 addEventListener 方法。对传入的 listener 进行包装，返回包装过的 listener，对其执行进行 try-catch。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const originAddEventListener = EventTarget.prototype.addEventListener;</span><br><span class="line">EventTarget.prototype.addEventListener = function (type, listener, options) &#123;</span><br><span class="line">  const wrappedListener = function (...args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">      return listener.apply(this, args);</span><br><span class="line">    &#125;</span><br><span class="line">    catch (err) &#123;</span><br><span class="line">      throw err;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return originAddEventListener.call(this, type, wrappedListener, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="window-addEventListener-“unhandledrejection”-捕获没有catch的Promise中的error"><a href="#window-addEventListener-“unhandledrejection”-捕获没有catch的Promise中的error" class="headerlink" title="window.addEventListener(“unhandledrejection”): 捕获没有catch的Promise中的error"></a>window.addEventListener(“unhandledrejection”): 捕获没有catch的Promise中的error</h5><blockquote>
+<p>promise中catch可以非常方便的捕获到异步error，没有写catch的Promise中抛出的错误无法被onerror或try-catch捕获到</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 正常</span><br><span class="line">new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  throw Error(&apos;e&apos;)</span><br><span class="line">&#125;).catch(e =&gt; &#123;</span><br><span class="line">  console.log(e)</span><br><span class="line">&#125;) // &apos;e&apos;</span><br><span class="line"></span><br><span class="line">// 没有catch</span><br><span class="line">window.addEventListener(&quot;unhandledrejection&quot;, function(e)&#123; // 只有没有catch的时候promise报错才会执行(注意兼容性)</span><br><span class="line">  e.preventDefault() // 去掉控制台的异常显示</span><br><span class="line">  console.log(e);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="页面崩溃和卡顿"><a href="#页面崩溃和卡顿" class="headerlink" title="页面崩溃和卡顿"></a>页面崩溃和卡顿</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const time = null</span><br><span class="line">// load事件触发代表页面中的 DOM，CSS，JS，图片已经全部加载完毕</span><br><span class="line">// DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析，不需要等待 CSS，JS，图片加载</span><br><span class="line">window.addEventListener(&apos;load&apos;, function () &#123;</span><br><span class="line">  sessionStorage.setItem(&apos;good_exit&apos;, &apos;pending&apos;);</span><br><span class="line">  time = setInterval(function () &#123;</span><br><span class="line">      sessionStorage.setItem(&apos;time_before_crash&apos;, new Date().toString());</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">window.addEventListener(&apos;beforeunload&apos;, function () &#123;</span><br><span class="line">  sessionStorage.setItem(&apos;good_exit&apos;, &apos;true&apos;);</span><br><span class="line">  clearInterval(time)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">if(sessionStorage.getItem(&apos;good_exit&apos;) &amp;&amp;</span><br><span class="line">  sessionStorage.getItem(&apos;good_exit&apos;) !== &apos;true&apos;) &#123;</span><br><span class="line">  /* insert crash logging code here */</span><br><span class="line">  alert(&apos;Hey, welcome back from your crash, looks like you crashed on: &apos; + sessionStorage.getItem(&apos;time_before_crash&apos;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Vue捕获错误"><a href="#Vue捕获错误" class="headerlink" title="Vue捕获错误"></a>Vue捕获错误</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.errorHandler = (err, vm, info) =&gt; &#123;</span><br><span class="line">  console.error(&apos;通过vue errorHandler捕获的错误&apos;);</span><br><span class="line">  console.error(err);</span><br><span class="line">  console.error(vm);</span><br><span class="line">  console.error(info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="React捕获错误"><a href="#React捕获错误" class="headerlink" title="React捕获错误"></a>React捕获错误</h5><blockquote>
+<p>React 16 提供了一个内置函数 componentDidCatch，使用它可以非常简单的获取到 react 下的错误信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentDidCatch(error, info) &#123;</span><br><span class="line">    console.log(error, info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://jartto.wang/2018/11/20/js-exception-handling/" target="_blank" rel="noopener">详细讲解</a></p>
+<h5 id="监听错误总结"><a href="#监听错误总结" class="headerlink" title="监听错误总结"></a>监听错误总结</h5><blockquote>
+<p>在开发的过程中，对于容易出错的地方，可以使用try{}catch(){}来进行错误的捕获，做好兜底处理，避免页面挂掉。而对于全局的错误捕获，在现代浏览器中，使用使用window.addEventListener(‘error’)，window.addEventListener(‘unhandledrejection’)就行了。如果需要考虑兼容性，需要加上window.onerror，三者同时使用。</p>
+</blockquote>
+<h5 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h5><p><a href="http://jartto.wang/2018/11/20/js-exception-handling/" target="_blank" rel="noopener">如何优雅处理前端异常</a><br><a href="https://juejin.im/post/5c2d60616fb9a049dc025c39" target="_blank" rel="noopener">前端开发中的Error以及异常捕获</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/26/typescript之装饰器/" rel="next" title="typescript之装饰器">
+                <i class="fa fa-chevron-left"></i> typescript之装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/29/js之Promise练习/" rel="prev" title="js之Promise练习">
+                js之Promise练习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#前端有哪些异常"><span class="nav-number">1.</span> <span class="nav-text">前端有哪些异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-处理预见错误"><span class="nav-number">2.</span> <span class="nav-text">try-catch: 处理预见错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#window-onerror：监听同步异步和iframe错误"><span class="nav-number">3.</span> <span class="nav-text">window.onerror：监听同步异步和iframe错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#window-addEventListener-‘error’-：监听资源-js-img-link-加载错误"><span class="nav-number">4.</span> <span class="nav-text">window.addEventListener(‘error’)：监听资源(js/img/link)加载错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Script-error另一种解决思路-仅参考"><span class="nav-number">5.</span> <span class="nav-text">Script error另一种解决思路(仅参考)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#window-addEventListener-“unhandledrejection”-捕获没有catch的Promise中的error"><span class="nav-number">6.</span> <span class="nav-text">window.addEventListener(“unhandledrejection”): 捕获没有catch的Promise中的error</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#页面崩溃和卡顿"><span class="nav-number">7.</span> <span class="nav-text">页面崩溃和卡顿</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Vue捕获错误"><span class="nav-number">8.</span> <span class="nav-text">Vue捕获错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#React捕获错误"><span class="nav-number">9.</span> <span class="nav-text">React捕获错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#监听错误总结"><span class="nav-number">10.</span> <span class="nav-text">监听错误总结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考教程"><span class="nav-number">11.</span> <span class="nav-text">参考教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
