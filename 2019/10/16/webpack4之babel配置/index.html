@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/1004514314/q%3D80_m%3D1500/v2?sig=a790f218f180f02d5599b3bada70d56d855df5dd04ec2ff3888c18eb5fc9d22b">
-<meta property="og:updated_time" content="2020-05-01T11:26:14.680Z">
+<meta property="og:updated_time" content="2020-05-26T13:04:51.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack4之babel配置">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/1004514314/q%3D80_m%3D1500/v2?sig=a790f218f180f02d5599b3bada70d56d855df5dd04ec2ff3888c18eb5fc9d22b">
@@ -353,7 +353,7 @@
       
         <p><img src="https://drscdn.500px.org/photo/1004514314/q%3D80_m%3D1500/v2?sig=a790f218f180f02d5599b3bada70d56d855df5dd04ec2ff3888c18eb5fc9d22b" alt=""><br><a id="more"></a></p>
 <h5 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h5><blockquote>
-<p>是将webpack和babel搭建一个中间的桥梁，将ES6转为ES5需要其他依赖包</p>
+<p>是将webpack和babel搭建一个中间的桥梁，将ES6转为ES5需要其他依赖包。babel/core能识别js内容，将js转换为AST抽象语法树，再把AST抽象语法树转为js</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># npm install --save-dev babel-loader @babel/core</span><br><span class="line"></span><br><span class="line">// webpack.config.js</span><br><span class="line">module: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">    &#123; test: /\.js$/, exclude: /node_modules/, loader: &quot;babel-loader&quot; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="preset-env"><a href="#preset-env" class="headerlink" title="preset-env"></a>preset-env</h5><blockquote>
