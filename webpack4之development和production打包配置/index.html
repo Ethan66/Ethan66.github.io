@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack4,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="webpack4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4之development和production打包配置">
+<meta property="og:url" content="http://yoursite.com/webpack4之development和production打包配置/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/1004509685/q%3D80_m%3D2000/v2?sig=59b6f4d6f2f4826717bdb6ddbb6af568e6b00a1354e641e052f6360e41f668df">
+<meta property="og:updated_time" content="2020-06-20T12:51:23.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4之development和production打包配置">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/1004509685/q%3D80_m%3D2000/v2?sig=59b6f4d6f2f4826717bdb6ddbb6af568e6b00a1354e641e052f6360e41f668df">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/webpack4之development和production打包配置/">
+
+
+
+
+
+  <title>webpack4之development和production打包配置 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/webpack4之development和production打包配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack4之development和production打包配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T16:36:09+08:00">
+                2019-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/1004509685/q%3D80_m%3D2000/v2?sig=59b6f4d6f2f4826717bdb6ddbb6af568e6b00a1354e641e052f6360e41f668df" alt=""><br><a id="more"></a></p>
+<h5 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># npm i -D webpack-merge</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;webpack-demo&quot;,</span><br><span class="line">  &quot;sideEffects&quot;: [&quot;*.css&quot;, &quot;./src/**/*.js&quot;, &quot;./src/**/*.ts&quot;], // 有时候项目中直接是import &apos;./index.js&apos;，不能忽略这些</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,</span><br><span class="line">    &quot;bundle&quot;: &quot;webpack --watch&quot;,</span><br><span class="line">    &quot;watch&quot;: &quot;webpack-dev-server&quot;,</span><br><span class="line">    &quot;middleware&quot;: &quot;node server.js&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --config ./build/webpack.dev.js&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;webpack --config ./build/webpack.prod.js&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="webpack-common-js"><a href="#webpack-common-js" class="headerlink" title="webpack.common.js"></a>webpack.common.js</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">// ./build/webpack.common.js</span><br><span class="line">const webpack = require(&apos;webpack&apos;)</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;)</span><br><span class="line">const &#123;CleanWebpackPlugin&#125; = require(&apos;clean-webpack-plugin&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    main: &apos;./src/index.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [&apos;.js&apos;, &apos;.jsx&apos;], // 可以隐式的引用文件：import a form &apos;../src/A&apos;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      A: path.resolve(__dirname, &apos;../src/A&apos;) // 可以省略引用：import a from &apos;Ethan/A&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">      test: /\.js$/,</span><br><span class="line">      exclude: /node_modules/,</span><br><span class="line">      loader: &apos;babel-loader&apos;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      test: /\.(jpg|png|gif|mp4|mp3)$/,</span><br><span class="line">      use: &#123;</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          name: &apos;[name]_[hash:7].[ext]&apos;,</span><br><span class="line">          outputPath: &apos;images/&apos;,</span><br><span class="line">          limit: 10240</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      test: /\.(eot|ttf|svg)$/,</span><br><span class="line">      use: &#123;</span><br><span class="line">        loader: &apos;file-loader&apos;,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">    test: /\.html$/,</span><br><span class="line">    use: &#123;</span><br><span class="line">      loader: &apos;html-loader&apos;,</span><br><span class="line">      options: &#123;</span><br><span class="line">        // 默认只识别img:src，所以不配置的时候img:src会用url-loader打包，其他就忽略</span><br><span class="line">        attrs: [&apos;img:src&apos;, &apos;img:data-src&apos;, &apos;audio:src&apos;, &apos;video:src&apos; ],</span><br><span class="line">        minimize: false,</span><br><span class="line">        removeComments: true,</span><br><span class="line">        collapseWhitespace: false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: &apos;./src/index.html&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    new CleanWebpackPlugin([&apos;dist&apos;])</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="development配置"><a href="#development配置" class="headerlink" title="development配置"></a>development配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// ./build/webpack.dev.js</span><br><span class="line"></span><br><span class="line">const webpack = require(&apos;webpack&apos;)</span><br><span class="line">const commonConfig = require(&apos;./webpack.common.js&apos;)</span><br><span class="line">const merge = require(&apos;webpack-merge&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const IP = require(&apos;ip&apos;).address()</span><br><span class="line"></span><br><span class="line">const devConfig = &#123;</span><br><span class="line">  mode: &apos;development&apos;,</span><br><span class="line">  devtool: &apos;cheap-module-eval-source-map&apos;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: &apos;./dist&apos;,</span><br><span class="line">    open: true,</span><br><span class="line">    port: 8080,</span><br><span class="line">    host: IP,</span><br><span class="line">    hot: true</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">      test: /\.scss$/,</span><br><span class="line">      use: [</span><br><span class="line">        &apos;style-loader&apos;,</span><br><span class="line">        &#123;</span><br><span class="line">          loader: &apos;css-loader&apos;,</span><br><span class="line">          options: &#123;</span><br><span class="line">            importLoaders: 2</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &apos;postcss-loader&apos;,</span><br><span class="line">        &apos;sass-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      test: /\.css$/,</span><br><span class="line">      use: [</span><br><span class="line">        &apos;style-loader&apos;, &apos;css-loader&apos;, &apos;postcss-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    // 可以将webpack设置的变量在js中使用，js中就有了_DEV_的变量</span><br><span class="line">    new webpack.DefinePlugin(&#123;</span><br><span class="line">      _DEV_: JSON.stringify([&apos;./index.js&apos;, &apos;./index1.js&apos;])</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    usedExports: true</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].chunk.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = merge(commonConfig, devConfig)</span><br></pre></td></tr></table></figure>
+<h5 id="production配置"><a href="#production配置" class="headerlink" title="production配置"></a>production配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">// ./build/webpack.prod.js</span><br><span class="line"></span><br><span class="line">const MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;)</span><br><span class="line">const TerserJSPlugin = require(&apos;terser-webpack-plugin&apos;)</span><br><span class="line">const OptimizeCSSAssetsPlugin = require(&apos;optimize-css-assets-webpack-plugin&apos;)</span><br><span class="line">const commonConfig = require(&apos;./webpack.common.js&apos;)</span><br><span class="line">const merge = require(&apos;webpack-merge&apos;)</span><br><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">const prodConfig = &#123;</span><br><span class="line">  mode: &apos;production&apos;,</span><br><span class="line">  devtool: &apos;cheap-module-eval-source-map&apos;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new MiniCssExtractPlugin(&#123;</span><br><span class="line">      filename: &apos;[name].[contenthash].css&apos;,</span><br><span class="line">      chunkFilename: &apos;[id].[contenthash].css&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: [new TerserJSPlugin(&#123;&#125;), new OptimizeCSSAssetsPlugin(&#123;&#125;)],</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [&#123;</span><br><span class="line">      test: /\.scss$/,</span><br><span class="line">      use: [</span><br><span class="line">        MiniCssExtractPlugin.loader,</span><br><span class="line">        &#123;</span><br><span class="line">          loader: &apos;css-loader&apos;,</span><br><span class="line">          options: &#123;</span><br><span class="line">            importLoaders: 2</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &apos;postcss-loader&apos;,</span><br><span class="line">        &apos;sass-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      test: /\.css$/,</span><br><span class="line">      use: [</span><br><span class="line">        MiniCssExtractPlugin.loader, &apos;css-loader&apos;, &apos;postcss-loader&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;[name].[contenthash].js&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].[contenthash].chunk.js&apos;,</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = merge(commonConfig, prodConfig)</span><br></pre></td></tr></table></figure>
+<h5 id="babelrc"><a href="#babelrc" class="headerlink" title=".babelrc"></a>.babelrc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [[&quot;@babel/preset-env&quot;, &#123;</span><br><span class="line">    &quot;targets&quot;: &#123;</span><br><span class="line">      &quot;edge&quot;: &quot;17&quot;,</span><br><span class="line">      &quot;firefox&quot;: &quot;60&quot;,</span><br><span class="line">      &quot;chrome&quot;: &quot;67&quot;,</span><br><span class="line">      &quot;safari&quot;: &quot;11.1&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;useBuiltIns&quot;: &quot;usage&quot;</span><br><span class="line">  &#125;]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="获取指定目录下的指定类型文件路径传给js"><a href="#获取指定目录下的指定类型文件路径传给js" class="headerlink" title="获取指定目录下的指定类型文件路径传给js"></a>获取指定目录下的指定类型文件路径传给js</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// ./build/getListenFiles.js</span><br><span class="line">const pathJoin = require(&apos;path&apos;).join</span><br><span class="line">var fs = require(&apos;fs&apos;)</span><br><span class="line">function getListenFiles (startPath, parentPath, typeFile) &#123;</span><br><span class="line">  const result = []</span><br><span class="line">  function finder (path, parPath) &#123;</span><br><span class="line">    const files = fs.readdirSync(path) // 同步</span><br><span class="line">    files.forEach(val =&gt; &#123;</span><br><span class="line">      const fPath = pathJoin(path, val)</span><br><span class="line">      const stats = fs.statSync(fPath) // 同步</span><br><span class="line">      if (stats.isDirectory()) finder(fPath, `$&#123;parPath&#125;/$&#123;val&#125;`)</span><br><span class="line">      const reg = RegExp(`\\.$&#123;typeFile&#125;$`)</span><br><span class="line">      if (stats.isFile() &amp;&amp; reg.test(val)) result.push(`$&#123;parPath&#125;/$&#123;val&#125;`)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  finder(startPath, parentPath)</span><br><span class="line">  return result</span><br><span class="line">&#125;</span><br><span class="line">module.exports = getListenFiles</span><br><span class="line"></span><br><span class="line">// ./build/webpack.dev.js</span><br><span class="line">const webpack = require(&apos;webpack&apos;)</span><br><span class="line">const setListenFiles = require(&apos;./setListenFiles&apos;)</span><br><span class="line">var filePath = path.resolve(__dirname, &apos;../src/page&apos;) // 遍历哪个目录</span><br><span class="line">const fileList = setListenFiles(filePath, &apos;./page&apos;, &apos;js&apos;) // 添加前缀和筛选js还是ts</span><br><span class="line">console.log(fileList)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // 将fileList传给js使用</span><br><span class="line">  new webpack.DefinePlugin(&#123; fileList: JSON.stringify(fileList) &#125;)]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="多页面配置"><a href="#多页面配置" class="headerlink" title="多页面配置"></a>多页面配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// ./build/webpack.common.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    one: &apos;./src/index1.js&apos;,</span><br><span class="line">    two: &apos;./src/index2.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: &apos;./src/index1.html&apos;,</span><br><span class="line">      filename: &apos;index1.html&apos;, // 生成的html文件名</span><br><span class="line">      chunks: [&apos;one&apos;] // 入口文件名</span><br><span class="line">    &#125;),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: &apos;./src/index2.html&apos;,</span><br><span class="line">      filename: &apos;index2.html&apos;,</span><br><span class="line">      chunks: [&apos;two&apos;]</span><br><span class="line">    &#125;),</span><br><span class="line">    new CleanWebpackPlugin([&apos;dist&apos;])</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack4/" rel="tag"># webpack4</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/webpack4之Tree Shaking配置/" rel="next" title="webpack4之Tree Shaking配置">
+                <i class="fa fa-chevron-left"></i> webpack4之Tree Shaking配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/webpack4之SplitChunksPlugin配置、Preloading/Prefetching配置/" rel="prev" title="webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离">
+                webpack4之SplitChunksPlugin配置、Prefetching配置、css打包分离 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#package-json"><span class="nav-number">1.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#webpack-common-js"><span class="nav-number">2.</span> <span class="nav-text">webpack.common.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#development配置"><span class="nav-number">3.</span> <span class="nav-text">development配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#production配置"><span class="nav-number">4.</span> <span class="nav-text">production配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#babelrc"><span class="nav-number">5.</span> <span class="nav-text">.babelrc</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取指定目录下的指定类型文件路径传给js"><span class="nav-number">6.</span> <span class="nav-text">获取指定目录下的指定类型文件路径传给js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多页面配置"><span class="nav-number">7.</span> <span class="nav-text">多页面配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

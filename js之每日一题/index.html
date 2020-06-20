@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="练习题集,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="练习题集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之每日一题">
+<meta property="og:url" content="http://yoursite.com/js之每日一题/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/298863231/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=93891c81ca923b34cfdfb98f8ae0749cba25e742343ddee881c0b547b82245f4">
+<meta property="og:updated_time" content="2020-06-20T12:51:34.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之每日一题">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/298863231/q%3D80_m%3D1500_k%3D1/v2?webp=true&sig=93891c81ca923b34cfdfb98f8ae0749cba25e742343ddee881c0b547b82245f4">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/js之每日一题/">
+
+
+
+
+
+  <title>js之每日一题 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js之每日一题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之每日一题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T16:38:33+08:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/298863231/q%3D80_m%3D1500_k%3D1/v2?webp=true&amp;sig=93891c81ca923b34cfdfb98f8ae0749cba25e742343ddee881c0b547b82245f4" alt=""><br><a id="more"></a></p>
+<h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><h5 id="对String做扩展，实现如下方式获取字符串中频率最高的字符"><a href="#对String做扩展，实现如下方式获取字符串中频率最高的字符" class="headerlink" title="对String做扩展，实现如下方式获取字符串中频率最高的字符"></a>对String做扩展，实现如下方式获取字符串中频率最高的字符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var str = &apos;ahbbccdeddddfg&apos;;</span><br><span class="line">var ch = str.getMostOften();</span><br><span class="line">console.log(ch); //d , 因为d 出现了5次</span><br><span class="line">String.prototype.getMostOften=function()&#123;</span><br><span class="line">  var obj=&#123;&#125;;</span><br><span class="line">  for(var i=0;i&lt;this.length;i++)&#123;</span><br><span class="line">    if(obj[this[i]]) &#123;</span><br><span class="line">      obj[this[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    else obj[this[i]]=1;</span><br><span class="line">  &#125;</span><br><span class="line">  var num=0; str1=&apos;&apos;;</span><br><span class="line">  for(var key in obj)&#123;</span><br><span class="line">    if(obj[key]&gt;num) &#123;</span><br><span class="line">      num=obj[key]; str1=key;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return str1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="实现一个函数，将浮点数左边的数每三位添加一个逗号"><a href="#实现一个函数，将浮点数左边的数每三位添加一个逗号" class="headerlink" title="实现一个函数，将浮点数左边的数每三位添加一个逗号"></a>实现一个函数，将浮点数左边的数每三位添加一个逗号</h5><p>ex:commafy(12000000.11)=&gt;12,000,000.11<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function commafy(num)&#123;</span><br><span class="line">  var integer=parseInt(num)</span><br><span class="line">  var float=num.toString().match(/\.\d*/g).join(&quot;&quot;)</span><br><span class="line">  var str=integer.toString()</span><br><span class="line">  var yuShu=str.length%3</span><br><span class="line">  var result=&quot;&quot;</span><br><span class="line">  if(str.length/3&lt;=1)&#123;</span><br><span class="line">    return result+=num</span><br><span class="line">  &#125;</span><br><span class="line">  if(yuShu&gt;0)&#123;</span><br><span class="line">    result+=str.slice(0,yuShu)+&apos;,&apos;</span><br><span class="line">    str=str.slice(yuShu)</span><br><span class="line">  &#125;</span><br><span class="line">  for(var i=0;i&lt;Math.floor(str.length/3);i++)&#123;</span><br><span class="line">    result+=str.slice(i*3,i*3+3)</span><br><span class="line">    if(i==Math.floor(str.length/3)-1)&#123;</span><br><span class="line">      result+=float</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      result+=&apos;,&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h5 id="实现一个invoke函数，invoke-list-methodName-arguments"><a href="#实现一个invoke函数，invoke-list-methodName-arguments" class="headerlink" title="实现一个invoke函数，invoke(list, methodName, *arguments)"></a>实现一个invoke函数，invoke(list, methodName, *arguments)</h5><p>在list的每个元素上执行methodName方法。 任何传递给invoke的额外参数，invoke都会在调用methodName方法的时候传递给它。<br>Ex：invoke([[5,1,7],[3,2,1]],’sort’);  =&gt;[[1,5,7],[1,2,3]]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function isFun(obj)&#123;</span><br><span class="line">  return typeof obj==&apos;function&apos;</span><br><span class="line">&#125;</span><br><span class="line">function invoke(list,method)&#123;</span><br><span class="line">  var args=Array.prototype.slice.call(arguments,2)</span><br><span class="line">  var isFunc=isFun(method)</span><br><span class="line">  return list.map(function(value)&#123;</span><br><span class="line">    var func=isFunc?method:value[method]</span><br><span class="line">    return func==null?func:func.apply(value,args)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m-n次操作下，完成去重，得到一个完整的非重数组。"><a href="#有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m-n次操作下，完成去重，得到一个完整的非重数组。" class="headerlink" title="有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m+n次操作下，完成去重，得到一个完整的非重数组。"></a>有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m+n次操作下，完成去重，得到一个完整的非重数组。</h5><p>ex:var arr1=[1,2,5,10,12,15], arr2=[2,3,4,6,8,20,22,24,26]<br>distinctArr(arr1,arr2)=&gt;[1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 22, 24, 26]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function distinctArr(arr1,arr2)&#123;</span><br><span class="line">  var arr3=[];</span><br><span class="line">  for(var i=0,j=0;;i++)&#123;</span><br><span class="line">    if(i==arr1.length&amp;&amp;j!=arr2.length)&#123;</span><br><span class="line">      arr3=arr3.concat(arr2.slice(j))</span><br><span class="line">      break</span><br><span class="line">    &#125;</span><br><span class="line">    else if(i!=arr1.length&amp;&amp;j==arr2.length)&#123;</span><br><span class="line">      arr3=arr3.concat(arr1.slice(i))</span><br><span class="line">      break</span><br><span class="line">    &#125;</span><br><span class="line">    if(arr1[i]&lt;arr2[j])&#123;</span><br><span class="line">      arr3.push(arr1[i]);continue;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(arr1[i]==arr2[j])&#123;</span><br><span class="line">      arr3.push(arr1[i]);j++;continue;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(arr1[i]&gt;arr2[j])&#123;</span><br><span class="line">      arr3.push(arr2[j]);j++;--i;continue;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return arr3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="实现一个函数，能够枚举出数组中元素的所有可能的组合。-170919"><a href="#实现一个函数，能够枚举出数组中元素的所有可能的组合。-170919" class="headerlink" title="实现一个函数，能够枚举出数组中元素的所有可能的组合。(170919)"></a>实现一个函数，能够枚举出数组中元素的所有可能的组合。(170919)</h5><p>ex:[1,2,3]=&gt;”排列组合的结果：”[1, 2, 3]<br>“排列组合的结果：”[1, 3, 2]<br>“排列组合的结果：”[2, 1, 3]<br>“排列组合的结果：”[2, 3, 1]<br>“排列组合的结果：”[3, 1, 2]<br>“排列组合的结果：”[3, 2, 1]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function arrange(result,arr,deep)&#123;</span><br><span class="line">  for(var i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">    result[deep]=arr[i]</span><br><span class="line">    arrange(result,arr.filter(function(item,index)&#123;return index!==i&#125;),deep+1)</span><br><span class="line">  &#125;</span><br><span class="line">  if(arr.length==0)&#123;</span><br><span class="line">    console.log(&apos;排列组合的结果：&apos;,result)</span><br><span class="line">    return</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">arrange([],[1,2,3],0)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><h5 id="实现一个create函数-效果如下-170914"><a href="#实现一个create函数-效果如下-170914" class="headerlink" title="实现一个create函数,效果如下(170914)"></a>实现一个create函数,效果如下(170914)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var observable=create(function(obs)&#123;</span><br><span class="line">  obs.next(1)</span><br><span class="line">  obs.complete()</span><br><span class="line">  obs.next(&apos;still work&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">var observer=&#123;</span><br><span class="line">  next:function(value)&#123;</span><br><span class="line">    console.log(value)</span><br><span class="line">  &#125;,</span><br><span class="line">  complete:function()&#123;</span><br><span class="line">    console.log(&apos;completed&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">observable.subscribe(observer)</span><br><span class="line">//1</span><br><span class="line">//&quot;completed&quot;</span><br><span class="line">//&quot;still work&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//create函数</span><br><span class="line">function create(fn)&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    subscribe:function(obj)&#123;</span><br><span class="line">      fn(obj)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="使用-localStorage封装一个-Storage-对象，达到如下效果："><a href="#使用-localStorage封装一个-Storage-对象，达到如下效果：" class="headerlink" title="使用 localStorage封装一个 Storage 对象，达到如下效果："></a>使用 localStorage封装一个 Storage 对象，达到如下效果：</h5><p>ex:Storage.set(“name”,’Ethan6’,1);Storage.get(“name”)=&gt;”Ethan”<br>如何不超过1s, 返回字符串Ethan6，超过1s,返回undefined,并且localStorage清楚name字段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var Storage=(function()&#123;</span><br><span class="line">  return&#123;</span><br><span class="line">    set:function(key,value,seconds)&#123;</span><br><span class="line">      localStorage[key]=JSON.stringify(&#123;</span><br><span class="line">        value:value,</span><br><span class="line">        second:seconds?Date.now()+1000*seconds:undefined</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    get:function(key)&#123;</span><br><span class="line">      if(localStorage[key]===undefined)&#123;</span><br><span class="line">        return</span><br><span class="line">      &#125;</span><br><span class="line">      var obj=JSON.parse(localStorage[key])</span><br><span class="line">      if(obj.second&amp;&amp;Date.now()&lt;obj.second)&#123;</span><br><span class="line">        return obj.value</span><br><span class="line">      &#125;</span><br><span class="line">      else&#123;</span><br><span class="line">        delete localStorage[key]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/练习题集/" rel="tag"># 练习题集</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/html转为pdf进行下载/" rel="next" title="html转为pdf进行下载">
+                <i class="fa fa-chevron-left"></i> html转为pdf进行下载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/webstorm教程/" rel="prev" title="webstorm教程">
+                webstorm教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型"><span class="nav-number">1.</span> <span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对String做扩展，实现如下方式获取字符串中频率最高的字符"><span class="nav-number">1.0.1.</span> <span class="nav-text">对String做扩展，实现如下方式获取字符串中频率最高的字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现一个函数，将浮点数左边的数每三位添加一个逗号"><span class="nav-number">1.0.2.</span> <span class="nav-text">实现一个函数，将浮点数左边的数每三位添加一个逗号</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现一个invoke函数，invoke-list-methodName-arguments"><span class="nav-number">2.0.1.</span> <span class="nav-text">实现一个invoke函数，invoke(list, methodName, *arguments)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m-n次操作下，完成去重，得到一个完整的非重数组。"><span class="nav-number">2.0.2.</span> <span class="nav-text">有两个从小到大已经排序完成的数组，长度分别是n和m，单个数组的不存在重复元素，问如何在m+n次操作下，完成去重，得到一个完整的非重数组。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现一个函数，能够枚举出数组中元素的所有可能的组合。-170919"><span class="nav-number">2.0.3.</span> <span class="nav-text">实现一个函数，能够枚举出数组中元素的所有可能的组合。(170919)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function"><span class="nav-number">3.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现一个create函数-效果如下-170914"><span class="nav-number">3.0.1.</span> <span class="nav-text">实现一个create函数,效果如下(170914)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-localStorage封装一个-Storage-对象，达到如下效果："><span class="nav-number">3.0.2.</span> <span class="nav-text">使用 localStorage封装一个 Storage 对象，达到如下效果：</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

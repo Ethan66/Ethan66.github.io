@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js数组知识点">
+<meta property="og:url" content="http://yoursite.com/js数组知识点/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/182951695/q%3D80_m%3D2000/v2?webp=true&sig=66ada9d1847ebb855a6ea9e55b5f0288021eef0c2c896aebbfa4c8bc65a8f741">
+<meta property="og:updated_time" content="2020-06-20T12:51:36.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js数组知识点">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/182951695/q%3D80_m%3D2000/v2?webp=true&sig=66ada9d1847ebb855a6ea9e55b5f0288021eef0c2c896aebbfa4c8bc65a8f741">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/js数组知识点/">
+
+
+
+
+
+  <title>js数组知识点 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js数组知识点/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js数组知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T10:26:04+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/182951695/q%3D80_m%3D2000/v2?webp=true&amp;sig=66ada9d1847ebb855a6ea9e55b5f0288021eef0c2c896aebbfa4c8bc65a8f741" alt=""><br><a id="more"></a></p>
+<h5 id="Array-prototype-toString"><a href="#Array-prototype-toString" class="headerlink" title="Array.prototype.toString()"></a>Array.prototype.toString()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1,2,3].toString() // &apos;1,2,3&apos;</span><br><span class="line">[&#123;&#125;, &#123;&#125;].toString() // &apos;[object, Object], [object, Object]&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><p>1、构造函数创建，传入一个数字参数，被认为是设置长度，传入2个以上参数，被初始化加入到数组中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a1 = new Array(5);</span><br><span class="line">console.log(a1.length);//5</span><br><span class="line">console.log(a1); //[] ,数组是空的</span><br><span class="line"></span><br><span class="line">var a2 = new Array(5,6); // 相当于a2 = [5, 6]</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组的索引与长度"><a href="#数组的索引与长度" class="headerlink" title="数组的索引与长度"></a>数组的索引与长度</h3><p>1、数组的遍历: 数组也是对象，所以也可以使用for…in<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(let i in arr)</span><br></pre></td></tr></table></figure></p>
+<p>2、数组的长度：数组length是等于数组最大的index+1,当length变小时，数组会删除小于length的数据，当length变大时，只是往后面增加undefined的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = new Array(1,2,3);</span><br><span class="line">a[100] = 100;</span><br><span class="line">console.log(a.length); //101</span><br><span class="line">console.log(a[99]); //undefined</span><br><span class="line"></span><br><span class="line">a.length = 2</span><br><span class="line">console.log(a);//[1,2]</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组的增删"><a href="#数组的增删" class="headerlink" title="数组的增删"></a>数组的增删</h3><p>1、增：直接使用索引(index不需要连续)<br>2、删：数组是特殊的对象，所以也可以使用删除对象的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3]</span><br><span class="line">delete a[1] // 不过不会改变数组length,a[1] = undefined</span><br></pre></td></tr></table></figure></p>
+<p>3、使用栈方法：删除方法不能改变length,这是我们不愿看到的，pop和push可以实现先入后出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3]</span><br><span class="line">let result = a.push(5); // result = 4,所以返回的是length长度</span><br><span class="line">console.log(a) // [1,2,3,5]</span><br><span class="line">let result 2 = a.pop() // result2 = 5,所以返回的是拿出的值，且pop里加参数是没意义的，它只拿出最后一个</span><br><span class="line">console.log(a) // [1,2,3]</span><br></pre></td></tr></table></figure></p>
+<p>4、使用队列方法：也可以实现改变length,只是先入先出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [1,2,3]</span><br><span class="line">let result = a.unshift(6) // result = 4,返回的是length的长度</span><br><span class="line">console.log(a) // [6,1,2,3]</span><br><span class="line">let result1 = a.shift() // result1 = 6,返回的拿出的值，shift加参数没有意义</span><br></pre></td></tr></table></figure></p>
+<p>记忆方法：删除是返回删除的值，添加时返回length值，删除加参数是没有意义的<br>5、终极神器：splice: 3个参数：1：开始的索引，2：删除元素执行的次数，从索引开始算，3：输入新元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 删除</span><br><span class="line">let a = [1,2,3,4]</span><br><span class="line">let result = a.splice(1,2) // result = [2,3]</span><br><span class="line">console.log(a) // [1,4]</span><br><span class="line">// 特殊</span><br><span class="line">var a = new Array()</span><br><span class="line">a[2] = 2</span><br><span class="line">a[3] = 3</span><br><span class="line">a[7] = 4</span><br><span class="line">a[8] = 5</span><br><span class="line">console.log(a.splice(3,4)); //[3]</span><br><span class="line">console.log(a); //[2: 2, 3: 4, 4: 5]</span><br><span class="line">// 新增: 因为第二个参数是执行的次数，只要设为0就行了</span><br><span class="line">var a = [1,2,3,4,5];</span><br><span class="line">let result = a.splice(1,0,9,99,999); // result = []</span><br><span class="line">console.log(a);//[1, 9, 99, 999, 2, 3, 4, 5]</span><br><span class="line">// 模拟push</span><br><span class="line">let arr1 = [1,2,3,4,5]</span><br><span class="line">arr1.splice(arr1.length, 0, 6) // arr1 = [1,2,3,4,5,6]</span><br><span class="line">// 模拟pop</span><br><span class="line">let arr2 = [1,2,3,4,5]</span><br><span class="line">arr2.splice(arr2.length-1, 1) // arr2 = [1,2,3,4]</span><br><span class="line">// 模拟shift</span><br><span class="line">let arr3 = [1,2,3,4,5]</span><br><span class="line">arr3.splice(0, 1) // arr3 = [2,3,4,5]</span><br><span class="line">// 模拟unshift</span><br><span class="line">let arr4 = [1,2,3,4,5]</span><br><span class="line">arr4.splice(0, 0, 1, 2) // arr4 = [1,2,1,2,3,4,5]</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组常用的api"><a href="#数组常用的api" class="headerlink" title="数组常用的api"></a>数组常用的api</h3><p>不会修改原数组的api: join,slice,concat<br>会修改原数组的：reverse,sort<br>1、join<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,4,5];</span><br><span class="line">console.log(a.join(&apos;,&apos;)); //1,2,3,4,5</span><br><span class="line">console.log(a.join()); //1,2,3,4,5</span><br><span class="line">console.log(a.join(&apos; &apos;)); //1 2 3 4 5</span><br></pre></td></tr></table></figure></p>
+<p>1.2、toString()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = [1,2,3]</span><br><span class="line">a.toString() // &apos;1,2,3&apos;</span><br><span class="line">console.log(a) / [1,2,3]</span><br></pre></td></tr></table></figure></p>
+<p>2、slice:取头不取尾<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,4,5];</span><br><span class="line">console.log(a.slice(1)); // [2,3,4,5]</span><br><span class="line">console.log(a.slice(1,2));//2</span><br><span class="line">console.log(a.slice(1,-1));//[2, 3, 4]</span><br><span class="line">console.log(a.slice(3,2));//[]</span><br><span class="line">console.log(a); //[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure></p>
+<p>3、concat:参数可以是数据和数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,4,5];</span><br><span class="line">var b = [6,7,8,9];</span><br><span class="line">console.log(a.concat(b));//[1, 2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line">console.log(a); //[1, 2, 3, 4, 5]</span><br><span class="line">console.log(a.concat(6,7)) // [1,2,3,4,5,6,7]</span><br></pre></td></tr></table></figure></p>
+<p>4、reverse<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,4,5];</span><br><span class="line">a.reverse();</span><br><span class="line">console.log(a); //[5, 4, 3, 2, 1]</span><br></pre></td></tr></table></figure></p>
+<p>5、sort: 对数组进行排序,可以传自定义的函数当参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var a=[5,4,3,2,1]</span><br><span class="line">a.sort()</span><br><span class="line">console.log(a) //[1, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">//但是: 问题</span><br><span class="line">var a=[7,8,9,10,11]</span><br><span class="line">a.sort()</span><br><span class="line">console.log(a) //[10, 11, 7, 8, 9]</span><br><span class="line">因为按照字母表排序，7就比10大了，这时候我们需要传入自定义排序函数</span><br><span class="line"></span><br><span class="line">// 解决方法</span><br><span class="line">var a = [7,8,9,10,11]</span><br><span class="line">a.sort(function(v1, v2)&#123;</span><br><span class="line">	if (v1 &gt; v2) &#123;</span><br><span class="line">		return 1</span><br><span class="line">	&#125; else if (v1 &lt; v2) &#123;</span><br><span class="line">		return -1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">// 当sort里的函数返回大于0时，v1要排在v2后面，当返回小于0时，v1要排在v2前面</span><br><span class="line">// 所以可以简写为</span><br><span class="line">a.sort(function(v1,v2)&#123;</span><br><span class="line">    return v1-v2</span><br><span class="line">&#125;)</span><br><span class="line">console.log(a) //[7, 8, 9, 10, 11]</span><br><span class="line"></span><br><span class="line">var users = [&#123;name: &apos;aaa&apos;, age: 21&#125;,&#123;name: &apos;bbb&apos;, age: 18&#125;,&#123;name: &apos;aba&apos;, age: 24&#125;]</span><br><span class="line">// 按age 从小到大排序</span><br><span class="line">var sortByAge = users.sort(function(v1, v2)&#123;</span><br><span class="line">    return  v1.age - v2.age</span><br><span class="line">&#125;)</span><br><span class="line">// 按name从大到小排序</span><br><span class="line">var sortByName = users.sort(function(v1, v2)&#123;</span><br><span class="line">    return  v2.name - v1.name</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="ES5新增api"><a href="#ES5新增api" class="headerlink" title="ES5新增api"></a>ES5新增api</h3><p>6、Array.isArray(obj)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = [];</span><br><span class="line">var b = new Date();</span><br><span class="line">console.log(Array.isArray(a)); //true</span><br><span class="line">console.log(Array.isArray(b)); //false</span><br></pre></td></tr></table></figure></p>
+<p>7、.indexOf(element) / .lastIndexOf(element)<br>这两个方法用于查找数组内指定元素位置，查找到第一个后返回其索引，没有查找到返回-1，indexOf从头至尾搜索，lastIndexOf反向搜索。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = [1,2,3,3,2,1]</span><br><span class="line">console.log(a.indexOf(2)) //1</span><br><span class="line">console.log(a.lastIndexOf(2)) //4</span><br></pre></td></tr></table></figure></p>
+<p>8、.every(function(element, index, array)) / .some(function(element, index, array))<br>every是所有函数的每个回调函数都返回true的时候才会返回true，当遇到false的时候终止执行，返回false<br>some函数是“存在”有一个回调函数返回true的时候终止执行并返回true，否则返回false<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = [1, 2, 3, 4, 5, 6]</span><br><span class="line">console.log(a.every(function(e, i, arr)&#123;</span><br><span class="line">return e &lt; 5</span><br><span class="line">&#125;))</span><br><span class="line">console.log(a.some(function(e,i,arr)&#123;</span><br><span class="line">  return e &gt; 4</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>9、.filter(function(element))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = [1, 2, 3, 4, 5, 6]</span><br><span class="line">console.log(a.filter(function(e)&#123;</span><br><span class="line">  return e % 2 == 0;</span><br><span class="line">&#125;)) // [2, 4, 6]</span><br><span class="line">console.log(a) //[1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure></p>
+<p>9.1、find(function(element, index, arr)):找到满足函数的第一个值，不改变数组，找不到返回undefined<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [1,2,3,4]</span><br><span class="line">console.log(a.find(function(e, i)&#123;</span><br><span class="line">	return e % 2 === 0</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>9.2、findIndex(function(element, index, arr)):找到满足函数的第一个值得位置，找不到返回-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = [1,2,3,4]</span><br><span class="line">console.log(a.findIndex(function(e, i)&#123;</span><br><span class="line">	return e % 2 === 0</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>10、.reduce(function(accumulator, currentValue, currentIndex, arr), initValue)<br>/ .reduceRight(function(accumulator, currentValue, currentIndex, arr), value)<br>accumulator: 累计器，每次执行回调返回的累计值，最后输出<br>currentValue: 当前处理的元素<br>currentIndex: 当前处理元素的索引<br>arr: 调用reduce()的数组<br>initValue: 作为第一次调用回调的accmulator的值，没有就是数组中的第一个元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 数字数组</span><br><span class="line">[1,2,3].reduce((accumulator, currentValue) =&gt; accumulator + currentValue) // 6</span><br><span class="line">// 对象数组</span><br><span class="line">let arr = [&#123;x: 1&#125;, &#123;x: 2&#125;, &#123;x: 3&#125;]</span><br><span class="line">arr.reduce((accumulator, currentValue) =&gt; &#123;</span><br><span class="line">	return accumulator + currentValue.x</span><br><span class="line">&#125;, 0) // 6</span><br></pre></td></tr></table></figure></p>
+<h3 id="Es6-api"><a href="#Es6-api" class="headerlink" title="Es6 api"></a>Es6 api</h3><p>1、将类数组和string转化为真数组: Array.from()：特别适合函数里的arguments和获取的nodeLists,任何有length属性的对象，Array.from()都可以变成真数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let str = &apos;str&apos;</span><br><span class="line">Array.from(str) // [&apos;s&apos;,&apos;t&apos;,&apos;r&apos;]</span><br><span class="line">Array.from(str, x=&gt;x+i) // [&apos;s0&apos;,&apos;t1&apos;,&apos;r2&apos;]</span><br><span class="line">let obj = &#123;0: 1, 1:2, 2: 3, length: 3&#125; // length一定要存在，不然就是类数组了</span><br><span class="line">Array.from(obj) // [1,2,3]</span><br><span class="line">let ps = document.querySelector(&apos;p&apos;)</span><br><span class="line">Array.from(ps).filter(item =&gt; &#123;</span><br><span class="line">	return item.textContent.lenght &gt; 100</span><br><span class="line">&#125;)</span><br><span class="line">function fn()&#123;</span><br><span class="line">	arguments = Array.from(arguemnts)</span><br><span class="line">	arguments.push(6)</span><br><span class="line">	console.log(arguments)</span><br><span class="line">&#125;</span><br><span class="line">fn(1,2,3) // [1,2,3,6]</span><br></pre></td></tr></table></figure></p>
+<p>2、创建数组：Array.of()，为了弥补Array()的不足<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Array.of(2) // [2]</span><br><span class="line">Array.of(1,2,3) // [1,2,3]</span><br><span class="line">Array(2) // [,,]</span><br><span class="line">Array(1,2) // [1,2]</span><br></pre></td></tr></table></figure></p>
+<p>3、填充：fill():第一个参数为填充值，第二个参数为填充起始位置，默认0，第三个参数为终止位置，默认length。填充包头不包尾<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,3]</span><br><span class="line">arr.fill(4) // [4,4,4]</span><br><span class="line">console.log(arr) // [4,4,4]</span><br><span class="line">arr.fill(5,1) // [4,5,5]</span><br><span class="line">arr.fill(6,1,2) // [4,6,5]</span><br></pre></td></tr></table></figure></p>
+<p>4、匹配：includes(searchElement, fromIndex)：查看searchElement是否和数组中的匹配，返回true或false，是为了弥补indexOf()的不足<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,3]</span><br><span class="line">arr.includes(1) // true</span><br><span class="line">arr.includes(1,2) // false</span><br><span class="line">// indexOf()：判断是否是-1来判断是否存在，且不能区分NaN</span><br><span class="line">[NaN].indexOf(NaN) // -1</span><br><span class="line">[NaN].indexOf(NaN) // true</span><br></pre></td></tr></table></figure></p>
+<p>4.1匹配2：indexOf(searchElement, fromIndex): 查看searchElement是否和数组中的匹配，返回第一个匹配的位置，否则返回-1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,3,2]</span><br><span class="line">arr.indexOf(2) // 1</span><br><span class="line">arr.indexOf(2,2) // 3</span><br><span class="line">arr.indexOf(1,2) // -1</span><br></pre></td></tr></table></figure></p>
+<p>4.2、匹配3： lastIndexOf(searchElement, fromIndex): 和indexOf差不多，只是返回最后一个匹配的值，是从最后往前搜索的第一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,3,2]</span><br><span class="line">arr.lastIndexOf(2) // 3</span><br><span class="line">arr.lastIndexOf(2,2) // 1：注意不一样：因为被搜索的是[1,2,3]</span><br><span class="line">arr.lastIndexOf(1,2) // -1</span><br></pre></td></tr></table></figure></p>
+<p>5、拉平数组：flat(Number):Number默认为1,不改变原数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,[3,4],5]</span><br><span class="line">arr.flat() // [1,2,3,4,5]</span><br><span class="line">let arr1 = [1,2,[,3,[4,5]],6]</span><br><span class="line">arr1.flat() // [1,2,3,[4,5],6]</span><br><span class="line">arr1.flat(2) // [1,2,3,4,5,6] 拉平2层</span><br><span class="line">arr1.flat(Infinity) // [1,2,3,4,5,6] 当不知道要拉平几层的时候</span><br></pre></td></tr></table></figure></p>
+<p>5.1、遍历数组后拉平，只能拉平一层：flatMap(function(elemnent, index, arr))<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,3]</span><br><span class="line">arr.flatMap(x =&gt; [x,x*2]) // [1,2,2,4,3,6] 实际[[1,2],[2,4],[3,6]].flat()</span><br></pre></td></tr></table></figure></p>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p>1、 …<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(...[1,2,3]) // 1 2 3</span><br><span class="line">主要用于函数调用</span><br><span class="line">function add (x,y)&#123;</span><br><span class="line">	console.log(x+y)</span><br><span class="line">&#125;</span><br><span class="line">add(...[1,2]) // 3</span><br><span class="line">可以替换apply</span><br><span class="line">function fn(x,y,z)&#123;console.log(x,y,z)&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Es5和Es6写法区别<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Es5写法</span><br><span class="line">let arg = [1,2,3]</span><br><span class="line">fn.apply(null, arg)</span><br><span class="line">Math.max.apply(null, [14, 3, 77])</span><br><span class="line">Es6写法</span><br><span class="line">fn(...arg)</span><br><span class="line">Math.max(...[14, 3, 77])</span><br><span class="line">Es5写法</span><br><span class="line">let arr1 = [1,2,3]</span><br><span class="line">let arr2 = [4,5,6]</span><br><span class="line">Array.prototype.push.apply(arr1,arr2) // [1,2,3,4,5,6]</span><br><span class="line">Es6写法</span><br><span class="line">arr1.push(...arr2)</span><br></pre></td></tr></table></figure></p>
+<p>实际应用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">拷贝数组</span><br><span class="line">Es5</span><br><span class="line">let a1 = [1,2,3]</span><br><span class="line">let a2 = a1.concat()</span><br><span class="line">Es6</span><br><span class="line">let a2 = [...a1]</span><br><span class="line">let [...a2] = a1</span><br><span class="line">合并数组</span><br><span class="line">ES5</span><br><span class="line">let a1= [1,2,3]</span><br><span class="line">let a2 = [2,3,4]</span><br><span class="line">let a3 = a1.concat(a2)</span><br><span class="line">ES6</span><br><span class="line">let a3 = [...a1,...a2]</span><br><span class="line">与解构赋值结合</span><br><span class="line">let [first,...rest] = [1,2,3,4,5,6]</span><br><span class="line">first // 1</span><br><span class="line">rest // [2,3,4,5,6]</span><br><span class="line">[first, ...rest] = [1]</span><br><span class="line">first // 1</span><br><span class="line">rest // []</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/css实用/" rel="next" title="css实用">
+                <i class="fa fa-chevron-left"></i> css实用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/js字符串知识点/" rel="prev" title="js字符串知识点">
+                js字符串知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Array-prototype-toString"><span class="nav-number">1.</span> <span class="nav-text">Array.prototype.toString()</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数组"><span class="nav-number"></span> <span class="nav-text">创建数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的索引与长度"><span class="nav-number"></span> <span class="nav-text">数组的索引与长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的增删"><span class="nav-number"></span> <span class="nav-text">数组的增删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组常用的api"><span class="nav-number"></span> <span class="nav-text">数组常用的api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES5新增api"><span class="nav-number"></span> <span class="nav-text">ES5新增api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Es6-api"><span class="nav-number"></span> <span class="nav-text">Es6 api</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展运算符"><span class="nav-number"></span> <span class="nav-text">扩展运算符</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

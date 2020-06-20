@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js之页面性能优化">
+<meta property="og:url" content="http://yoursite.com/js之页面性能优化/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/308925401/q%3D80_m%3D2000/v2?webp=true&sig=21105083e4db7d16f09658596ff3619ed4e83c8e3846f6b54f4e29d2494aafb5">
+<meta property="og:updated_time" content="2020-06-20T12:51:32.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之页面性能优化">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/308925401/q%3D80_m%3D2000/v2?webp=true&sig=21105083e4db7d16f09658596ff3619ed4e83c8e3846f6b54f4e29d2494aafb5">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/js之页面性能优化/">
+
+
+
+
+
+  <title>js之页面性能优化 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js之页面性能优化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js之页面性能优化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-27T17:02:16+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/308925401/q%3D80_m%3D2000/v2?webp=true&amp;sig=21105083e4db7d16f09658596ff3619ed4e83c8e3846f6b54f4e29d2494aafb5" alt=""><br><a id="more"></a></p>
+<h3 id="使用webpack优化项目"><a href="#使用webpack优化项目" class="headerlink" title="使用webpack优化项目"></a>使用webpack优化项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对于 Webpack4，打包项目使用 production 模式，这样会自动开启代码压缩</span><br><span class="line">使用 ES6 引入模块并开启 tree shaking，这个技术可以移除没有使用的代码</span><br><span class="line">优化图片，对于小图可以使用 base64 的方式(url-loader)写入文件中</span><br><span class="line">开启SplitChunksPlugin按照路由拆分代码，实现按需加载和缓存</span><br></pre></td></tr></table></figure>
+<h3 id="资源压缩合并、减少http请求"><a href="#资源压缩合并、减少http请求" class="headerlink" title="资源压缩合并、减少http请求"></a>资源压缩合并、减少http请求</h3><blockquote>
+<p>合并图片（css sprites）、CSS和JS文件合并、CSS和JS文件压缩。图片较多的页面也可以使用 lazyLoad 等技术进行优化。精灵图等</p>
+</blockquote>
+<h3 id="非核心代码异步加载"><a href="#非核心代码异步加载" class="headerlink" title="非核心代码异步加载"></a>非核心代码异步加载</h3><h5 id="动态脚本加载"><a href="#动态脚本加载" class="headerlink" title="动态脚本加载"></a>动态脚本加载</h5><blockquote>
+<p>使用document.createElement创建一个script标签，即document.createElement(‘script’)，然后把这个标签加载到body上面去。</p>
+</blockquote>
+<h5 id="defer（推荐）"><a href="#defer（推荐）" class="headerlink" title="defer（推荐）"></a>defer（推荐）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 在HTML解析完之后才会执行。如果是多个，则按照加载的顺序依次执行。</span><br><span class="line">&lt;script src=&quot;./defer1.js&quot; defer&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;./defer2.js&quot; defer&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;console.log(&apos;同步任务&apos;)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// 同步任务</span><br><span class="line">// defer1</span><br><span class="line">// defer2</span><br></pre></td></tr></table></figure>
+<h5 id="async（不推荐）"><a href="#async（不推荐）" class="headerlink" title="async（不推荐）"></a>async（不推荐）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 在加载完之后立即执行（所以有可能阻碍dom渲染）。如果是多个，执行顺序和加载顺序无关。</span><br><span class="line">&lt;script src=&quot;./async1.js&quot; async&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;./defer1.js&quot; defer&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;./defer2.js&quot; defer&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;console.log(&apos;同步任务&apos;)&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// 同步任务</span><br><span class="line">// defer1、defer2的先后顺序不定</span><br></pre></td></tr></table></figure>
+<h3 id="利用浏览器缓存（面试官问你：与浏览器缓存相关的http-header有哪些？）"><a href="#利用浏览器缓存（面试官问你：与浏览器缓存相关的http-header有哪些？）" class="headerlink" title="利用浏览器缓存（面试官问你：与浏览器缓存相关的http header有哪些？）"></a>利用浏览器缓存（面试官问你：与浏览器缓存相关的http header有哪些？）</h3><blockquote>
+<p>缓存：资源文件（比如图片）在本地的硬盘里存有副本，浏览器下次请求的时候，可能直接从本地磁盘里读取，而不会重新请求图片的url。<br>缓存分为强缓存和协商缓存<br>强缓存：不用请求服务区，直接使用本地的缓存。(可以查看百度官网)</p>
+</blockquote>
+<h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><blockquote>
+<p>利用 http 响应头中的<strong>Expires或Cache-Control</strong>实现的。【重要】<br>浏览器第一次请求一个资源时，服务器在返回该资源的同时，会把上面这两个属性放在response header中。<br>注意：这两个response header属性可以只启用一个，也可以同时启用。当response header中，Expires和Cache-Control同时存在时，Cache-Control的优先级高于Expires。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、Expires：服务器返回的绝对时间。</span><br><span class="line"></span><br><span class="line">浏览器再次请求这个资源时，先从缓存中寻找，找到这个资源后，拿出它的Expires跟当前的请求时间比较，如果请求时间在Expires的时间之前，就能命中缓存，否则就不行。</span><br><span class="line">如果缓存没有命中，浏览器直接从服务器请求资源时，Expires Header在重新请求的时候会被更新。</span><br><span class="line"></span><br><span class="line">缺点：由于Expires是服务器返回的一个绝对时间，存在的问题是：服务器的事件和客户端的事件可能不一致。在服务器时间与客户端时间相差较大时，缓存管理容易出现问题</span><br><span class="line"></span><br><span class="line">2、Cache-Control：服务器返回的相对时间。</span><br><span class="line">http1.1中新增的 response header。浏览器第一次请求资源之后，在接下来的相对时间之内，都可以利用本地缓存。超出这个时间之后，则不能命中缓存。重新请求时，Cache-Control会被更新。</span><br></pre></td></tr></table></figure>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><blockquote>
+<p>浏览器发现本地有资源的副本，但是不太确定要不要使用，于是去问问服务器。当浏览器对某个资源的请求没有命中强缓存（也就是说超出时间了），就会发一个请求到服务器，验证协商缓存是否命中。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1、Last-Modified、If-Modified-Since。过程如下：</span><br><span class="line">（1）浏览器第一次请求一个资源，服务器在返回这个资源的同时，会加上Last-Modified这个 response header，这个header表示这该资源在服务器上的最后修改时间。</span><br><span class="line">（2）浏览器再次请求这个资源时，会加上If-Modified-Since这个 request header，这个header的值就是上一次返回的Last-Modified的值。</span><br><span class="line">（3）服务器收到第二次请求时，会比对浏览器传过来的If-Modified-Since和资源在服务器上的最后修改时间Last-Modified，判断资源是否有变化。如果没有变化则返回304 Not Modified，但不返回资源内容</span><br><span class="line">4）浏览器如果收到304的响应，就会从缓存中加载资源。</span><br><span class="line"></span><br><span class="line">缺点：</span><br><span class="line">如果服务器端在一秒内修改文件两次，但产生的Last-Modified却只有一个值。于是，下面这一对header出场了。</span><br><span class="line"></span><br><span class="line">2、ETag、If-None-Match。过程如下：</span><br><span class="line">（1）浏览器第一次请求一个资源，服务器在返回这个资源的同时，会加上ETag这个 response header，这个header是服务器根据当前请求的资源生成的唯一标识。这个唯一标识是一个字符串，只要资源有变化这个串就不同，跟最后修改时间无关，所以也就很好地补充了Last-Modified的不足。</span><br><span class="line">（2）浏览器再次请求这个资源时，会加上If-None-Match这个 request header，这个header的值就是上一次返回的ETag的值。</span><br><span class="line">（3）服务器第二次请求时，会对比浏览器传过来的If-None-Match和服务器重新生成的一个新的ETag，判断资源是否有变化。如果没有变化则返回304 Not Modified，但不返回资源内容</span><br><span class="line">（4）浏览器如果收到304的响应，就会从缓存中加载资源。</span><br></pre></td></tr></table></figure>
+<h3 id="使用CDN"><a href="#使用CDN" class="headerlink" title="使用CDN"></a>使用CDN</h3><blockquote>
+<p>浏览器缓存始终只是为了提升二次访问的速度，对于首次访问的加速，我们需要从网络层面进行优化，最常见的手段就是CDN。</p>
+</blockquote>
+<h5 id="CDN是怎么做到加速的呢？"><a href="#CDN是怎么做到加速的呢？" class="headerlink" title="CDN是怎么做到加速的呢？"></a>CDN是怎么做到加速的呢？</h5><p>其实这是CDN服务商在全国各个省份部署计算节点，CDN加速将网站的内容缓存在网络边缘,不同地区的用户就会访问到离自己最近的相同网络线路上的CDN节点，当请求达到CDN节点后，节点会判断自己的内容缓存是否有效，如果有效，则立即响应缓存内容给用户，从而加快响应速度。如果CDN节点的缓存失效，它会根据服务配置去我们的内容源服务器获取最新的资源响应给用户，并将内容缓存下来以便响应给后续访问的用户。因此，一个地区内只要有一个用户先加载资源，在CDN中建立了缓存，该地区的其他后续用户都能因此而受益。</p>
+<h3 id="DNS预解析"><a href="#DNS预解析" class="headerlink" title="DNS预解析"></a>DNS预解析</h3><blockquote>
+<p>通过 DNS 预解析来告诉浏览器未来我们可能从某个特定的 URL 获取资源，当浏览器真正使用到该域中的某个资源时就可以尽快地完成 DNS 解析。</p>
+</blockquote>
+<h5 id="第一步：打开或关闭DNS预解析"><a href="#第一步：打开或关闭DNS预解析" class="headerlink" title="第一步：打开或关闭DNS预解析"></a>第一步：打开或关闭DNS预解析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你可以通过在服务器端发送 X-DNS-Prefetch-Control 报头。或是在文档中使用值为 http-equiv 的meta标签：</span><br><span class="line">&lt;meta http-equiv=&quot;x-dns-prefetch-control&quot; content=&quot;on&quot;&gt;</span><br><span class="line">注:在一些高级浏览器中，页面中所有的超链接（&lt;a&gt;标签），默认打开了DNS预解析。但是，如果页面中采用的https协议，很多浏览器是默认关闭了超链接的DNS预解析。如果加了上面这行代码，则表明强制打开浏览器的预解析。（如果你能在面试中把这句话说出来，则一定是你出彩的地方）</span><br></pre></td></tr></table></figure>
+<h5 id="第二步：对指定的域名进行DNS预解析"><a href="#第二步：对指定的域名进行DNS预解析" class="headerlink" title="第二步：对指定的域名进行DNS预解析"></a>第二步：对指定的域名进行DNS预解析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果我们将来可能从 smyhvae.com 获取图片或音频资源，那么可以在文档顶部的 标签中加入以下内容：</span><br><span class="line">	&lt;link rel=&quot;dns-prefetch&quot; href=&quot;http://www.smyhvae.com/&quot;&gt;</span><br><span class="line">当我们从该 URL 请求一个资源时，就不再需要等待 DNS 解析的过程。该技术对使用第三方资源特别有用。</span><br></pre></td></tr></table></figure>
+<h3 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h3><blockquote>
+<p>在开发中，可能会遇到有些资源不需要马上用到，这时候就可以使用预加载。预加载可以一定程度上降低首屏的加载时间，因为可以将一些不影响首屏但重要的文件延后加载，唯一缺点就是兼容性不好。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;preload&quot; href=&quot;http://example.com&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="垃圾回收和内存泄漏"><a href="#垃圾回收和内存泄漏" class="headerlink" title="垃圾回收和内存泄漏"></a>垃圾回收和内存泄漏</h3><h5 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h5><blockquote>
+<p>由于字符串、对象和数组没有固定大小，所有当他们的大小已知时，才能对他们进行动态的存储分配。JavaScript程序每次创建字符串、数组或对象时，解释器都必须分配内存来存储那个实体。只要像这样动态地分配了内存，最终都要释放这些内存以便他们能够被再用，否则，JavaScript的解释器将会消耗完系统中所有可用的内存，造成系统崩溃。所以才需要垃圾回收。<br>JavaScript垃圾回收的机制很简单：找出不再使用的变量，然后释放掉其占用的内存，但是这个过程不是时时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
+</blockquote>
+<h5 id="垃圾回收机制怎么知道，哪些内存不再需要呢？"><a href="#垃圾回收机制怎么知道，哪些内存不再需要呢？" class="headerlink" title="垃圾回收机制怎么知道，哪些内存不再需要呢？"></a>垃圾回收机制怎么知道，哪些内存不再需要呢？</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1、标记清除</span><br><span class="line">这是javascript中最常用的垃圾回收方式。当变量进入执行环境是，就标记这个变量为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占用的内存，因为只要执行流进入相应的环境，就可能会用到他们。当变量离开环境时，则将其标记为“离开环境”。</span><br><span class="line"></span><br><span class="line">var m = 0,n = 19 // 把 m,n,add() 标记为进入环境。</span><br><span class="line">add(m, n) // 把 a, b, c标记为进入环境。</span><br><span class="line">console.log(n) // a,b,c标记为离开环境，等待垃圾回收。</span><br><span class="line">function add(a, b) &#123;</span><br><span class="line">  a++</span><br><span class="line">  var c = a + b</span><br><span class="line">  return c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="哪些情况会引起内存泄漏？"><a href="#哪些情况会引起内存泄漏？" class="headerlink" title="哪些情况会引起内存泄漏？"></a>哪些情况会引起内存泄漏？</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">1、意外的全局变量</span><br><span class="line">function foo(arg) &#123;</span><br><span class="line">    bar = &quot;this is a hidden global variable&quot;;</span><br><span class="line">&#125;</span><br><span class="line">// bar没被声明,会变成一个全局变量,在页面关闭之前不会被释放。</span><br><span class="line"></span><br><span class="line">2、被遗忘的计时器或回调函数</span><br><span class="line"></span><br><span class="line">3、闭包</span><br><span class="line"></span><br><span class="line">4、清理的DOM元素需要删除引用</span><br><span class="line">var elements = &#123;</span><br><span class="line">    button: document.getElementById(&apos;button&apos;),</span><br><span class="line">    image: document.getElementById(&apos;image&apos;),</span><br><span class="line">    text: document.getElementById(&apos;text&apos;)</span><br><span class="line">&#125;;</span><br><span class="line">function doStuff() &#123;</span><br><span class="line">    image.src = &apos;http://some.url/image&apos;;</span><br><span class="line">    button.click();</span><br><span class="line">    console.log(text.innerHTML);</span><br><span class="line">&#125;</span><br><span class="line">function removeButton() &#123;</span><br><span class="line">    document.body.removeChild(document.getElementById(&apos;button&apos;));</span><br><span class="line">    // 此时，仍旧存在一个全局的 #button 的引用</span><br><span class="line">    // elements 字典。button 元素仍旧在内存中，不能被 GC 回收。</span><br><span class="line">&#125;</span><br><span class="line">// 虽然我们用removeChild移除了button，但是还在elements对象里保存着#button的引用，换言之，DOM元素还在内存里面。</span><br></pre></td></tr></table></figure>
+<h5 id="垃圾回收的优化"><a href="#垃圾回收的优化" class="headerlink" title="垃圾回收的优化"></a>垃圾回收的优化</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1、数组array优化：将数组长度赋值为0（arr.length = 0）也能达到清空数组的目的，并且同时能实现数组重用，减少内存垃圾的产生。</span><br><span class="line">const arr = [1, 2, 3, 4];</span><br><span class="line">console.log(&apos;浪里行舟&apos;);</span><br><span class="line">arr.length = 0  // 可以直接让数字清空，而且数组类型不变。</span><br><span class="line">// arr = []; 虽然让a变量成一个空数组,但是在堆上重新申请了一个空数组对象。</span><br><span class="line"></span><br><span class="line">2、对象尽量复用：对象尽量复用，尤其是在循环等地方出现创建新对象，能复用就复用。不用的对象，尽可能设置为null，尽快被垃圾回收掉。</span><br><span class="line">var t = &#123;&#125; // 每次循环都会创建一个新对象。</span><br><span class="line">for (var i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  // var t = &#123;&#125;;// 每次循环都会创建一个新对象。</span><br><span class="line">  t.age = 19</span><br><span class="line">  t.name = &apos;123&apos;</span><br><span class="line">  t.index = i</span><br><span class="line">  console.log(t)</span><br><span class="line">&#125;</span><br><span class="line">t = null //对象如果已经不用了，那就立即设置为null；等待垃圾回收。</span><br><span class="line"></span><br><span class="line">3、在循环中的函数表达式，能复用最好放到循环外面。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/js之运行机制/" rel="next" title="js之运行机制">
+                <i class="fa fa-chevron-left"></i> js之运行机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/js原型链和继承/" rel="prev" title="js原型链和继承">
+                js原型链和继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用webpack优化项目"><span class="nav-number">1.</span> <span class="nav-text">使用webpack优化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源压缩合并、减少http请求"><span class="nav-number">2.</span> <span class="nav-text">资源压缩合并、减少http请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非核心代码异步加载"><span class="nav-number">3.</span> <span class="nav-text">非核心代码异步加载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#动态脚本加载"><span class="nav-number">3.0.1.</span> <span class="nav-text">动态脚本加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#defer（推荐）"><span class="nav-number">3.0.2.</span> <span class="nav-text">defer（推荐）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#async（不推荐）"><span class="nav-number">3.0.3.</span> <span class="nav-text">async（不推荐）</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#利用浏览器缓存（面试官问你：与浏览器缓存相关的http-header有哪些？）"><span class="nav-number">4.</span> <span class="nav-text">利用浏览器缓存（面试官问你：与浏览器缓存相关的http header有哪些？）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#强缓存"><span class="nav-number">4.0.1.</span> <span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#协商缓存"><span class="nav-number">4.0.2.</span> <span class="nav-text">协商缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用CDN"><span class="nav-number">5.</span> <span class="nav-text">使用CDN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CDN是怎么做到加速的呢？"><span class="nav-number">5.0.1.</span> <span class="nav-text">CDN是怎么做到加速的呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS预解析"><span class="nav-number">6.</span> <span class="nav-text">DNS预解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步：打开或关闭DNS预解析"><span class="nav-number">6.0.1.</span> <span class="nav-text">第一步：打开或关闭DNS预解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步：对指定的域名进行DNS预解析"><span class="nav-number">6.0.2.</span> <span class="nav-text">第二步：对指定的域名进行DNS预解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预加载"><span class="nav-number">7.</span> <span class="nav-text">预加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收和内存泄漏"><span class="nav-number">8.</span> <span class="nav-text">垃圾回收和内存泄漏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收"><span class="nav-number">8.0.1.</span> <span class="nav-text">垃圾回收</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收机制怎么知道，哪些内存不再需要呢？"><span class="nav-number">8.0.2.</span> <span class="nav-text">垃圾回收机制怎么知道，哪些内存不再需要呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#哪些情况会引起内存泄漏？"><span class="nav-number">8.0.3.</span> <span class="nav-text">哪些情况会引起内存泄漏？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收的优化"><span class="nav-number">8.0.4.</span> <span class="nav-text">垃圾回收的优化</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

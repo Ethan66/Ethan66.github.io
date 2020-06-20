@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react教程">
+<meta property="og:url" content="http://yoursite.com/react教程/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/1000838871/q%3D80_m%3D1500_k%3D1/v2?sig=16d5dd7bfc4ad329f9180532f3e03001da621942d40e1b111529e29bfa990094">
+<meta property="og:updated_time" content="2020-06-20T12:51:29.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react教程">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/1000838871/q%3D80_m%3D1500_k%3D1/v2?sig=16d5dd7bfc4ad329f9180532f3e03001da621942d40e1b111529e29bfa990094">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/react教程/">
+
+
+
+
+
+  <title>react教程 | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/react教程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T15:17:43+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/1000838871/q%3D80_m%3D1500_k%3D1/v2?sig=16d5dd7bfc4ad329f9180532f3e03001da621942d40e1b111529e29bfa990094" alt=""><br><a id="more"></a></p>
+<h5 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h5><blockquote>
+<p>当前版本为React Fiber版本，也就是React16这个版本（2019年）</p>
+</blockquote>
+<h5 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vscode插件： Simple React Snippets</span><br><span class="line">chrome插件：React developer tools：点击设置图标，选中highlight Updates，这个高亮显示说明组件已更新</span><br><span class="line"># npm install -g create-react-app</span><br><span class="line"># mkdir reactDemo &amp;&amp; cd reactDemo</span><br><span class="line"># create-react-app . // 脚手架会安装好npm包</span><br><span class="line">// # yarn install</span><br><span class="line"># npm start</span><br></pre></td></tr></table></figure>
+<h5 id="npm包"><a href="#npm包" class="headerlink" title="npm包"></a>npm包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">axios</span><br><span class="line">react-transition-group: react第三方动画组件</span><br></pre></td></tr></table></figure>
+<h5 id="根目录文件"><a href="#根目录文件" class="headerlink" title="根目录文件"></a>根目录文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">package-lock.json：这个文件用一句话来解释，就是锁定安装时的版本号，并且需要上传到git，以保证其他人再npm install 时大家的依赖能保证一致。</span><br><span class="line">mainifest.json：移动端配置文件</span><br><span class="line">serviceWorker.js: 这个是用于写移动端开发的，PWA必须用到这个文件，有了这个文件，就相当于有了离线浏览的功能。</span><br></pre></td></tr></table></figure>
+<h5 id="入口文件src-index-js"><a href="#入口文件src-index-js" class="headerlink" title="入口文件src/index.js"></a>入口文件src/index.js</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;</span><br><span class="line">import App from &apos;./App&apos; // 一定要大写，JSX规定自定义组件必须要大写</span><br><span class="line">ReactDOM.render(&lt;App /&gt;,document.getElementById(&apos;root&apos;))</span><br></pre></td></tr></table></figure>
+<h5 id="React注意事项"><a href="#React注意事项" class="headerlink" title="React注意事项"></a>React注意事项</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// this.state.inputValue = e.target.value 不支持，因为React中改变值需要使用this.setState方法</span><br><span class="line">this.setState(&#123; // 这方法是异步的，所以有时候要写回调函数</span><br><span class="line">  inputValue: e.target.value</span><br><span class="line">&#125;, () =&gt; &#123;</span><br><span class="line">  console.log(111)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 重复渲染问题：因为修改了props属性或者state状态都会重新渲染组件，通过shouldComponentUpdate进行阻止</span><br><span class="line">shouldComponentUpdate (nextProps, nextState) &#123;</span><br><span class="line">  if (nextProps.content1 !== this.props.content1) &#123;</span><br><span class="line">    return true</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="JSX的注意事项"><a href="#JSX的注意事项" class="headerlink" title="JSX的注意事项"></a>JSX的注意事项</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 和vue一样，组件都需要一个根标签，但是真不想展示根标签，可以使用Fragment标签</span><br><span class="line">import React,&#123;Component,Fragment &#125; from &apos;react&apos;</span><br><span class="line">render()&#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;Fragment&gt;</span><br><span class="line">        &lt;div&gt;&lt;input /&gt; &lt;button&gt; 增加服务 &lt;/button&gt;&lt;/div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;头部按摩&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt; </span><br><span class="line">    &lt;/Fragment&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;/* 我是注释内容 */&#125;  // 注释：因为JSX中的&#123;&#125;里就是js内容</span><br><span class="line"></span><br><span class="line">&lt;input className=&quot;input&quot; /&gt;  // 将class换成className，防止和js中的class类名 冲突</span><br><span class="line"></span><br><span class="line">&lt;div dangerouslySetInnerHTML=&#123;&#123;__html: htmlContent&#125;&#125;&gt;&lt;/div&gt;  // htmlContent是表示绑定在react中的数据，渲染成html,而不仅仅是展示内容</span><br><span class="line"></span><br><span class="line">&lt;label htmlFor=&quot;jspang&quot;&gt;加入服务：&lt;/label&gt; // label的for换成htmlFor，也是为了防止和js中的for冲突</span><br><span class="line">&lt;input id=&quot;jspang&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="基本组件"><a href="#基本组件" class="headerlink" title="基本组件"></a>基本组件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123;Component&#125; from &apos;react&apos;</span><br><span class="line">class Xiaojiejie extends Component&#123;</span><br><span class="line">  constructor (props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.state = &#123; inputValue: &apos;基本服务&apos;, list: [&apos;基础按摩&apos;, &apos;精油&apos;] &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    return  (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;input value=&#123;this.state.inputValue&#125; onChange=&#123;this.inputChange.bind(this)&#125; /&gt;</span><br><span class="line">          &#123;/* vue：&lt;input :value=&quot;inputValue&quot; @change=&quot;inputChange&quot; /&gt; */&#125;</span><br><span class="line"></span><br><span class="line">          &lt;button onClick=&#123;this.addList.bind(this)&#125;&gt; 增加服务 &lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &#123;</span><br><span class="line">            this.state.list.map((item,index)=&gt;&#123;</span><br><span class="line">                return &lt;li key=&#123;index&#125; onClick=&#123;this.deleteItem.bind(this, index)&#125;&gt;&#123;item&#125;&lt;/li&gt;</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;/ul&gt;  </span><br><span class="line">      &lt;/Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  inputChange (e) &#123;</span><br><span class="line">    // this.state.inputValue = e.target.value 不支持，因为React中改变值需要使用this.setState方法</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      inputValue: e.target.value</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  addList()&#123;</span><br><span class="line">    this.setState(&#123; // 注意：这个方法是异步的</span><br><span class="line">        list:[...this.state.list,this.state.inputValue]</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  deleteItem(index)&#123;</span><br><span class="line">    let list = this.state.list</span><br><span class="line">    list.splice(index,1)</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">        list:list</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default Xiaojiejie</span><br></pre></td></tr></table></figure>
+<h5 id="如何快速获取元素"><a href="#如何快速获取元素" class="headerlink" title="如何快速获取元素"></a>如何快速获取元素</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;input</span><br><span class="line">  type=&quot;text&quot;</span><br><span class="line">  className=&quot;input&quot; </span><br><span class="line">  ref=&#123;(input) =&gt; &#123;</span><br><span class="line">    console.log(input) // &lt;input type=&quot;text&quot; class=&quot;input&quot; /&gt;</span><br><span class="line">    this.input = input // 将DOM元素赋值给this.input</span><br><span class="line">  &#125;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="哪个钩子请求接口"><a href="#哪个钩子请求接口" class="headerlink" title="哪个钩子请求接口"></a>哪个钩子请求接口</h5><blockquote>
+<p>componentDidMount生命周期函数里请求ajax</p>
+</blockquote>
+<h5 id="react动画"><a href="#react动画" class="headerlink" title="react动画"></a>react动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line">class Boss extends Component &#123;</span><br><span class="line">  constructor (props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    this.state = &#123; isShow: true &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className=&#123;this.state.isShow ? &apos;show&apos; : &apos;hide&apos;&#125;&gt;BOSS级人物-孙悟空&lt;/div&gt;</span><br><span class="line">        &lt;div&gt;&lt;button onClick=&#123;this.toToggle.bind(this)&#125;&gt;召唤Boss&lt;/button&gt;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  toToggole()&#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">        isShow:this.state.isShow ? false : true</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// css</span><br><span class="line">.show&#123; opacity: 1; transition:all 1.5s ease-in;&#125;</span><br><span class="line">.hide&#123;opacity: 0; transition:all 1.5s ease-in;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="第三方动画：react-transition-group"><a href="#第三方动画：react-transition-group" class="headerlink" title="第三方动画：react-transition-group"></a>第三方动画：react-transition-group</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// css样式书写和vue差不多</span><br><span class="line">import &#123; CSSTransition &#125; from &apos;react-transition-group&apos;</span><br><span class="line">render() &#123; </span><br><span class="line">  return ( </span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;CSSTransition </span><br><span class="line">            in=&#123;this.state.isShow&#125;   //用于判断是否出现的状态</span><br><span class="line">            timeout=&#123;2000&#125;           //动画持续时间</span><br><span class="line">            classNames=&quot;boss-text&quot;   //className值，防止重复</span><br><span class="line">            unmountOnExit // 元素退出自动删除DOM</span><br><span class="line">        &gt;</span><br><span class="line">            &lt;div&gt;BOSS级人物-孙悟空&lt;/div&gt;</span><br><span class="line">        &lt;/CSSTransition&gt;</span><br><span class="line">        &lt;div&gt;&lt;button onClick=&#123;this.toToggole&#125;&gt;召唤Boss&lt;/button&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">.boss-text-enter&#123; opacity: 0; &#125;</span><br><span class="line">.boss-text-enter-active&#123; opacity: 1; transition: opacity 2000ms; &#125;</span><br><span class="line">.boss-text-enter-done&#123; opacity: 1; &#125;</span><br><span class="line">.boss-text-exit&#123; opacity: 1; &#125;</span><br><span class="line">.boss-text-exit-active&#123; opacity: 0; transition: opacity 2000ms; &#125;</span><br><span class="line">.boss-text-exit-done&#123; opacity: 0; &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="react-transition-group控制多个元素"><a href="#react-transition-group控制多个元素" class="headerlink" title="react-transition-group控制多个元素"></a>react-transition-group控制多个元素</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import &#123;CSSTransition , TransitionGroup&#125; from &apos;react-transition-group&apos;</span><br><span class="line">&lt;TransitionGroup&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    this.state.list.map((item,index)=&gt;&#123;</span><br><span class="line">      return (</span><br><span class="line">        &lt;CSSTransition</span><br><span class="line">          timeout=&#123;1000&#125;</span><br><span class="line">          classNames=&apos;boss-text&apos;</span><br><span class="line">          unmountOnExit</span><br><span class="line">          appear=&#123;true&#125;</span><br><span class="line">          key=&#123;index+item&#125;  </span><br><span class="line">        &gt;</span><br><span class="line">          &lt;XiaojiejieItem </span><br><span class="line">          content=&#123;item&#125;</span><br><span class="line">          index=&#123;index&#125;</span><br><span class="line">          deleteItem=&#123;this.deleteItem.bind(this)&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">        &lt;/CSSTransition&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/TransitionGroup&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h5><p><a href="http://jspang.com/posts/2019/05/04/new-react-base.html" target="_blank" rel="noopener">技术胖教程</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/vue虚拟DOM/" rel="next" title="vue虚拟DOM">
+                <i class="fa fa-chevron-left"></i> vue虚拟DOM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/react组件/" rel="prev" title="react组件">
+                react组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#版本"><span class="nav-number">1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#npm包"><span class="nav-number">3.</span> <span class="nav-text">npm包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根目录文件"><span class="nav-number">4.</span> <span class="nav-text">根目录文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#入口文件src-index-js"><span class="nav-number">5.</span> <span class="nav-text">入口文件src/index.js</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#React注意事项"><span class="nav-number">6.</span> <span class="nav-text">React注意事项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSX的注意事项"><span class="nav-number">7.</span> <span class="nav-text">JSX的注意事项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本组件"><span class="nav-number">8.</span> <span class="nav-text">基本组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何快速获取元素"><span class="nav-number">9.</span> <span class="nav-text">如何快速获取元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#哪个钩子请求接口"><span class="nav-number">10.</span> <span class="nav-text">哪个钩子请求接口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#react动画"><span class="nav-number">11.</span> <span class="nav-text">react动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三方动画：react-transition-group"><span class="nav-number">12.</span> <span class="nav-text">第三方动画：react-transition-group</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#react-transition-group控制多个元素"><span class="nav-number">13.</span> <span class="nav-text">react-transition-group控制多个元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考教程"><span class="nav-number">14.</span> <span class="nav-text">参考教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
