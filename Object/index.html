@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="知识点,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object">
+<meta property="og:url" content="http://yoursite.com/Object/index.html">
+<meta property="og:site_name" content="肥而不腻的蜗牛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://drscdn.500px.org/photo/297464285/q%3D80_m%3D2000/v2?webp=true&sig=1a352c4125c71461b07e0c04acf588702be16ed4caa42072dff6699376d23728">
+<meta property="og:updated_time" content="2020-06-24T23:14:53.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Object">
+<meta name="twitter:image" content="https://drscdn.500px.org/photo/297464285/q%3D80_m%3D2000/v2?webp=true&sig=1a352c4125c71461b07e0c04acf588702be16ed4caa42072dff6699376d23728">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+        setTimeout(() => {
+          let script = document.createElement('script')
+          script.setAttribute('type', 'text/javascript')
+          script.setAttribute('opacity', '0.5')
+          script.setAttribute('zIndex', '-2')
+          script.setAttribute('count', '120')
+          script.setAttribute('src', '//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js')
+          document.querySelector('body').appendChild(script)
+        }, 2000)
+    })();
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/Object/">
+
+
+
+
+
+  <title>Object | 肥而不腻的蜗牛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥而不腻的蜗牛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">カタツムリのノート</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Object/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ethan-庄">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥而不腻的蜗牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Object</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T15:41:18+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/每日精读/" itemprop="url" rel="index">
+                    <span itemprop="name">每日精读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://drscdn.500px.org/photo/297464285/q%3D80_m%3D2000/v2?webp=true&amp;sig=1a352c4125c71461b07e0c04acf588702be16ed4caa42072dff6699376d23728" alt=""><br><a id="more"></a></p>
+<h5 id="表达式还是语句"><a href="#表达式还是语句" class="headerlink" title="表达式还是语句"></a>表达式还是语句</h5><p>表达式和语句的区别：表达式必须有一个结果<br>JavaScript规定，如果行首是大括号，一律解释为语句（即代码块）。如果要解释为表达式（即对象），必须在大括号前加上圆括号。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(&#123; foo: 123&#125;)</span><br></pre></td></tr></table></figure></p>
+<h5 id="对象浅拷贝和深拷贝的区别"><a href="#对象浅拷贝和深拷贝的区别" class="headerlink" title="对象浅拷贝和深拷贝的区别"></a>对象浅拷贝和深拷贝的区别</h5><blockquote>
+<p>浅拷贝：一个对象的属性为非对象时，改变属性值不会发生联动变化，只会一个对象会变，假如是对象的话，就会变，因为对象存储的是地址<br>深拷贝：改变所有属性值都不会发生联动变化</p>
+</blockquote>
+<h5 id="删除属性"><a href="#删除属性" class="headerlink" title="删除属性"></a>删除属性</h5><p>delete: 用于删除对象的属性，删除后不管属性存在与否都会返回true。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;p: 1&#125;;</span><br><span class="line">Object.keys(o) // [&quot;p&quot;]</span><br><span class="line">delete o.p // true</span><br></pre></td></tr></table></figure></p>
+<h5 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString()"></a>Object.prototype.toString()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;&#125;</span><br><span class="line">obj.toString() // &apos;[object Object]&apos;</span><br><span class="line"></span><br><span class="line">// 实用：区分数组、对象和函数</span><br><span class="line">let arr = [1,2,3]</span><br><span class="line">let fn = function()&#123;console.log(111)&#125;</span><br><span class="line">Object.prototype.toString.call(arr) // [object Array]</span><br><span class="line">Object.prototype.toString.call(fn) // [object Function]</span><br></pre></td></tr></table></figure>
+<h5 id="ES5对象api"><a href="#ES5对象api" class="headerlink" title="ES5对象api"></a>ES5对象api</h5><p>Object.create(proto, [propertiesObject])方法创建一个新对象，使用现有的对象来提供新创建的对象的<strong>proto</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">  this.a = 1</span><br><span class="line">  this.b = 2</span><br><span class="line">&#125;</span><br><span class="line">fn.prototype.c = 1</span><br><span class="line">let obj1 = new fn()</span><br><span class="line">let obj2 = Object.create(obj1) // 等价于obj2.__proto__ === obj1</span><br><span class="line">console.log(obj2) // &#123;&#125;因为只是把obj1绑定到obj2的原型对象上</span><br><span class="line">obj2.a === 1</span><br><span class="line">obj2.b === 1</span><br><span class="line">obj2.c === 1</span><br><span class="line"></span><br><span class="line">// 带第二参数时，是带属性描述对象</span><br><span class="line">let obj3 = Object.create(obj1, &#123;d: &#123;&#125;&#125;)</span><br><span class="line">console.log(obj3) // &#123;d: undefined&#125;</span><br><span class="line">Object.getOwnPropertyDescriptor(obj3, &apos;d&apos;)</span><br><span class="line">// &#123;value: undefined, enumerable: false, configurable: false, writable: false&#125;</span><br><span class="line"></span><br><span class="line">let obj4 = Object.create(obj1, &#123;e: &#123; value: 4, enumerable: true, writable: true, configurable: true &#125;&#125;)</span><br><span class="line">console.log(obj4) // &#123;e: 4&#125;</span><br><span class="line"></span><br><span class="line">// 用Object.create()浅拷贝一个新对象，并继承对象的属性</span><br><span class="line">let obj5 = Object.create(Object.getPrototypeOf(obj1), Object.getOwnPropertyDescriptors(obj1))</span><br><span class="line">console.log(obj5)</span><br></pre></td></tr></table></figure></p>
+<h5 id="对象属性、方法的简写"><a href="#对象属性、方法的简写" class="headerlink" title="对象属性、方法的简写"></a>对象属性、方法的简写</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const foo = &apos;bar&apos;;</span><br><span class="line">const baz = &#123;foo&#125;;</span><br><span class="line">baz // &#123;foo: &quot;bar&quot;&#125;</span><br><span class="line">// 等同于</span><br><span class="line">const baz = &#123;foo: foo&#125;;</span><br><span class="line"></span><br><span class="line">function f(x, y) &#123;</span><br><span class="line">  return &#123;x, y&#125;;</span><br><span class="line">&#125;</span><br><span class="line">// 等同于</span><br><span class="line">function f(x, y) &#123;</span><br><span class="line">  return &#123;x: x, y: y&#125;;</span><br><span class="line">&#125;</span><br><span class="line">f(1, 2) // Object &#123;x: 1, y: 2&#125;</span><br><span class="line"></span><br><span class="line">const o = &#123;</span><br><span class="line">  method() &#123;</span><br><span class="line">    return &quot;Hello!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">// 等同于</span><br><span class="line">const o = &#123;</span><br><span class="line">  method: function() &#123;</span><br><span class="line">    return &quot;Hello!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="属性名表达式"><a href="#属性名表达式" class="headerlink" title="属性名表达式"></a>属性名表达式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 方法一</span><br><span class="line">obj.foo = true;</span><br><span class="line">// 方法二</span><br><span class="line">obj[&apos;a&apos; + &apos;bc&apos;] = 123;</span><br><span class="line">// 方法三</span><br><span class="line">let obj = &#123;</span><br><span class="line">  [propKey]: true,</span><br><span class="line">  [&apos;a&apos; + &apos;bc&apos;]: 123</span><br><span class="line">&#125;;</span><br><span class="line">// 表达式还可以用于定义方法名。</span><br><span class="line">let obj = &#123;</span><br><span class="line">  [&apos;h&apos; + &apos;ello&apos;]() &#123;</span><br><span class="line">    return &apos;hi&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.hello() // hi</span><br></pre></td></tr></table></figure>
+<h5 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h5><p>解构赋值：浅拷贝，能赋值继承的属性<br>扩展运算符：浅拷贝，不能继承继承的属性。扩展运算符等同于Object.assign(),Object.assign()也不能继承继承的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let &#123;x, y&#125; = null // 报错</span><br><span class="line">let &#123; x, y &#125; = undefined // 报错</span><br><span class="line">let &#123;x, ...y, z&#125; = &#123;1,2,3,4&#125; // 报错</span><br><span class="line">// 案例</span><br><span class="line">let obj1 = &#123;a: 1, b: &#123;b: 1&#125;&#125;</span><br><span class="line">let obj2 = &#123;c: &#123;c: 1&#125;&#125;</span><br><span class="line">obj1.__proto__ = obj2</span><br><span class="line">let &#123;c, ...obj3&#125; = obj1</span><br><span class="line">// 结果</span><br><span class="line">c // &#123;c: 1&#125;</span><br><span class="line">obj3 // &#123;a:1, b: &#123;b: 1&#125;&#125;</span><br><span class="line">obj3.c // undefined</span><br><span class="line">// 修改</span><br><span class="line">obj1.a = 2</span><br><span class="line">obj1.b.b = 2</span><br><span class="line">obj1.c.c = 2</span><br><span class="line">// 结果（重点）</span><br><span class="line">obj3 // &#123;a:1, b: &#123;b: 2&#125;&#125;</span><br><span class="line"></span><br><span class="line">let aClone = &#123;...a&#125;</span><br><span class="line">// 等同于</span><br><span class="line">let aClone = Object.assign(&#123;&#125;, a)</span><br></pre></td></tr></table></figure></p>
+<h5 id="运用扩展运算符或Object-assign-拷贝对象和对象的继承属性"><a href="#运用扩展运算符或Object-assign-拷贝对象和对象的继承属性" class="headerlink" title="运用扩展运算符或Object.assign()拷贝对象和对象的继承属性"></a>运用扩展运算符或Object.assign()拷贝对象和对象的继承属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">let fn = function()&#123;&#125;</span><br><span class="line">fn.prototype.b = 1</span><br><span class="line">let obj = new fn()</span><br><span class="line">obj.a = 1</span><br><span class="line">// 写法一，非浏览器的环境不一定有效</span><br><span class="line">const clone1 = &#123;</span><br><span class="line">  __proto__: Object.getPrototypeOf(obj), // 等价于__proto__: fn.prototype</span><br><span class="line">  ...obj</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 写法二</span><br><span class="line">const clone2 = Object.assign(</span><br><span class="line">  Object.create(Object.getPrototypeOf(obj)), // 因为Object.create()就是将对象绑定到__proto__上</span><br><span class="line">  obj</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 写法三</span><br><span class="line">const clone3 = Object.create(</span><br><span class="line">  Object.getPrototypeOf(obj),</span><br><span class="line">  Object.getOwnPropertyDescriptors(obj)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="用api定义修改属性"><a href="#用api定义修改属性" class="headerlink" title="用api定义修改属性"></a>用api定义修改属性</h5><p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(obj, prop, descriptor)</span><br><span class="line">descriptor是对象的描述对象</span><br><span class="line">let obj = &#123;&#125;</span><br><span class="line">Object.defineProperty(obj, &apos;a&apos;, &#123;</span><br><span class="line">  enumerable: true, // 属性是否可枚举</span><br><span class="line">  configurable: true, // 是否可重新定义属性描述，为false时不能再重新定义属性描述，也不能delete属性</span><br><span class="line">  value: &apos;1&apos;, // 属性值，默认undefined</span><br><span class="line">  writable: true // value是否可编辑，为false时即使给对象属性赋值了，也不能修改value</span><br><span class="line">&#125;)</span><br><span class="line">// 对象中的属性描述符有2种：数据描述符和存取描述符。数据描述符和存取描述符不能共存，两者共有的属性为enumerable和configurable。</span><br><span class="line">// 数据描述符：value和writable</span><br><span class="line">// 存取描述符：get和set函数</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下(为数据描述符)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;&#125;</span><br><span class="line">Object.defineProperty(obj, &apos;a&apos;, &#123;&#125;) // &#123;a:undefined&#125;</span><br><span class="line">Object.getOwnPropertyDescriptor(obj, &apos;a&apos;) // &#123;value: undefined, writable: false, enumerable: false, configurable: false&#125;</span><br></pre></td></tr></table></figure></p>
+<p>存取描述符情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; firstName: &apos;zhuang&apos;, lastName: &apos;cheng&apos; &#125;</span><br><span class="line">Object.defineProperty(obj, &apos;fullName&apos;, &#123;</span><br><span class="line">  enumerable: true,</span><br><span class="line">  configurable: true,</span><br><span class="line">  get () &#123;</span><br><span class="line">    return this.firstName + &apos; &apos; + this.lastName</span><br><span class="line">  &#125;,</span><br><span class="line">  set (val) &#123;</span><br><span class="line">    this.firstName = val.split(&apos; &apos;)[0]</span><br><span class="line">    this.lastName = val.split(&apos; &apos;)[1]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(obj.fullName) // &apos;zhuang cheng&apos;</span><br><span class="line">obj.firstName = &apos;jiang&apos;</span><br><span class="line">obj.lastName = &apos;jie&apos;</span><br><span class="line">console.log(obj.fullName) // &apos;jiang jie&apos;</span><br><span class="line">obj.fullName = &apos;chen xi&apos;</span><br><span class="line">console.log(obj.firstName) // &apos;chen&apos;</span><br><span class="line">console.log(obj.lastName) // &apos;xi&apos;</span><br></pre></td></tr></table></figure></p>
+<h5 id="可枚举性"><a href="#可枚举性" class="headerlink" title="可枚举性"></a>可枚举性</h5><p>对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为。Object.getOwnPropertyDescriptor方法可以获取该属性的描述对象。只能获取自身的属性，不能获取继承的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; foo: 123 &#125;;</span><br><span class="line">Object.getOwnPropertyDescriptor(obj, &apos;foo&apos;)</span><br><span class="line">//  &#123;</span><br><span class="line">//    value: 123,</span><br><span class="line">//    writable: true, // 可编辑</span><br><span class="line">//    enumerable: true, // 可枚举</span><br><span class="line">//    configurable: true // 对象的属性描述可改变或属性可删除</span><br><span class="line">//  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>描述对象的enumerable属性，称为”可枚举性“，如果该属性为false，就表示某些操作会忽略当前属性。有四个操作会忽略enumerable为false的属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for...in循环：只遍历对象自身的和继承的可枚举的属性。</span><br><span class="line">Object.keys()：返回对象自身的所有可枚举的属性的键名。</span><br><span class="line">JSON.stringify()：只串行化对象自身的可枚举的属性。</span><br><span class="line">Object.assign()：只拷贝对象自身的可枚举的属性。</span><br></pre></td></tr></table></figure></p>
+<p>引入“可枚举”（enumerable）这个概念的最初目的，就是让某些属性可以规避掉for…in操作，不然所有内部属性和方法都会被遍历到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyDescriptor(Object.prototype, &apos;toString&apos;).enumerable</span><br><span class="line">// false</span><br><span class="line">Object.getOwnPropertyDescriptor([], &apos;length&apos;).enumerable</span><br><span class="line">// false</span><br></pre></td></tr></table></figure></p>
+<p>ES6 规定，所有 Class 的原型的方法都是不可枚举的。</p>
+<h5 id="属性的遍历"><a href="#属性的遍历" class="headerlink" title="属性的遍历"></a>属性的遍历</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for...in</span><br><span class="line">// for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。</span><br><span class="line"></span><br><span class="line">Object.keys(obj)</span><br><span class="line">// Object.keys返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyNames(obj)</span><br><span class="line">// Object.getOwnPropertyNames返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertySymbols(obj)</span><br><span class="line">// Object.getOwnPropertySymbols返回一个数组，包含对象自身的所有 Symbol 属性的键名。</span><br><span class="line"></span><br><span class="line">Reflect.ownKeys(obj)</span><br><span class="line">// Reflect.ownKeys返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。</span><br></pre></td></tr></table></figure>
+<h5 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h5><p>this关键字总是指向函数所在的当前对象，ES6 又新增了另一个类似的关键字super，指向当前对象的原型对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const proto = &#123;</span><br><span class="line">  foo: &apos;hello&apos;</span><br><span class="line">&#125;;</span><br><span class="line">const obj = &#123;</span><br><span class="line">  foo: &apos;world&apos;,</span><br><span class="line">  find() &#123;</span><br><span class="line">    return super.foo;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Object.setPrototypeOf(obj, proto);</span><br><span class="line">obj.find() // &quot;hello&quot;</span><br><span class="line">// super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。</span><br></pre></td></tr></table></figure></p>
+<h5 id="es6对象的api"><a href="#es6对象的api" class="headerlink" title="es6对象的api"></a>es6对象的api</h5><p>Object.keys查看对象自身的所有属性（不包含继承属性）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var o = &#123;</span><br><span class="line">  key1: 1, key2: 2</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Object.keys(o);</span><br><span class="line">// [&apos;key1&apos;, &apos;key2&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>ES5 比较两个值是否相等，只有两个运算符：相等运算符和严格相等运算符。它们都有缺点，前者会自动转换数据类型，后者的NaN不等于自身，以及+0等于-0。<br>Object.is()提出“Same-value equality”（同值相等）算法，用来解决这个问题。它用来比较两个值是否严格相等，与严格比较运算符（===）的行为基本一致。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Object.is(&apos;foo&apos;, &apos;foo&apos;)</span><br><span class="line">// true</span><br><span class="line">Object.is(&#123;&#125;, &#123;&#125;)</span><br><span class="line">// false</span><br><span class="line"></span><br><span class="line">// 不同之处</span><br><span class="line">+0 === -0 //true</span><br><span class="line">NaN === NaN // false</span><br><span class="line">Object.is(+0, -0) // false</span><br><span class="line">Object.is(NaN, NaN) // true</span><br></pre></td></tr></table></figure></p>
+<h5 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h5><p>Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。特殊情况：1、只有一个参数，直接返回该参数；2、若不是对象，则转成对象再返回；undefined和null无法转成对象，所以报错；3、如果非对象参数出现在源对象的位置（即非首参数），不会报错<br>注意：Object.assign()无法正确拷贝get属性和set属性的问题，可以用Object.getOwnPropertyDescriptors<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const target = &#123; a: 1 &#125;;</span><br><span class="line">const source1 = &#123; b: 2 &#125;;</span><br><span class="line">const source2 = &#123; c: 3 &#125;;</span><br><span class="line">Object.assign(target, source1, source2);</span><br><span class="line">target // &#123;a:1, b:2, c:3&#125;</span><br><span class="line">source1.a = 2;</span><br><span class="line">Object.assign(target, source1, source2);</span><br><span class="line">target // &#123;a:2,b:2,c:3&#125;</span><br><span class="line"></span><br><span class="line">// 属性名为 Symbol 值的属性，也会被Object.assign拷贝。</span><br><span class="line">Object.assign(&#123; a: &apos;b&apos; &#125;, &#123; [Symbol(&apos;c&apos;)]: &apos;d&apos; &#125;)</span><br><span class="line">// &#123; a: &apos;b&apos;, Symbol(c): &apos;d&apos; &#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Object-assign-实用"><a href="#Object-assign-实用" class="headerlink" title="Object.assign()实用"></a>Object.assign()实用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 为对象添加属性</span><br><span class="line">class Point &#123;</span><br><span class="line">  constructor(x, y) &#123;</span><br><span class="line">    Object.assign(this, &#123;x, y&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将x属性和y属性添加到Point类的对象实例。</span><br><span class="line"></span><br><span class="line">// 为对象添加原型方法</span><br><span class="line">Object.assign(SomeClass.prototype, &#123;</span><br><span class="line">  someMethod(arg1, arg2) &#123;</span><br><span class="line">    ···</span><br><span class="line">  &#125;,</span><br><span class="line">  anotherMethod() &#123;</span><br><span class="line">    ···</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">// 等同于下面的写法</span><br><span class="line">SomeClass.prototype.someMethod = function (arg1, arg2) &#123;</span><br><span class="line">  ···</span><br><span class="line">&#125;;</span><br><span class="line">SomeClass.prototype.anotherMethod = function () &#123;</span><br><span class="line">  ···</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>克隆对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function clone(origin) &#123;</span><br><span class="line">  return Object.assign(&#123;&#125;, origin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="Object-getOwnPropertyDescriptors"><a href="#Object-getOwnPropertyDescriptors" class="headerlink" title="Object.getOwnPropertyDescriptors()"></a>Object.getOwnPropertyDescriptors()</h5><p>ES5 的Object.getOwnPropertyDescriptor()方法会返回某个对象属性的描述对象（descriptor）。ES2017 引入了Object.getOwnPropertyDescriptors()方法，返回指定对象所有自身属性（非继承属性）的描述对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  foo: 123,</span><br><span class="line">  get bar() &#123; return &apos;abc&apos; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Object.getOwnPropertyDescriptors(obj)</span><br><span class="line">// &#123; foo:</span><br><span class="line">//    &#123; value: 123,</span><br><span class="line">//      writable: true,</span><br><span class="line">//      enumerable: true,</span><br><span class="line">//      configurable: true &#125;,</span><br><span class="line">//   bar:</span><br><span class="line">//    &#123; get: [Function: get bar],</span><br><span class="line">//      set: undefined,</span><br><span class="line">//      enumerable: true,</span><br><span class="line">//      configurable: true &#125; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>问题：Object.assign()无法正确拷贝get属性和set属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 案例</span><br><span class="line">const source = &#123;</span><br><span class="line">  set foo(value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">const target1 = &#123;&#125;;</span><br><span class="line">Object.assign(target1, source);</span><br><span class="line">Object.getOwnPropertyDescriptor(target1, &apos;foo&apos;)</span><br><span class="line">// &#123; value: undefined,</span><br><span class="line">//   writable: true,</span><br><span class="line">//   enumerable: true,</span><br><span class="line">//   configurable: true &#125;</span><br><span class="line">// source对象的foo属性的值是一个赋值函数，Object.assign方法将这个属性拷贝给target1对象，结果该属性的值变成了undefined。</span><br><span class="line">// 这是因为Object.assign方法总是拷贝一个属性的值，而不会拷贝它背后的赋值方法或取值方法。</span><br></pre></td></tr></table></figure></p>
+<p>Object.getOwnPropertyDescriptors()方法配合Object.defineProperties()方法，就可以实现正确拷贝。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const source = &#123;</span><br><span class="line">  set foo(value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const target2 = &#123;&#125;;</span><br><span class="line">Object.defineProperties(target2, Object.getOwnPropertyDescriptors(source));</span><br><span class="line">Object.getOwnPropertyDescriptor(target2, &apos;foo&apos;)</span><br><span class="line">// &#123; get: undefined,</span><br><span class="line">//   set: [Function: set foo],</span><br><span class="line">//   enumerable: true,</span><br><span class="line">//   configurable: true &#125;</span><br></pre></td></tr></table></figure></p>
+<p>Object.getOwnPropertyDescriptors()方法的另一个用处，是配合Object.create()方法，将对象属性克隆到一个新对象。这属于浅拷贝。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const clone = Object.create(Object.getPrototypeOf(obj),</span><br><span class="line">  Object.getOwnPropertyDescriptors(obj));</span><br><span class="line">// 或者</span><br><span class="line">const shallowClone = (obj) =&gt; Object.create(</span><br><span class="line">  Object.getPrototypeOf(obj),</span><br><span class="line">  Object.getOwnPropertyDescriptors(obj)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>Object.getOwnPropertyDescriptors()也可以用来实现 Mixin（混入）模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let mix = (object) =&gt; (&#123;</span><br><span class="line">  with: (...mixins) =&gt; mixins.reduce(</span><br><span class="line">    (c, mixin) =&gt; Object.create(</span><br><span class="line">      c, Object.getOwnPropertyDescriptors(mixin)</span><br><span class="line">    ), object)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// multiple mixins example</span><br><span class="line">let a = &#123;a: &apos;a&apos;&#125;;</span><br><span class="line">let b = &#123;b: &apos;b&apos;&#125;;</span><br><span class="line">let c = &#123;c: &apos;c&apos;&#125;;</span><br><span class="line">let d = mix(c).with(a, b);</span><br><span class="line"></span><br><span class="line">d.c // &quot;c&quot;</span><br><span class="line">d.b // &quot;b&quot;</span><br><span class="line">d.a // &quot;a&quot;</span><br></pre></td></tr></table></figure></p>
+<h5 id="proto属性用Object-create-Object-setPrototypeOf-和Object-getPrototypeOf-代替"><a href="#proto属性用Object-create-Object-setPrototypeOf-和Object-getPrototypeOf-代替" class="headerlink" title="proto属性用Object.create(),Object.setPrototypeOf()和Object.getPrototypeOf()代替"></a><strong>proto</strong>属性用Object.create(),Object.setPrototypeOf()和Object.getPrototypeOf()代替</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let a = &#123;a:1&#125;</span><br><span class="line">let b = &#123;b:2&#125;</span><br><span class="line">b.__proto__ = a</span><br><span class="line">b.a === 1</span><br><span class="line"></span><br><span class="line">// 用Object.create()替换</span><br><span class="line">let c = Object.create(a) // 相当于c.__proto__指向了a</span><br><span class="line">c.a === 1</span><br><span class="line"></span><br><span class="line">// 用Object.setPrototypeOf()替换__proto__</span><br><span class="line">let d = &#123;&#125;</span><br><span class="line">Object.setPrototypeOf(d, a) // 相当于d.__proto__ = a</span><br><span class="line">d.a === 1</span><br><span class="line">Object.getPrototypeOf(d) // a</span><br></pre></td></tr></table></figure>
+<h5 id="Object-values-Object-entries"><a href="#Object-values-Object-entries" class="headerlink" title="Object.values(), Object.entries()"></a>Object.values(), Object.entries()</h5><p>Object.values()、Object.entries()和Object.keys()一样，都只能遍历自身可枚举的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a = &#123; a: 1, b: 2 &#125;</span><br><span class="line">let b = Object.values(a) // [1,2]</span><br><span class="line">let c = Object.entries(a) // [[&apos;a&apos;, 1], [&apos;b&apos;, 2]]</span><br></pre></td></tr></table></figure></p>
+<h5 id="Object-fromEntries-是Object-entries-的逆操作"><a href="#Object-fromEntries-是Object-entries-的逆操作" class="headerlink" title="Object.fromEntries()是Object.entries()的逆操作"></a>Object.fromEntries()是Object.entries()的逆操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.fromEntries([</span><br><span class="line">  [&apos;foo&apos;, &apos;bar&apos;],</span><br><span class="line">  [&apos;baz&apos;, 42]</span><br><span class="line">])</span><br><span class="line">// &#123; foo: &quot;bar&quot;, baz: 42 &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/知识点/" rel="tag"># 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/String/" rel="next" title="String">
+                <i class="fa fa-chevron-left"></i> String
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/js解构赋值/" rel="prev" title="js解构赋值">
+                js解构赋值 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/head.jpg" alt="Ethan-庄">
+            
+              <p class="site-author-name" itemprop="name">Ethan-庄</p>
+              <p class="site-description motion-element" itemprop="description">我从来不相信什么懒洋洋的自由，我向往的自由是通过勤奋和努力实现的更广阔的人生；我也从来不相信天上掉馅饼的灵感和坐等的成就，我相信一万小时定律。做一个自由又自律的人，靠势必实现的决心认真地活着。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ethan66" target="_blank" title="我的GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>我的GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005052230385380/home" target="_blank" title="我的Weibo">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>我的Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#表达式还是语句"><span class="nav-number">1.</span> <span class="nav-text">表达式还是语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象浅拷贝和深拷贝的区别"><span class="nav-number">2.</span> <span class="nav-text">对象浅拷贝和深拷贝的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除属性"><span class="nav-number">3.</span> <span class="nav-text">删除属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-prototype-toString"><span class="nav-number">4.</span> <span class="nav-text">Object.prototype.toString()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ES5对象api"><span class="nav-number">5.</span> <span class="nav-text">ES5对象api</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象属性、方法的简写"><span class="nav-number">6.</span> <span class="nav-text">对象属性、方法的简写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性名表达式"><span class="nav-number">7.</span> <span class="nav-text">属性名表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#扩展运算符"><span class="nav-number">8.</span> <span class="nav-text">扩展运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运用扩展运算符或Object-assign-拷贝对象和对象的继承属性"><span class="nav-number">9.</span> <span class="nav-text">运用扩展运算符或Object.assign()拷贝对象和对象的继承属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用api定义修改属性"><span class="nav-number">10.</span> <span class="nav-text">用api定义修改属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可枚举性"><span class="nav-number">11.</span> <span class="nav-text">可枚举性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性的遍历"><span class="nav-number">12.</span> <span class="nav-text">属性的遍历</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#super关键字"><span class="nav-number">13.</span> <span class="nav-text">super关键字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es6对象的api"><span class="nav-number">14.</span> <span class="nav-text">es6对象的api</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-assign"><span class="nav-number">15.</span> <span class="nav-text">Object.assign()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-assign-实用"><span class="nav-number">16.</span> <span class="nav-text">Object.assign()实用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-getOwnPropertyDescriptors"><span class="nav-number">17.</span> <span class="nav-text">Object.getOwnPropertyDescriptors()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#proto属性用Object-create-Object-setPrototypeOf-和Object-getPrototypeOf-代替"><span class="nav-number">18.</span> <span class="nav-text">proto属性用Object.create(),Object.setPrototypeOf()和Object.getPrototypeOf()代替</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-values-Object-entries"><span class="nav-number">19.</span> <span class="nav-text">Object.values(), Object.entries()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Object-fromEntries-是Object-entries-的逆操作"><span class="nav-number">20.</span> <span class="nav-text">Object.fromEntries()是Object.entries()的逆操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ethan-庄</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
