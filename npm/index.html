@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="肥而不腻的蜗牛">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://drscdn.500px.org/photo/297056749/q%3D80_m%3D1500/v2?webp=true&sig=85bfa20c0a02e06ee84162333eeab92fc6b33009f3803ed1d4f1ecc1036cce62">
-<meta property="og:updated_time" content="2020-06-24T23:14:53.063Z">
+<meta property="og:updated_time" content="2021-02-16T11:17:23.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="npm">
 <meta name="twitter:image" content="https://drscdn.500px.org/photo/297056749/q%3D80_m%3D1500/v2?webp=true&sig=85bfa20c0a02e06ee84162333eeab92fc6b33009f3803ed1d4f1ecc1036cce62">
@@ -351,7 +351,7 @@
 
       
         <p><img src="https://drscdn.500px.org/photo/297056749/q%3D80_m%3D1500/v2?webp=true&amp;sig=85bfa20c0a02e06ee84162333eeab92fc6b33009f3803ed1d4f1ecc1036cce62" alt=""><br><a id="more"></a></p>
-<h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><h5 id="全局包"><a href="#全局包" class="headerlink" title="全局包"></a>全局包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 安装全局包</span><br><span class="line">npm install -g nrm supervisor typescript hexo-cli</span><br><span class="line">npm i -g ts-node // ts-node 可以执行ts文件里的代码并输出到命令行</span><br><span class="line"></span><br><span class="line">// 查看全局包list</span><br><span class="line">npm list -g --depth 0</span><br><span class="line"></span><br><span class="line">// 查看npm安装的全局node包</span><br><span class="line">npm config get prefix</span><br><span class="line">//C:\Users\Administrator\AppData\Roaming\npm（测过：windows所有全局安装的node包都在这个路径下）</span><br></pre></td></tr></table></figure>
+<h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><h5 id="全局包"><a href="#全局包" class="headerlink" title="全局包"></a>全局包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 安装全局包</span><br><span class="line">npm install -g nrm supervisor typescript hexo-cli</span><br><span class="line">npm i -g ts-node // ts-node 可以执行ts文件里的代码并输出到命令行</span><br><span class="line"></span><br><span class="line">// 查看全局包list</span><br><span class="line">npm list -g --depth 0</span><br><span class="line"></span><br><span class="line">// 查看npm安装的全局node包</span><br><span class="line">npm config get prefix</span><br><span class="line">//C:\Users\Administrator\AppData\Roaming\npm（测过：windows所有全局安装的node包都在这个路径下）</span><br><span class="line"></span><br><span class="line">// npm账号</span><br><span class="line">userName: ethan6</span><br><span class="line">password: 常用新密码10位</span><br><span class="line"></span><br><span class="line">// npm上传包</span><br><span class="line"># npm login</span><br><span class="line"># npm publish</span><br><span class="line"># npm unpublish --registry=https://registry.npmjs.org/ 依赖包名称 --force // 删除包</span><br></pre></td></tr></table></figure>
 <h5 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 查看账号密码</span><br><span class="line">git config --list</span><br><span class="line">$ git config --global user.name &quot;xxx&quot; // 设置name</span><br><span class="line">$ git config --global user.email &quot;xxx@gmail.com&quot; // 设置email</span><br><span class="line"></span><br><span class="line">// 切换镜像源</span><br><span class="line">nrm ls // 查看所有镜像源</span><br><span class="line">nrm --help // 帮助</span><br><span class="line">nrm use taobao // 切换到淘宝镜像源</span><br><span class="line">nrm use npm // 切换到npm镜像源，比如要发npm包</span><br></pre></td></tr></table></figure>
 <h5 id="具体项目"><a href="#具体项目" class="headerlink" title="具体项目"></a>具体项目</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote -v // 远程库地址</span><br><span class="line"></span><br><span class="line">npm list // 查看当前目录安装包list</span><br><span class="line">npm view vue versions // 查看某个package所有安装版本</span><br></pre></td></tr></table></figure>
 <h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><h5 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">工作目录：都还没add的文件</span><br><span class="line">暂存区：把文件add了，就是暂存区</span><br></pre></td></tr></table></figure>
@@ -478,7 +478,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +569,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
